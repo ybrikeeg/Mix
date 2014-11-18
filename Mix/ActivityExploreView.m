@@ -9,29 +9,45 @@
 #import "ActivityExploreView.h"
 #import "ActivityBar.h"
 
+
+#define ACTIVITY_BAR_HEIGHT 100
+
+@interface ActivityExploreView ()
+@property (nonatomic, strong) UIScrollView *scrollView;
+@end
 @implementation ActivityExploreView
 
 - (instancetype)initWithFrame:(CGRect)frame withData:(NSArray *)data
 {
    self = [super initWithFrame:frame];
    if (self) {
-
-      NSLog(@"Count: %d", [self.data count]);
       self.data = data;
       self.backgroundColor = [UIColor lightGrayColor];
-      ActivityBar *bar1 = [[ActivityBar alloc] initWithFrame: CGRectMake(0, 0, self.bounds.size.width, 100) withActivty: self.data[0]];
-      [self addSubview:bar1];
       
+      self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)];
+      self.scrollView.clipsToBounds = NO;
+      self.scrollView.backgroundColor = [UIColor whiteColor];
+      [self addSubview:self.scrollView];
+      
+      for (int i = 0; i < [data count]; i ++){
+         ActivityBar *bar = [[ActivityBar alloc] initWithFrame: CGRectMake(0, ACTIVITY_BAR_HEIGHT * i, self.bounds.size.width, ACTIVITY_BAR_HEIGHT) withActivty: self.data[i]];
+         [self.scrollView addSubview:bar];
+      }
+
+      self.scrollView.contentSize = CGSizeMake(self.frame.size.width, [data count] * ACTIVITY_BAR_HEIGHT);
+
+      
+      
+      
+      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+      [self addGestureRecognizer:tap];
       
    }
    return self;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+
+- (void)tapGesture:(UITapGestureRecognizer *)sender {
+
 }
-*/
 
 @end
