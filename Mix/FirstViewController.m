@@ -57,6 +57,9 @@
    [self.activities addObject:act1];
    [self.activities addObject:act2];
    [self.activities addObject:act3];
+   
+   
+   
 }
 
 - (void)didReceiveMemoryWarning {

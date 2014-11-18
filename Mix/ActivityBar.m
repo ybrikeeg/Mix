@@ -9,7 +9,6 @@
 #import "ActivityBar.h"
 
 @interface ActivityBar ()
-@property (nonatomic, strong) Activity *activity;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIView *underline;
 @property (nonatomic, strong) UILabel *startTimeLabel;

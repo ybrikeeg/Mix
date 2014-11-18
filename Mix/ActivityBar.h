@@ -11,6 +11,7 @@
 
 @interface ActivityBar : UIView
 
+@property (nonatomic, strong) Activity *activity;
 
 - (instancetype)initWithFrame:(CGRect)frame withActivty:(Activity *)activity;
 
