@@ -12,7 +12,12 @@
 @interface ActivityBar : UIView
 
 @property (nonatomic, strong) Activity *activity;
+@property (nonatomic) CGRect originalFrame;
+@property (nonatomic, strong) UIView *bottomBorder;
 
 - (instancetype)initWithFrame:(CGRect)frame withActivty:(Activity *)activity;
+
+- (void)expandBarWithFrame:(CGRect)frame;
+- (void)contractView;
 
 @end

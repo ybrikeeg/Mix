@@ -21,7 +21,9 @@
    [super viewDidLoad];
    
    [self createActivities];
-   
+   NSLog(@"t: %f" ,self.tabBarController.tabBar.frame.size.height);
+   NSLog(@"t: %f" , [UIApplication sharedApplication].statusBarFrame.size.height);
+
    self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabBarController.tabBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height) withData:self.activities];
    [self.view addSubview:self.exploreView];
    

@@ -7,6 +7,7 @@
 //
 
 #import "ActivityBar.h"
+#import "Constants.h"
 
 @interface ActivityBar ()
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -17,37 +18,61 @@
 @end
 @implementation ActivityBar
 
-#define BOARDER_HEIGHT 2
 - (instancetype)initWithFrame:(CGRect)frame withActivty:(Activity *)activity{
    
    self = [super initWithFrame:frame];
    if (self) {
       self.activity = activity;
+      self.originalFrame = frame;
       NSLog(@"Just checking: %@", activity.activityName);
-      self.backgroundColor = [UIColor redColor];
-      
+      CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+      CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
+      CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+      UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+      self.backgroundColor = color;
+      self.backgroundColor = [UIColor whiteColor];
       [self createLabels];
-      [self createBoarders];
-
+      [self createBorders];
    }
    
    return self;
 }
 
-- (void)createBoarders{
-   UIView *top = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, BOARDER_HEIGHT/2)];
-   top.backgroundColor = [UIColor blackColor];
-   [self addSubview:top];
-   
-   UIView *bottom = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - BOARDER_HEIGHT/2, self.frame.size.width, BOARDER_HEIGHT/2)];
-   bottom.backgroundColor = [UIColor blackColor];
-   [self addSubview:bottom];
+- (void)contractView{
+   [UIView animateWithDuration:0.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
+      self.frame = self.originalFrame;
+      self.bottomBorder.frame = CGRectMake(0, self.frame.size.height - BORDER_HEIGHT, self.frame.size.width, BORDER_HEIGHT);
+
+   }completion:^(BOOL finished){
+
+   }];
 }
+- (void)expandBarWithFrame:(CGRect)frame{
+   NSLog(@"expand: %@", NSStringFromCGRect(frame));
+   [UIView animateWithDuration:.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
+      self.bottomBorder.center = CGPointMake(self.center.x, frame.size.height - 1);
+      self.frame = frame;
+      
+   }completion:^(BOOL finished){
+      
+   }];
+}
+
+- (void)createBorders{
+   UIView *top = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, BORDER_HEIGHT)];
+   top.backgroundColor = [UIColor blackColor];
+   //[self addSubview:top];
+   
+   self.bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - BORDER_HEIGHT, self.frame.size.width, BORDER_HEIGHT)];
+   self.bottomBorder.backgroundColor = [UIColor blackColor];
+   [self addSubview:self.bottomBorder];
+}
+
 - (void)createLabels{
    //create title label
    self.titleLabel = [[UILabel alloc] init];
    self.titleLabel.text = self.activity.activityName;
-   self.titleLabel.font = [UIFont systemFontOfSize:24.0f];
+   self.titleLabel.font = [UIFont systemFontOfSize:20.0f];
    [self.titleLabel sizeToFit];
    self.titleLabel.center = CGPointMake(self.center.x, 15);
    [self addSubview:self.titleLabel];

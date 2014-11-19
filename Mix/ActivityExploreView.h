@@ -10,7 +10,6 @@
 
 @interface ActivityExploreView : UIView
 
-@property (nonatomic, strong) NSArray *data;
 
 - (instancetype)initWithFrame:(CGRect)frame withData:(NSArray *)data;
 
