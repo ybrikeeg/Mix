@@ -47,7 +47,6 @@
       CGPoint pointInSubjectsView = [sender locationInView:bar];
       BOOL pointInsideObject = [bar pointInside:pointInSubjectsView withEvent:nil];
       if(pointInsideObject){
-         NSLog(@"Tapped bar: %@", bar.activity.activityName);
          self.tappedBar = bar;
          [UIView animateWithDuration:0.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
             
@@ -66,7 +65,6 @@
             
             //ActivtyBar now make the expanded view visible
             [bar expandBarWithFrame: CGRectMake(0, 0, bar.bounds.size.width, EXPANDED_BAR_HEIGHT)];
-            //bar.bottomBorder.frame = CGRectMake(0, self.frame.size.height - 40, self.frame.size.width, BORDER_HEIGHT);
             self.scrollView.scrollEnabled = NO;
             [bar layoutIfNeeded];
             
@@ -78,17 +76,14 @@
    }
 }
 
-- (void)loadActivityBars{
-   for (int i = 0; i < [self.data count]; i ++){
-      ActivityBar *bar = [[ActivityBar alloc] initWithFrame: CGRectMake(0, ACTIVITY_BAR_HEIGHT * i, self.bounds.size.width, ACTIVITY_BAR_HEIGHT) withActivty: self.data[i]];
-      bar.tag = i;
-      [self.scrollView addSubview:bar];
-      [self.allBars addObject:bar];
-   }
-   self.scrollView.contentSize = CGSizeMake(self.frame.size.width, [self.data count] * ACTIVITY_BAR_HEIGHT);
+/*
+ * Delegate method from ActivityBar when user joins activity
+ */
+- (void)joinedActivity{
+   [self done:nil];
 }
+
 - (void)done:(UIButton*)button{
-   NSLog(@"Done");
    self.isDetailViewPresented = NO;
    self.doneButton.hidden = YES;
    
@@ -122,12 +117,24 @@
    
 }
 
+- (void)loadActivityBars{
+   for (int i = 0; i < [self.data count]; i ++){
+      ActivityBar *bar = [[ActivityBar alloc] initWithFrame: CGRectMake(0, ACTIVITY_BAR_HEIGHT * i, self.bounds.size.width, ACTIVITY_BAR_HEIGHT) withActivty: self.data[i]];
+      bar.tag = i;
+      bar.delegate = self;
+      [self.scrollView addSubview:bar];
+      [self.allBars addObject:bar];
+   }
+   self.scrollView.contentSize = CGSizeMake(self.frame.size.width, [self.data count] * ACTIVITY_BAR_HEIGHT);
+}
+
 - (void)initializeData{
    self.backgroundColor = [UIColor whiteColor];
    self.isDetailViewPresented = NO;
    self.titleLabel = [[UILabel alloc] init];
    self.titleLabel.text = @"Today";
    self.titleLabel.font = [UIFont systemFontOfSize:28.0f];
+   self.titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:28.0f];
    [self.titleLabel sizeToFit];
    self.titleLabel.center = CGPointMake(self.center.x, self.titleLabel.frame.size.height/2);
    [self addSubview:self.titleLabel];
@@ -135,7 +142,6 @@
    UIView *top = [[UIView alloc] initWithFrame:CGRectMake(0, self.titleLabel.frame.size.height-1, self.frame.size.width, 1)];
    top.backgroundColor = [UIColor blackColor];
    [self addSubview:top];
-   
    
    self.doneButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.doneButton addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];

@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ActivityExploreView : UIView
+#import "ActivityBar.h"
+@interface ActivityExploreView : UIView <ActivityBarDelegate>
 
 
 - (instancetype)initWithFrame:(CGRect)frame withData:(NSArray *)data;
