@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Activity.h"
+#import <MapKit/MapKit.h>
 
 @interface ActivityBar : UIView
 

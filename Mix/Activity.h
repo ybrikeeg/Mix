@@ -12,6 +12,7 @@
 @interface Activity : NSObject
 
 @property (nonatomic, strong) NSString *activityName;
+@property (nonatomic, strong) NSString *descriptionText;
 @property (nonatomic, strong) NSString *startTime;
 @property (nonatomic, strong) NSString *endTime;
 @property (nonatomic, strong) NSArray *participants;

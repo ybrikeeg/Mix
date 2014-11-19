@@ -13,12 +13,14 @@
 @interface FirstViewController ()
 @property (nonatomic, strong) NSMutableArray *activities;
 @property (nonatomic, strong) ActivityExploreView *exploreView;
+
 @end
 
 @implementation FirstViewController
 
 - (void)viewDidLoad {
    [super viewDidLoad];
+
    
    [self createActivities];
    NSLog(@"t: %f" ,self.tabBarController.tabBar.frame.size.height);
@@ -32,6 +34,7 @@
 - (void)createActivities{
    Activity *act1 = [[Activity alloc] init];
    act1.activityName = @"Squash";
+   act1.descriptionText = @"Lets play squash";
    act1.startTime = @"10:00am";
    act1.endTime = @"12:00pm";
    act1.participants = @[@"Joe", @"Kerry", @"Jane"];
@@ -41,6 +44,7 @@
    
    Activity *act2 = [[Activity alloc] init];
    act2.activityName = @"Pottery";
+   act2.descriptionText = @"Let go make a pot";
    act2.startTime = @"2:00pm";
    act2.endTime = @"3:00pm";
    act2.participants = @[@"Jake", @"Cesca"];
@@ -49,6 +53,7 @@
    
    Activity *act3 = [[Activity alloc] init];
    act3.activityName = @"Hide and Seek";
+   act3.descriptionText = @"Lets play hide and seek";
    act3.startTime = @"8:00pm";
    act3.endTime = @"11:30pm";
    act3.participants = @[@"Larry", @"Bill", @"Nolan", @"Jenny", @"Daniel", @"Michelle"];

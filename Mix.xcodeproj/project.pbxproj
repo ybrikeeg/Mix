@@ -18,6 +18,7 @@
 		4264EAFF1A1BE7CC0028078D /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EAFC1A1BE7CC0028078D /* Activity.m */; };
 		4264EB001A1BE7CC0028078D /* ActivityExploreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EAFE1A1BE7CC0028078D /* ActivityExploreView.m */; };
 		4264EB031A1BE86C0028078D /* ActivityBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EB021A1BE86C0028078D /* ActivityBar.m */; };
+		4264EB081A1C28930028078D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4264EB071A1C28930028078D /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		4264EB011A1BE86C0028078D /* ActivityBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityBar.h; sourceTree = "<group>"; };
 		4264EB021A1BE86C0028078D /* ActivityBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityBar.m; sourceTree = "<group>"; };
 		4264EB061A1C15F90028078D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		4264EB071A1C28930028078D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4264EB081A1C28930028078D /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +79,7 @@
 		4264EAC61A1BE7A70028078D = {
 			isa = PBXGroup;
 			children = (
+				4264EB071A1C28930028078D /* MapKit.framework */,
 				4264EAD11A1BE7A70028078D /* Mix */,
 				4264EAEE1A1BE7A70028078D /* MixTests */,
 				4264EAD01A1BE7A70028078D /* Products */,
