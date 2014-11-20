@@ -101,6 +101,10 @@
 }
 
 - (void)join:(UIButton*)button{
+   self.activity.activityJoined = YES;
+   self.layer.borderColor = [UIColor colorWithRed:37/255.0f green:217/255.0f blue:0/255.0f alpha:1.0f].CGColor;
+   self.layer.borderWidth = 2.0f;
+   [self bringSubviewToFront:self.underline];
    [self.delegate joinedActivity];
 }
 
@@ -119,7 +123,11 @@
    //underline title
    self.underline = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.titleLabel.frame.size.width, 2)];
    self.underline.center = CGPointMake(self.titleLabel.center.x, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height);
-   self.underline.backgroundColor = [UIColor purpleColor];
+   CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+   CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
+   CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+   UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+   self.underline.backgroundColor = color;
    self.underline.tag = KEEP_VISIBLE_TAG;
    [self addSubview:self.underline];
    

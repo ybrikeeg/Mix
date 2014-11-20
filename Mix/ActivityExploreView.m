@@ -80,6 +80,21 @@
  * Delegate method from ActivityBar when user joins activity
  */
 - (void)joinedActivity{
+   //NSLog(@"index: %d", [self.allBars indexOfObject:self.tappedBar]);
+   NSUInteger index = [self.allBars indexOfObject:self.tappedBar];
+   bool top = YES;
+   bool bottom = YES;
+   if (index > 0){
+      ActivityBar *act = [self.allBars objectAtIndex:index - 1];
+      top = !act.activity.activityJoined;
+   }
+   
+   if (index < [self.allBars count] - 1){
+      ActivityBar *act = [self.allBars objectAtIndex:index + 1];
+      bottom = !act.activity.activityJoined;
+   }
+   
+   NSLog(@"Top: %d Bottom: %d", top, bottom);
    [self done:nil];
 }
 

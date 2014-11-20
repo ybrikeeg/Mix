@@ -18,5 +18,6 @@
 @property (nonatomic, strong) NSArray *participants;
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic) CGFloat distance;
+@property (nonatomic) bool activityJoined;
 
 @end

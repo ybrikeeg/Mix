@@ -10,4 +10,12 @@
 
 @implementation Activity
 
+- (instancetype)init{
+   self = [super init];
+   if (self) {
+      self.activityJoined = NO;
+   }
+   
+   return self;
+}
 @end
