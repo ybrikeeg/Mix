@@ -10,11 +10,13 @@
 #import "Activity.h"
 
 @interface AddActivityViewController ()
-@property (nonatomic, strong) UITextField *activityNameTextField;
-@property (nonatomic, strong) UITextField *addressTextField;
-@property (nonatomic, strong) UITextField *startTime;
-@property (nonatomic, strong) UITextField *endTime;
-@property (nonatomic, strong) UITextField *descriptionTextField;
+
+@property (strong, nonatomic) IBOutlet UITextField *activityNameTextField;
+@property (strong, nonatomic) IBOutlet UITextField *addressTextField;
+@property (nonatomic, strong) IBOutlet UITextField *startTime;
+@property (nonatomic, strong) IBOutlet UITextField *endTime;
+@property (strong, nonatomic) IBOutlet UITextView *descriptionTextField;
+
 @end
 
 @implementation AddActivityViewController
@@ -27,6 +29,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)submitAction:(UIButton *)sender {
+    Activity *newAct = [[Activity alloc] init];
+    newAct.activityName = self.activityNameTextField.text;
+    newAct.descriptionText = self.descriptionTextField.text;
+    newAct.startTime = self.startTime.text;
+    newAct.endTime = self.endTime.text;
+    newAct.participants = @[];
+    newAct.address = self.addressTextField.text;
+    newAct.distance = 5.8f;
 }
 
 /*
