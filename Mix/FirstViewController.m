@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
    [super viewDidLoad];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newActivityAdded:) name:@"newActivityAdded" object:nil];
    
    [self createActivities];
    NSLog(@"t: %f" ,self.tabBarController.tabBar.frame.size.height);
@@ -67,6 +67,11 @@
    
    
    
+}
+
+- (void)newActivityAdded:(NSNotification *)notification{
+    Activity *newActivity = notification.object;
+    [self.activities addObject:newActivity];
 }
 
 - (void)didReceiveMemoryWarning {

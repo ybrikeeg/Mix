@@ -40,6 +40,7 @@
     newAct.participants = @[];
     newAct.address = self.addressTextField.text;
     newAct.distance = 5.8f;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"newActivityAdded" object:newAct];
 }
 
 /*
