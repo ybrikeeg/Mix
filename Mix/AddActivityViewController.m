@@ -42,6 +42,9 @@
     newAct.distance = 5.8f;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"newActivityAdded" object:newAct];
 }
+- (IBAction)endEditingTap:(UITapGestureRecognizer *)sender {
+    [self.view endEditing:YES];
+}
 
 /*
 #pragma mark - Navigation

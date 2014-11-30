@@ -164,6 +164,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="ACK-8H-Igp" appends="YES" id="h1A-V2-vdd"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Add" id="0CH-0f-SBT"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
@@ -176,6 +180,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Rx-QJ-MLc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ACK-8H-Igp">
+                    <connections>
+                        <action selector="endEditingTap:" destination="jKe-W2-Wef" id="SZy-gR-mLQ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="750" y="1202"/>
         </scene>

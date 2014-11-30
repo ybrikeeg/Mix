@@ -18,6 +18,8 @@
 
 @implementation FirstViewController
 
+
+
 - (void)viewDidLoad {
    [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newActivityAdded:) name:@"newActivityAdded" object:nil];
@@ -25,10 +27,11 @@
    [self createActivities];
    NSLog(@"t: %f" ,self.tabBarController.tabBar.frame.size.height);
    NSLog(@"t: %f" , [UIApplication sharedApplication].statusBarFrame.size.height);
+}
 
-   self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabBarController.tabBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height) withData:self.activities];
-   [self.view addSubview:self.exploreView];
-   
+- (void)viewWillAppear:(BOOL)animated{
+    self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabBarController.tabBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height) withData:self.activities];
+    [self.view addSubview:self.exploreView];
 }
 
 - (void)createActivities{
@@ -70,7 +73,9 @@
 }
 
 - (void)newActivityAdded:(NSNotification *)notification{
+    
     Activity *newActivity = notification.object;
+    NSLog(@"%@", newActivity.activityName);
     [self.activities addObject:newActivity];
 }
 
