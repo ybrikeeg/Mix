@@ -26,10 +26,10 @@
 {
    self = [super initWithFrame:frame];
    if (self) {
-      self.data = [[MockData sharedObj] getPastEvents];
+      self.data = [[[MockData sharedObj] getPastEvents] mutableCopy];
       [self initializeData];
       [self loadActivityBars];
-      
+
       UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
       [self addGestureRecognizer:tap];
       
@@ -81,28 +81,6 @@
    }
 }
 
-/*
- * Delegate method from ActivityBar when user joins activity
- */
-- (void)joinedActivity{
-   //NSLog(@"index: %d", [self.allBars indexOfObject:self.tappedBar]);
-   NSUInteger index = [self.allBars indexOfObject:self.tappedBar];
-   bool top = YES;
-   bool bottom = YES;
-   if (index > 0){
-      RecentBar *act = [self.allBars objectAtIndex:index - 1];
-      top = !act.activity.activityJoined;
-   }
-   
-   if (index < [self.allBars count] - 1){
-      RecentBar *act = [self.allBars objectAtIndex:index + 1];
-      bottom = !act.activity.activityJoined;
-   }
-   
-   NSLog(@"Top: %d Bottom: %d", top, bottom);
-   [self done:nil];
-}
-
 - (void)done:(UIButton *)button{
    self.isDetailViewPresented = NO;
    
@@ -123,14 +101,13 @@
       
    }];
    return;
-   
 }
 
 - (void)loadActivityBars{
+   
    for (int i = 0; i < [self.data count]; i ++){
       RecentBar *bar = [[RecentBar alloc] initWithFrame: CGRectMake(0, ACTIVITY_BAR_HEIGHT * i, self.bounds.size.width, ACTIVITY_BAR_HEIGHT) withActivty: self.data[i]];
       bar.tag = i;
-      bar.backgroundColor = [UIColor grayColor];
       [self.scrollView addSubview:bar];
       [self.allBars addObject:bar];
    }
