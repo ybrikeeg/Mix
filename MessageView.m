@@ -22,6 +22,7 @@
    
    self = [super initWithFrame:frame];
    if (self) {
+      self.pastActivites = [[MockData sharedObj] getUpcomingActivities];
       self.messageScrollView = [[UIScrollView alloc] initWithFrame:frame];
       [self addSubview:self.messageScrollView];
       [self createView];
@@ -45,8 +46,10 @@
          [self.messageScrollView addSubview:bar];
          ycoord += header.frame.size.height;
       }
-      
    }
+   
+   ycoord += 50;//height of last person bar
+   [self.messageScrollView setContentSize:CGSizeMake(self.frame.size.width, ycoord)];
 }
 
 @end
