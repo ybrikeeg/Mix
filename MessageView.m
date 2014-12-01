@@ -22,7 +22,8 @@
    
    self = [super initWithFrame:frame];
    if (self) {
-      self.pastActivites = [[MockData sharedObj] getUpcomingActivities];
+      self.pastActivites = [[MockData sharedObj] getPastEvents];
+      NSLog(@"act: %@", self.pastActivites);
       self.messageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
       [self addSubview:self.messageScrollView];
       [self createView];

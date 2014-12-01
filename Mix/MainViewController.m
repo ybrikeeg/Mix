@@ -38,19 +38,19 @@
 
 - (void)animateIndicator:(UIButton *)sender
 {
-   
    [UIView animateWithDuration:0.2f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
-   self.selectionIndicator.frame = CGRectMake(sender.frame.origin.x, self.selectionIndicator.frame.origin.y, self.selectionIndicator.frame.size.width, self.selectionIndicator.frame.size.height);
-      
+      self.selectionIndicator.frame = CGRectMake(sender.frame.origin.x, self.selectionIndicator.frame.origin.y, self.selectionIndicator.frame.size.width, self.selectionIndicator.frame.size.height);
    }completion:^(BOOL finished){
-      
    }];
-   
 }
+
 
 - (void)explore:(UIButton *)sender
 {
    [self animateIndicator:sender];
+   self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.tabView.frame.size.height)];
+   [self.view addSubview:self.exploreView];
+   NSLog(@"Frame: %@", NSStringFromCGRect(self.exploreView.frame));
 }
 
 - (void)create:(UIButton *)sender
@@ -66,9 +66,12 @@
 - (void)message:(UIButton *)sender
 {
    [self animateIndicator:sender];
+   self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.tabView.frame.size.height)];
+   [self.view addSubview:self.messageView];
+   NSLog(@"Frame: %@", NSStringFromCGRect(self.messageView.frame));
+   self.messageView.backgroundColor = [UIColor purpleColor];
 }
 
-#define INDICATOR_HEIGHT 2
 - (void)createTabBar
 {
    self.tabView = [[UIView alloc] initWithFrame:CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, self.view.frame.size.width, 40)];
@@ -102,15 +105,12 @@
    [message setTitle:@"Message" forState:UIControlStateNormal];
    message.frame = CGRectMake(3 * self.tabView.frame.size.width/4, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
    [self.tabView addSubview:message];
-   
 }
 - (void)viewWillAppear:(BOOL)animated{
    //    self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height) withData:self.activities];
    //    [self.view addSubview:self.exploreView];
    
-   self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.tabView.frame.size.height)];
-   [self.view addSubview:self.messageView];
-   self.messageView.backgroundColor = [UIColor purpleColor];
+   
 }
 
 

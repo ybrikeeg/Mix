@@ -13,6 +13,10 @@
 #define EXPANDED_BAR_HEIGHT (self.scrollView.frame.size.height)
 #define BORDER_HEIGHT 1
 
+//tab bar
+#define INDICATOR_HEIGHT 2
+
+
 //used in the message views
 #define EDGE_INSET 10
 #define CHECK_IMAGE_SIDE 30

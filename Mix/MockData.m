@@ -204,11 +204,11 @@
     act5.category = @"Social";
     act5.date = @"11/26";
     
-    [self.upcomingActivities addObject:act1];
-    [self.upcomingActivities addObject:act2];
-    [self.upcomingActivities addObject:act3];
-    [self.upcomingActivities addObject:act4];
-    [self.upcomingActivities addObject:act5];
+    [self.pastActivities addObject:act1];
+    [self.pastActivities addObject:act2];
+    [self.pastActivities addObject:act3];
+    [self.pastActivities addObject:act4];
+    [self.pastActivities addObject:act5];
 }
 
 - (void)createPersonLibrary
