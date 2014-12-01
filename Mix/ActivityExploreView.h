@@ -10,5 +10,8 @@
 #import "ActivityBar.h"
 @interface ActivityExploreView : UIView <ActivityBarDelegate>
 
+@property (nonatomic) bool isDetailViewPresented;
+@property (nonatomic, strong) UIButton *doneButton;
+- (void)done:(UIButton*)button;
 
 @end

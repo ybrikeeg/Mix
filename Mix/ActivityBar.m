@@ -35,7 +35,6 @@
       self.clipsToBounds = YES;
       self.activity = activity;
       self.originalFrame = frame;
-      NSLog(@"original bar frame: %@", NSStringFromCGRect(frame));
 
       CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
       CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
@@ -222,7 +221,7 @@
    [self addSubview:locationTitle];
    
    CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(-37.00, 100.00) radius:10 identifier:@"idd"];
-   self.map = [[MKMapView alloc] initWithFrame:CGRectMake(INSET, locationTitle.frame.origin.y + locationTitle.frame.size.height, self.frame.size.width - 2*INSET, 120)];
+   self.map = [[MKMapView alloc] initWithFrame:CGRectMake(INSET, locationTitle.frame.origin.y + locationTitle.frame.size.height, self.frame.size.width - 2*INSET, 80)];
    self.map.rotateEnabled = YES;
    self.map.pitchEnabled = YES;
    self.map.showsUserLocation = YES;

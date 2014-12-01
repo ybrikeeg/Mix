@@ -15,8 +15,6 @@
 @property (nonatomic, strong) NSArray *data;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray *allBars;
-@property (nonatomic) bool isDetailViewPresented;
-@property (nonatomic, strong) UIButton *doneButton;
 @property (nonatomic, strong) ActivityBar *tappedBar;
 @end
 
@@ -37,13 +35,17 @@
    return self;
 }
 
+- (void)setIsDetailViewPresented:(bool)isDetailViewPresented
+{
+   self.doneButton.hidden = !isDetailViewPresented;
+   _isDetailViewPresented = isDetailViewPresented;
+}
 /**
  * Moves all the non tapped bars up or down, and then calls the tapped bar method to show the expanded view
  */
 - (void)tapGesture:(UITapGestureRecognizer *)sender {
    if (self.isDetailViewPresented) return;
    self.isDetailViewPresented = YES;
-   self.doneButton.hidden = NO;
    for (ActivityBar *bar in self.allBars){
       CGPoint pointInSubjectsView = [sender locationInView:bar];
       BOOL pointInsideObject = [bar pointInside:pointInSubjectsView withEvent:nil];
@@ -55,7 +57,6 @@
             //distnace all subviews above tappedBar need to move in the y direction
             CGFloat moveAboveSubviewsDistance = bar.frame.origin.y - (newCenter.y - EXPANDED_BAR_HEIGHT/2);
             CGFloat moveBelowSubviewsDistance = (newCenter.y - EXPANDED_BAR_HEIGHT/2 + EXPANDED_BAR_HEIGHT) - (bar.frame.origin.y + bar.frame.size.height);
-            NSLog(@"dist: %f, %f", moveAboveSubviewsDistance, moveBelowSubviewsDistance);
             for (ActivityBar *subs in self.allBars){
                if (subs.tag > bar.tag){
                   subs.center = CGPointMake(subs.center.x, subs.center.y + moveBelowSubviewsDistance);
@@ -100,40 +101,19 @@
    [self done:nil];
 }
 
-- (void)done:(UIButton*)button{
+- (void)done:(UIButton *)button{
    self.isDetailViewPresented = NO;
-   self.doneButton.hidden = YES;
    
    [UIView animateWithDuration:0.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
       
-      CGFloat moveAboveSubviewsDistance = self.tappedBar.originalFrame.origin.y - self.tappedBar.bounds.origin.y;
-      CGFloat moveBelowSubviewsDistance = (self.tappedBar.bounds.origin.y + EXPANDED_BAR_HEIGHT) - (self.tappedBar.originalFrame.origin.y + self.tappedBar.originalFrame.size.height);
-      
       for (UIView *subs in self.scrollView.subviews){
          if ([subs isKindOfClass:[ActivityBar class]]){
-            NSLog(@"1bar frame: %@", NSStringFromCGRect(subs.frame));
             ActivityBar *b = (ActivityBar *)subs;
             b.frame = b.originalFrame;
          }
-//            if (subs.tag > self.tappedBar.tag){
-//               subs.center = CGPointMake(subs.center.x, subs.center.y - moveBelowSubviewsDistance);
-//               
-//            }else if (subs.tag < self.tappedBar.tag){
-//               subs.center = CGPointMake(subs.center.x, subs.center.y + moveAboveSubviewsDistance);
-//            }
-//         
-//         if (abs((int)subs.tag - (int)self.tappedBar.tag) <= 1){
-//            [self.scrollView bringSubviewToFront:subs];
-//         }
-//         
-//         if ([subs isKindOfClass:[ActivityBar class]]){
-//            NSLog(@"11bar frame: %@", NSStringFromCGRect(subs.frame));
-//
-//         }
       }
       
       [self.tappedBar contractView];
-      //self.tappedBar.frame = self.tappedBar.originalFrame;
       self.scrollView.scrollEnabled = YES;
       [self.tappedBar layoutIfNeeded];
 
@@ -151,9 +131,6 @@
       bar.delegate = self;
       [self.scrollView addSubview:bar];
       [self.allBars addObject:bar];
-      NSLog(@"bar frame: %@", NSStringFromCGRect(bar.frame));
-
-      
    }
    self.scrollView.contentSize = CGSizeMake(self.frame.size.width, [self.data count] * ACTIVITY_BAR_HEIGHT);
 }
@@ -167,18 +144,9 @@
    top.backgroundColor = [UIColor blackColor];
    [self addSubview:top];
    
-   self.doneButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-   [self.doneButton addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
-   [self.doneButton setTitle:@"Done" forState:UIControlStateNormal];
-   self.doneButton.frame = CGRectMake(self.frame.size.width - 50, 5,40, 20);
-   [self addSubview:self.doneButton];
-   self.doneButton.hidden = YES;
-   
    self.allBars = [[NSMutableArray alloc] init];
    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
    [self addSubview:self.scrollView];
-   
-   NSLog(@"Scrollview frame: %@", NSStringFromCGRect(self.scrollView.frame));
 }
 
 @end

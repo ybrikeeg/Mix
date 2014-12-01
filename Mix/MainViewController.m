@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UIView *tabView;
 @property (nonatomic, strong) UIView *selectionIndicator;
 @property (nonatomic, strong) UIView *navBar;
+@property (nonatomic, strong) UIButton *buttonTopRight;
+@property (nonatomic, strong) UIView *activeView;
 @end
 
 @implementation MainViewController
@@ -37,6 +39,8 @@
 
 - (void)animateIndicator:(UIButton *)sender
 {
+   self.buttonTopRight.hidden = self.exploreView.isDetailViewPresented;
+
    [UIView animateWithDuration:0.2f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
       self.selectionIndicator.frame = CGRectMake(sender.frame.origin.x, self.selectionIndicator.frame.origin.y, self.selectionIndicator.frame.size.width, self.selectionIndicator.frame.size.height);
    }completion:^(BOOL finished){
@@ -48,6 +52,9 @@
 {
    [self animateIndicator:sender];
    [self.view bringSubviewToFront:self.exploreView];
+   self.activeView = self.exploreView;
+   self.buttonTopRight.hidden = !self.exploreView.isDetailViewPresented;
+
 }
 
 - (void)create:(UIButton *)sender
@@ -64,6 +71,16 @@
 {
    [self animateIndicator:sender];
    [self.view bringSubviewToFront:self.messageView];
+   self.activeView = self.messageView;
+}
+
+- (void)done:(UIButton *)sender
+{
+   if (self.activeView == self.exploreView){
+      [self.exploreView done:nil];
+   }
+
+   
 }
 
 - (void)createTabBar
@@ -72,6 +89,19 @@
    self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.height + self.view.frame.size.width, 50)];
    self.navBar.backgroundColor = [UIColor yellowColor];
    [self.view addSubview:self.navBar];
+   
+   UILabel *mix = [[UILabel alloc] init];
+   mix.text = @"Mix";
+   [mix sizeToFit];
+   mix.center = self.navBar.center;
+   [self.navBar addSubview:mix];
+   
+   self.buttonTopRight = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   [self.buttonTopRight addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
+   [self.buttonTopRight setTitle:@"Done" forState:UIControlStateNormal];
+   [self.buttonTopRight sizeToFit];
+   self.buttonTopRight.frame = CGRectMake(self.view.frame.size.width - EDGE_INSET - self.buttonTopRight.frame.size.width, self.navBar.frame.size.height - EDGE_INSET - self.buttonTopRight.frame.size.height, self.buttonTopRight.frame.size.width, self.buttonTopRight.frame.size.height);
+   [self.navBar addSubview:self.buttonTopRight];
    
    self.tabView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navBar.frame.origin.y + self.navBar.frame.size.height, self.view.frame.size.width, 40)];
    self.tabView.backgroundColor = [UIColor blackColor];
@@ -113,7 +143,10 @@
    
    self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
    [self.view addSubview:self.exploreView];
+   self.exploreView.doneButton = self.buttonTopRight;
    self.exploreView.backgroundColor = [UIColor orangeColor];
+   self.activeView = self.exploreView;
+   self.buttonTopRight.hidden = !self.exploreView.isDetailViewPresented;
 }
 
 
