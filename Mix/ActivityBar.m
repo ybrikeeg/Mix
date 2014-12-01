@@ -20,6 +20,9 @@
 @property (nonatomic, strong) MKMapView *map;
 @property (nonatomic, strong) UILabel *addressLabel;
 @property (nonatomic, strong) UIButton *joinButton;
+
+@property (nonatomic, strong) UIImageView *categoryImage;
+@property (nonatomic, strong) UIImageView *creatorImage;
 @end
 
 @implementation ActivityBar
@@ -62,11 +65,11 @@
             sub.alpha = 0.0f;
          }
       }
-      self.startTimeLabel.frame = CGRectMake(INSET, self.frame.size.height/2 - self.startTimeLabel.bounds.size.height, self.startTimeLabel.bounds.size.width, self.startTimeLabel.bounds.size.height);
+      //self.startTimeLabel.frame = CGRectMake(INSET, self.frame.size.height/2 - self.startTimeLabel.bounds.size.height, self.startTimeLabel.bounds.size.width, self.startTimeLabel.bounds.size.height);
       self.endTimeLabel.frame = CGRectMake(INSET, self.frame.size.height/2, self.endTimeLabel.frame.size.width, self.endTimeLabel.frame.size.height);
 
       
-      self.distanceLabel.frame = CGRectMake(self.bounds.size.width - INSET - self.distanceLabel.frame.size.width, self.frame.size.height/2 - self.distanceLabel.frame.size.height/2, self.distanceLabel.frame.size.width, self.distanceLabel.frame.size.height);
+      //self.distanceLabel.frame = CGRectMake(self.bounds.size.width - INSET - self.distanceLabel.frame.size.width, self.frame.size.height/2 - self.distanceLabel.frame.size.height/2, self.distanceLabel.frame.size.width, self.distanceLabel.frame.size.height);
 
       
    }completion:^(BOOL finished){
@@ -81,10 +84,10 @@
       NSLog(@"expand bar frame: %@", NSStringFromCGRect(frame));
 
       
-      self.startTimeLabel.center = CGPointMake(self.startTimeLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT - self.startTimeLabel.frame.size.height/2);
+      //self.startTimeLabel.center = CGPointMake(self.startTimeLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT - self.startTimeLabel.frame.size.height/2);
       self.endTimeLabel.center = CGPointMake(self.endTimeLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT + self.endTimeLabel.frame.size.height/2);
 
-      self.distanceLabel.center = CGPointMake(self.distanceLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT);
+      //self.distanceLabel.center = CGPointMake(self.distanceLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT);
       for (UIView *sub in self.subviews){
          if (sub.tag == MAKE_INVISIBLE_TAG){
             sub.alpha = 1.0f;
@@ -112,13 +115,21 @@
 #define FONT_NAME @"Avenir-Medium"
 
 - (void)createLabels{
+   self.categoryImage = [[UIImageView alloc] initWithFrame:CGRectMake(EDGE_INSET, 0, CHECK_IMAGE_SIDE, CHECK_IMAGE_SIDE)];
+   self.categoryImage.center = CGPointMake(self.categoryImage.center.x, self.frame.size.height/2);
+   //self.categoryImage.backgroundColor = [UIColor redColor];
+   [self.categoryImage setImage:[UIImage imageNamed:[self.activity.category.lowercaseString stringByReplacingOccurrencesOfString:@" " withString:@"_"]]];
+   [self addSubview:self.categoryImage];
+   
    //create title label
-   self.titleLabel = [[UILabel alloc] init];
+   self.titleLabel = [[UILabel alloc] initWithFrame: CGRectMake(self.categoryImage.frame.origin.x + self.categoryImage.frame.size.width, 0, 150, 45)];
    self.titleLabel.text = self.activity.activityName;
    self.titleLabel.font = [UIFont fontWithName:FONT_NAME size:28.0f];
    self.titleLabel.tag = KEEP_VISIBLE_TAG;
-   [self.titleLabel sizeToFit];
-   self.titleLabel.center = CGPointMake(self.center.x, 20);
+   self.titleLabel.adjustsFontSizeToFitWidth = YES;
+   [self.titleLabel sizeThatFits:CGSizeMake(200, 50)];
+   self.titleLabel.center = CGPointMake(self.titleLabel.center.x, self.frame.size.height/2);
+   //self.titleLabel.backgroundColor = [UIColor greenColor];
    [self addSubview:self.titleLabel];
    
    //underline title
@@ -132,31 +143,51 @@
    self.underline.tag = KEEP_VISIBLE_TAG;
    [self addSubview:self.underline];
    
-   //start time label
-   self.startTimeLabel = [[UILabel alloc] init];
-   self.startTimeLabel.text = [NSString stringWithFormat:@"%@ -", self.activity.startTime];
-   self.startTimeLabel.font = [UIFont fontWithName:FONT_NAME size:14.0f];
-   self.startTimeLabel.tag = KEEP_VISIBLE_TAG;
-   [self.startTimeLabel sizeToFit];
-   self.startTimeLabel.frame = CGRectMake(INSET, self.frame.size.height/2 - self.startTimeLabel.bounds.size.height, self.startTimeLabel.bounds.size.width, self.startTimeLabel.bounds.size.height);
-   [self addSubview:self.startTimeLabel];
+   int sideLength = 50;
+
+   self.creatorImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - EDGE_INSET - sideLength, self.frame.size.height/2 - sideLength/2, sideLength, sideLength)];
+   [self.creatorImage setImage:[UIImage imageNamed:self.activity.creator.imageName]];
+   CAShapeLayer *shape = [CAShapeLayer layer];
+   UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:self.creatorImage.bounds];
+   shape.path = path.CGPath;
+   self.creatorImage.layer.mask = shape;
+   [self addSubview:self.creatorImage];
    
-   //end time label
-   self.endTimeLabel = [[UILabel alloc] init];
-   self.endTimeLabel.text = self.activity.endTime;
-   self.endTimeLabel.font = [UIFont fontWithName:FONT_NAME size:14.0f];
-   self.endTimeLabel.tag = KEEP_VISIBLE_TAG;
-   [self.endTimeLabel sizeToFit];
-   self.endTimeLabel.frame = CGRectMake(INSET, self.frame.size.height/2, self.endTimeLabel.frame.size.width, self.endTimeLabel.frame.size.height);
-   [self addSubview:self.endTimeLabel];
+   int timeWidth = self.creatorImage.frame.origin.x - (self.titleLabel.frame.origin.x + self.titleLabel.frame.size.width);
+   NSLog(@"width: %d", timeWidth);
+   self.startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.titleLabel.frame.origin.x + self.titleLabel.frame.size.width, self.titleLabel.frame.origin.y, timeWidth, self.titleLabel.frame.size.height/2)];
+   NSLog(@"frame: %@", NSStringFromCGRect(self.startTimeLabel.frame));
+   self.startTimeLabel.adjustsFontSizeToFitWidth = YES;
+   self.startTimeLabel.text = [NSString stringWithFormat:@"%@-%@", self.activity.startTime, self.activity.endTime];
+   //self.startTimeLabel.backgroundColor = color;
+   [self.startTimeLabel setTextAlignment:NSTextAlignmentCenter];
+   [self addSubview:self.startTimeLabel];
+//   //start time label
+//   self.startTimeLabel = [[UILabel alloc] init];
+//   self.startTimeLabel.text = [NSString stringWithFormat:@"%@ -", self.activity.startTime];
+//   self.startTimeLabel.font = [UIFont fontWithName:FONT_NAME size:14.0f];
+//   self.startTimeLabel.tag = KEEP_VISIBLE_TAG;
+//   [self.startTimeLabel sizeToFit];
+//   self.startTimeLabel.frame = CGRectMake(INSET, self.frame.size.height/2 - self.startTimeLabel.bounds.size.height, self.startTimeLabel.bounds.size.width, self.startTimeLabel.bounds.size.height);
+//   [self addSubview:self.startTimeLabel];
+//   
+//   //end time label
+//   self.endTimeLabel = [[UILabel alloc] init];
+//   self.endTimeLabel.text = self.activity.endTime;
+//   self.endTimeLabel.font = [UIFont fontWithName:FONT_NAME size:14.0f];
+//   self.endTimeLabel.tag = KEEP_VISIBLE_TAG;
+//   [self.endTimeLabel sizeToFit];
+//   self.endTimeLabel.frame = CGRectMake(INSET, self.frame.size.height/2, self.endTimeLabel.frame.size.width, self.endTimeLabel.frame.size.height);
+//   [self addSubview:self.endTimeLabel];
    
    //distnace
    self.distanceLabel = [[UILabel alloc] init];
-   self.distanceLabel.text = [NSString stringWithFormat:@"%.01f mi", self.activity.distance];
+   self.distanceLabel.text = [NSString stringWithFormat:@"%.01f mi away", self.activity.distance];
    self.distanceLabel.font = [UIFont fontWithName:FONT_NAME size:14.0f];
    self.distanceLabel.tag = KEEP_VISIBLE_TAG;
-   [self.distanceLabel sizeToFit];
-   self.distanceLabel.frame = CGRectMake(self.bounds.size.width - INSET - self.distanceLabel.frame.size.width, self.frame.size.height/2 - self.distanceLabel.frame.size.height/2, self.distanceLabel.frame.size.width, self.distanceLabel.frame.size.height);
+   self.distanceLabel.adjustsFontSizeToFitWidth = YES;
+   [self.distanceLabel setTextAlignment:NSTextAlignmentCenter];
+   self.distanceLabel.frame = CGRectMake(self.startTimeLabel.frame.origin.x, self.startTimeLabel.frame.origin.y + self.startTimeLabel.frame.size.height, timeWidth, self.titleLabel.frame.size.height/2);
    [self addSubview:self.distanceLabel];
    
    
@@ -189,7 +220,11 @@
 
    for (int i = 0; i < [self.activity.participants count]; i++){
       UIImageView *thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(i * 60, 0, 60, 60)];
-      thumbnail.image = [UIImage imageNamed:@"lana"];
+      thumbnail.image = [UIImage imageNamed:[[self.activity.participants objectAtIndex:i] imageName]];
+      CAShapeLayer *shape = [CAShapeLayer layer];
+      UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:thumbnail.bounds];
+      shape.path = path.CGPath;
+      thumbnail.layer.mask = shape;
       [self.profileScrollView addSubview:thumbnail];
       
       UILabel *firstName = [[UILabel alloc] init];
