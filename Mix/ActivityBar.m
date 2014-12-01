@@ -121,14 +121,14 @@
    [self.categoryImage setImage:[UIImage imageNamed:[self.activity.category.lowercaseString stringByReplacingOccurrencesOfString:@" " withString:@"_"]]];
    [self addSubview:self.categoryImage];
    
+   int titleWidth = self.frame.size.width - 4*EDGE_INSET - self.categoryImage.frame.size.width - 50;
    //create title label
-   self.titleLabel = [[UILabel alloc] initWithFrame: CGRectMake(self.categoryImage.frame.origin.x + self.categoryImage.frame.size.width, 0, 150, 45)];
+   self.titleLabel = [[UILabel alloc] initWithFrame: CGRectMake(EDGE_INSET + self.categoryImage.frame.origin.x + self.categoryImage.frame.size.width, 0, titleWidth, 35)];
    self.titleLabel.text = self.activity.activityName;
    self.titleLabel.font = [UIFont fontWithName:FONT_NAME size:28.0f];
    self.titleLabel.tag = KEEP_VISIBLE_TAG;
    self.titleLabel.adjustsFontSizeToFitWidth = YES;
-   [self.titleLabel sizeThatFits:CGSizeMake(200, 50)];
-   self.titleLabel.center = CGPointMake(self.titleLabel.center.x, self.frame.size.height/2);
+   self.titleLabel.center = CGPointMake(self.titleLabel.center.x, self.frame.size.height/3);
    //self.titleLabel.backgroundColor = [UIColor greenColor];
    [self addSubview:self.titleLabel];
    
@@ -155,51 +155,34 @@
    
    int timeWidth = self.creatorImage.frame.origin.x - (self.titleLabel.frame.origin.x + self.titleLabel.frame.size.width);
    NSLog(@"width: %d", timeWidth);
-   self.startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.titleLabel.frame.origin.x + self.titleLabel.frame.size.width, self.titleLabel.frame.origin.y, timeWidth, self.titleLabel.frame.size.height/2)];
+   timeWidth = self.titleLabel.frame.size.width/2;
+   self.startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height, timeWidth, self.frame.size.height - (self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height))];
    NSLog(@"frame: %@", NSStringFromCGRect(self.startTimeLabel.frame));
    self.startTimeLabel.adjustsFontSizeToFitWidth = YES;
    self.startTimeLabel.text = [NSString stringWithFormat:@"%@-%@", self.activity.startTime, self.activity.endTime];
    //self.startTimeLabel.backgroundColor = color;
-   [self.startTimeLabel setTextAlignment:NSTextAlignmentCenter];
+   [self.startTimeLabel setTextAlignment:NSTextAlignmentLeft];
    [self addSubview:self.startTimeLabel];
-//   //start time label
-//   self.startTimeLabel = [[UILabel alloc] init];
-//   self.startTimeLabel.text = [NSString stringWithFormat:@"%@ -", self.activity.startTime];
-//   self.startTimeLabel.font = [UIFont fontWithName:FONT_NAME size:14.0f];
-//   self.startTimeLabel.tag = KEEP_VISIBLE_TAG;
-//   [self.startTimeLabel sizeToFit];
-//   self.startTimeLabel.frame = CGRectMake(INSET, self.frame.size.height/2 - self.startTimeLabel.bounds.size.height, self.startTimeLabel.bounds.size.width, self.startTimeLabel.bounds.size.height);
-//   [self addSubview:self.startTimeLabel];
-//   
-//   //end time label
-//   self.endTimeLabel = [[UILabel alloc] init];
-//   self.endTimeLabel.text = self.activity.endTime;
-//   self.endTimeLabel.font = [UIFont fontWithName:FONT_NAME size:14.0f];
-//   self.endTimeLabel.tag = KEEP_VISIBLE_TAG;
-//   [self.endTimeLabel sizeToFit];
-//   self.endTimeLabel.frame = CGRectMake(INSET, self.frame.size.height/2, self.endTimeLabel.frame.size.width, self.endTimeLabel.frame.size.height);
-//   [self addSubview:self.endTimeLabel];
-   
+
    //distnace
-   self.distanceLabel = [[UILabel alloc] init];
+   self.distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.startTimeLabel.frame.origin.x + self.startTimeLabel.frame.size.width, self.startTimeLabel.frame.origin.y, timeWidth, self.startTimeLabel.frame.size.height)];
    self.distanceLabel.text = [NSString stringWithFormat:@"%.01f mi away", self.activity.distance];
    self.distanceLabel.font = [UIFont fontWithName:FONT_NAME size:14.0f];
    self.distanceLabel.tag = KEEP_VISIBLE_TAG;
    self.distanceLabel.adjustsFontSizeToFitWidth = YES;
-   [self.distanceLabel setTextAlignment:NSTextAlignmentCenter];
-   self.distanceLabel.frame = CGRectMake(self.startTimeLabel.frame.origin.x, self.startTimeLabel.frame.origin.y + self.startTimeLabel.frame.size.height, timeWidth, self.titleLabel.frame.size.height/2);
+   [self.distanceLabel setTextAlignment:NSTextAlignmentLeft];
    [self addSubview:self.distanceLabel];
    
    
    //create UI for expanded view
-   UILabel *descriptionTitle = [[UILabel alloc] initWithFrame:CGRectMake(INSET, self.underline.frame.origin.y + 18, self.frame.size.width - 2*INSET, 80)];
+   UILabel *descriptionTitle = [[UILabel alloc] initWithFrame:CGRectMake(INSET, self.startTimeLabel.frame.origin.y + self.startTimeLabel.frame.size.height, self.frame.size.width - 2*INSET, 60)];
    descriptionTitle.text = @"Description";
    descriptionTitle.font = [UIFont fontWithName:FONT_NAME size:18.0f];
    [descriptionTitle sizeToFit];
    descriptionTitle.tag = MAKE_INVISIBLE_TAG;
    [self addSubview:descriptionTitle];
 
-   self.descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(INSET, descriptionTitle.frame.origin.y + descriptionTitle.frame.size.height, self.frame.size.width - 2*INSET, 40)];
+   self.descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(INSET, descriptionTitle.frame.origin.y + descriptionTitle.frame.size.height, self.frame.size.width - 2*INSET, 35)];
    self.descriptionTextView.text = self.activity.descriptionText;
    self.descriptionTextView.font = [UIFont fontWithName:FONT_NAME size:14.0f];
    self.descriptionTextView.editable = NO;
