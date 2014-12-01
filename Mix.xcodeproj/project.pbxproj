@@ -104,6 +104,17 @@
 			name = MessageView;
 			sourceTree = "<group>";
 		};
+		42518CDF1A2C7C8900C2F2B3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4264EAFB1A1BE7CC0028078D /* Activity.h */,
+				4264EAFC1A1BE7CC0028078D /* Activity.m */,
+				42518CCF1A2C52B000C2F2B3 /* Person.h */,
+				42518CD01A2C52B000C2F2B3 /* Person.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		4264EAC61A1BE7A70028078D = {
 			isa = PBXGroup;
 			children = (
@@ -138,10 +149,7 @@
 				4264EB011A1BE86C0028078D /* ActivityBar.h */,
 				4264EB021A1BE86C0028078D /* ActivityBar.m */,
 				42518CDB1A2C650500C2F2B3 /* MessageView */,
-				4264EAFB1A1BE7CC0028078D /* Activity.h */,
-				4264EAFC1A1BE7CC0028078D /* Activity.m */,
-				42518CCF1A2C52B000C2F2B3 /* Person.h */,
-				42518CD01A2C52B000C2F2B3 /* Person.m */,
+				42518CDF1A2C7C8900C2F2B3 /* Model */,
 				42518CCC1A2C524400C2F2B3 /* MockData.h */,
 				42518CCD1A2C524400C2F2B3 /* MockData.m */,
 				4264EADF1A1BE7A70028078D /* Main.storyboard */,

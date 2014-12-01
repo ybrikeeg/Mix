@@ -35,7 +35,8 @@
       self.clipsToBounds = YES;
       self.activity = activity;
       self.originalFrame = frame;
-      NSLog(@"Just checking: %@", activity.activityName);
+      NSLog(@"original bar frame: %@", NSStringFromCGRect(frame));
+
       CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
       CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
       CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
@@ -78,7 +79,8 @@
    [UIView animateWithDuration:.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
       self.bottomBorder.center = CGPointMake(self.center.x, frame.size.height - 1);
       self.frame = frame;
-      
+      NSLog(@"expand bar frame: %@", NSStringFromCGRect(frame));
+
       
       self.startTimeLabel.center = CGPointMake(self.startTimeLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT - self.startTimeLabel.frame.size.height/2);
       self.endTimeLabel.center = CGPointMake(self.endTimeLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT + self.endTimeLabel.frame.size.height/2);
@@ -112,7 +114,6 @@
 
 - (void)createLabels{
    //create title label
-    NSLog(@"created title label");
    self.titleLabel = [[UILabel alloc] init];
    self.titleLabel.text = self.activity.activityName;
    self.titleLabel.font = [UIFont fontWithName:FONT_NAME size:28.0f];
@@ -122,7 +123,6 @@
    [self addSubview:self.titleLabel];
    
    //underline title
-    NSLog(@"created underline title");
    self.underline = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.titleLabel.frame.size.width, 2)];
    self.underline.center = CGPointMake(self.titleLabel.center.x, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height);
    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
@@ -161,8 +161,6 @@
    [self addSubview:self.distanceLabel];
    
    
-   
-   
    //create UI for expanded view
    UILabel *descriptionTitle = [[UILabel alloc] initWithFrame:CGRectMake(INSET, self.underline.frame.origin.y + 18, self.frame.size.width - 2*INSET, 80)];
    descriptionTitle.text = @"Description";
@@ -171,7 +169,7 @@
    descriptionTitle.tag = MAKE_INVISIBLE_TAG;
    [self addSubview:descriptionTitle];
 
-   self.descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(INSET, descriptionTitle.frame.origin.y + descriptionTitle.frame.size.height, self.frame.size.width - 2*INSET, 80)];
+   self.descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(INSET, descriptionTitle.frame.origin.y + descriptionTitle.frame.size.height, self.frame.size.width - 2*INSET, 40)];
    self.descriptionTextView.text = self.activity.descriptionText;
    self.descriptionTextView.font = [UIFont fontWithName:FONT_NAME size:14.0f];
    self.descriptionTextView.editable = NO;
@@ -196,7 +194,6 @@
       [self.profileScrollView addSubview:thumbnail];
       
       UILabel *firstName = [[UILabel alloc] init];
-       NSLog(@"%@", self.activity.participants);
       firstName.text = [[self.activity.participants objectAtIndex:i] firstName];
       firstName.font = [UIFont fontWithName:FONT_NAME size:12.0f];
       [firstName sizeToFit];

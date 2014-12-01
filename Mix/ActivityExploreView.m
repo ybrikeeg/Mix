@@ -18,16 +18,15 @@
 @property (nonatomic) bool isDetailViewPresented;
 @property (nonatomic, strong) UIButton *doneButton;
 @property (nonatomic, strong) ActivityBar *tappedBar;
-@property (nonatomic, strong) UILabel *titleLabel;
 @end
+
 @implementation ActivityExploreView
 
-- (instancetype)initWithFrame:(CGRect)frame withData:(NSArray *)data
+- (instancetype)initWithFrame:(CGRect)frame
 {
    self = [super initWithFrame:frame];
    if (self) {
        self.data = [[MockData sharedObj] getUpcomingActivities];
-       NSLog(@"%@", self.data);
       [self initializeData];
       [self loadActivityBars];
       
@@ -56,7 +55,7 @@
             //distnace all subviews above tappedBar need to move in the y direction
             CGFloat moveAboveSubviewsDistance = bar.frame.origin.y - (newCenter.y - EXPANDED_BAR_HEIGHT/2);
             CGFloat moveBelowSubviewsDistance = (newCenter.y - EXPANDED_BAR_HEIGHT/2 + EXPANDED_BAR_HEIGHT) - (bar.frame.origin.y + bar.frame.size.height);
-            
+            NSLog(@"dist: %f, %f", moveAboveSubviewsDistance, moveBelowSubviewsDistance);
             for (ActivityBar *subs in self.allBars){
                if (subs.tag > bar.tag){
                   subs.center = CGPointMake(subs.center.x, subs.center.y + moveBelowSubviewsDistance);
@@ -69,9 +68,10 @@
             [bar expandBarWithFrame: CGRectMake(0, 0, bar.bounds.size.width, EXPANDED_BAR_HEIGHT)];
             self.scrollView.scrollEnabled = NO;
             [bar layoutIfNeeded];
-            
+            [self.scrollView setContentOffset:CGPointZero animated:YES];
+
          }completion:^(BOOL finished){
-            
+
          }];
          
       }
@@ -106,20 +106,30 @@
    
    [UIView animateWithDuration:0.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
       
-      CGFloat moveAboveSubviewsDistance = self.tappedBar.originalFrame.origin.y - self.tappedBar.frame.origin.y;
-      CGFloat moveBelowSubviewsDistance = (self.tappedBar.frame.origin.y + EXPANDED_BAR_HEIGHT) - (self.tappedBar.originalFrame.origin.y + self.tappedBar.originalFrame.size.height);
+      CGFloat moveAboveSubviewsDistance = self.tappedBar.originalFrame.origin.y - self.tappedBar.bounds.origin.y;
+      CGFloat moveBelowSubviewsDistance = (self.tappedBar.bounds.origin.y + EXPANDED_BAR_HEIGHT) - (self.tappedBar.originalFrame.origin.y + self.tappedBar.originalFrame.size.height);
       
       for (UIView *subs in self.scrollView.subviews){
-            if (subs.tag > self.tappedBar.tag){
-               subs.center = CGPointMake(subs.center.x, subs.center.y - moveBelowSubviewsDistance);
-               
-            }else if (subs.tag < self.tappedBar.tag){
-               subs.center = CGPointMake(subs.center.x, subs.center.y + moveAboveSubviewsDistance);
-            }
-         
-         if (abs((int)subs.tag - (int)self.tappedBar.tag) <= 1){
-            [self.scrollView bringSubviewToFront:subs];
+         if ([subs isKindOfClass:[ActivityBar class]]){
+            NSLog(@"1bar frame: %@", NSStringFromCGRect(subs.frame));
+            ActivityBar *b = (ActivityBar *)subs;
+            b.frame = b.originalFrame;
          }
+//            if (subs.tag > self.tappedBar.tag){
+//               subs.center = CGPointMake(subs.center.x, subs.center.y - moveBelowSubviewsDistance);
+//               
+//            }else if (subs.tag < self.tappedBar.tag){
+//               subs.center = CGPointMake(subs.center.x, subs.center.y + moveAboveSubviewsDistance);
+//            }
+//         
+//         if (abs((int)subs.tag - (int)self.tappedBar.tag) <= 1){
+//            [self.scrollView bringSubviewToFront:subs];
+//         }
+//         
+//         if ([subs isKindOfClass:[ActivityBar class]]){
+//            NSLog(@"11bar frame: %@", NSStringFromCGRect(subs.frame));
+//
+//         }
       }
       
       [self.tappedBar contractView];
@@ -141,6 +151,9 @@
       bar.delegate = self;
       [self.scrollView addSubview:bar];
       [self.allBars addObject:bar];
+      NSLog(@"bar frame: %@", NSStringFromCGRect(bar.frame));
+
+      
    }
    self.scrollView.contentSize = CGSizeMake(self.frame.size.width, [self.data count] * ACTIVITY_BAR_HEIGHT);
 }
@@ -148,15 +161,9 @@
 - (void)initializeData{
    self.backgroundColor = [UIColor whiteColor];
    self.isDetailViewPresented = NO;
-   self.titleLabel = [[UILabel alloc] init];
-   self.titleLabel.text = @"Today";
-   self.titleLabel.font = [UIFont systemFontOfSize:28.0f];
-   self.titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:28.0f];
-   [self.titleLabel sizeToFit];
-   self.titleLabel.center = CGPointMake(self.center.x, self.titleLabel.frame.size.height/2);
-   [self addSubview:self.titleLabel];
+
    
-   UIView *top = [[UIView alloc] initWithFrame:CGRectMake(0, self.titleLabel.frame.size.height-1, self.frame.size.width, 1)];
+   UIView *top = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 1)];
    top.backgroundColor = [UIColor blackColor];
    [self addSubview:top];
    
@@ -168,8 +175,10 @@
    self.doneButton.hidden = YES;
    
    self.allBars = [[NSMutableArray alloc] init];
-   self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.titleLabel.frame.size.height, self.frame.size.width, self.frame.size.height - self.titleLabel.frame.size.height)];
+   self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
    [self addSubview:self.scrollView];
+   
+   NSLog(@"Scrollview frame: %@", NSStringFromCGRect(self.scrollView.frame));
 }
 
 @end
