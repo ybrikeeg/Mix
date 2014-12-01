@@ -12,7 +12,7 @@
 #import "MockData.h"
 
 @interface ActivityExploreView ()
-@property (nonatomic, strong) NSArray *data;
+@property (nonatomic, strong) NSMutableArray *data;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray *allBars;
 @property (nonatomic, strong) ActivityBar *tappedBar;
@@ -24,10 +24,10 @@
 {
    self = [super initWithFrame:frame];
    if (self) {
-       self.data = [[MockData sharedObj] getUpcomingActivities];
+       self.data = [[[MockData sharedObj] getUpcomingActivities] mutableCopy];
       [self initializeData];
       [self loadActivityBars];
-      
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newActivityAdded:) name:@"newActivityAdded" object:nil];
       UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
       [self addGestureRecognizer:tap];
       
@@ -147,6 +147,14 @@
    self.allBars = [[NSMutableArray alloc] init];
    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
    [self addSubview:self.scrollView];
+}
+
+- (void)newActivityAdded:(NSNotification *)notification{
+    
+    Activity *newActivity = notification.object;
+    NSLog(@"%@: fuck my ass", newActivity.activityName);
+    [self.data addObject:newActivity];
+    [self loadActivityBars];
 }
 
 @end

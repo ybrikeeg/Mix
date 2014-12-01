@@ -12,6 +12,7 @@
 #import "RecentActivityView.h"
 
 #import "MessageView.h"
+#import "CreateView.h"
 #import <MessageUI/MessageUI.h>
 
 #import "MockData.h"
@@ -21,12 +22,18 @@
 @property (nonatomic, strong) ActivityExploreView *exploreView;
 @property (nonatomic, strong) MessageView *messageView;
 @property (nonatomic, strong) RecentActivityView *recentView;
+@property (nonatomic, strong) CreateView *createView;
 
 @property (nonatomic, strong) UIView *tabView;
 @property (nonatomic, strong) UIView *selectionIndicator;
 @property (nonatomic, strong) UIView *navBar;
 @property (nonatomic, strong) UIButton *buttonTopRight;
 @property (nonatomic, strong) UIView *activeView;
+
+@property (nonatomic, strong) UIButton *explore;
+@property (nonatomic, strong) UIButton *create;
+@property (nonatomic, strong) UIButton *recent;
+@property (nonatomic, strong) UIButton *message;
 @end
 
 @implementation MainViewController
@@ -36,8 +43,7 @@
 - (void)viewDidLoad {
    
    [super viewDidLoad];
-   
-   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newActivityAdded:) name:@"newActivityAdded" object:nil];
+
    [self createTabBar];
 }
 
@@ -64,6 +70,8 @@
 - (void)create:(UIButton *)sender
 {
    [self animateIndicator:sender];
+    [self.view bringSubviewToFront:self.createView];
+    self.activeView = self.createView;
 }
 
 - (void)recent:(UIButton *)sender
@@ -124,29 +132,29 @@
    self.selectionIndicator.backgroundColor = [UIColor greenColor];
    [self.tabView addSubview:self.selectionIndicator];
    
-   UIButton *explore = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-   [explore addTarget:self action:@selector(explore:) forControlEvents:UIControlEventTouchUpInside];
-   [explore setTitle:@"Explore" forState:UIControlStateNormal];
-   explore.frame = CGRectMake(0, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
-   [self.tabView addSubview:explore];
+   self.explore = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   [self.explore addTarget:self action:@selector(explore:) forControlEvents:UIControlEventTouchUpInside];
+   [self.explore setTitle:@"Explore" forState:UIControlStateNormal];
+   self.explore.frame = CGRectMake(0, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
+   [self.tabView addSubview:self.explore];
    
-   UIButton *create = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-   [create addTarget:self action:@selector(create:) forControlEvents:UIControlEventTouchUpInside];
-   [create setTitle:@"Create" forState:UIControlStateNormal];
-   create.frame = CGRectMake(self.tabView.frame.size.width/4, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
-   [self.tabView addSubview:create];
+   self.create = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   [self.create addTarget:self action:@selector(create:) forControlEvents:UIControlEventTouchUpInside];
+   [self.create setTitle:@"Create" forState:UIControlStateNormal];
+   self.create.frame = CGRectMake(self.tabView.frame.size.width/4, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
+   [self.tabView addSubview:self.create];
    
-   UIButton *recent = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-   [recent addTarget:self action:@selector(recent:) forControlEvents:UIControlEventTouchUpInside];
-   [recent setTitle:@"Recent" forState:UIControlStateNormal];
-   recent.frame = CGRectMake(self.tabView.frame.size.width/2, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
-   [self.tabView addSubview:recent];
+   self.recent = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   [self.recent addTarget:self action:@selector(recent:) forControlEvents:UIControlEventTouchUpInside];
+   [self.recent setTitle:@"Recent" forState:UIControlStateNormal];
+   self.recent.frame = CGRectMake(self.tabView.frame.size.width/2, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
+   [self.tabView addSubview:self.recent];
    
-   UIButton *message = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-   [message addTarget:self action:@selector(message:) forControlEvents:UIControlEventTouchUpInside];
-   [message setTitle:@"Message" forState:UIControlStateNormal];
-   message.frame = CGRectMake(3 * self.tabView.frame.size.width/4, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
-   [self.tabView addSubview:message];
+   self.message = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   [self.message addTarget:self action:@selector(message:) forControlEvents:UIControlEventTouchUpInside];
+   [self.message setTitle:@"Message" forState:UIControlStateNormal];
+   self.message.frame = CGRectMake(3 * self.tabView.frame.size.width/4, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
+   [self.tabView addSubview:self.message];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -159,6 +167,9 @@
    [self.view addSubview:self.messageView];
    self.messageView.backgroundColor = [UIColor purpleColor];
    
+    self.createView = [[CreateView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
+    [self.view addSubview:self.createView];
+    self.createView.backgroundColor = [UIColor purpleColor];
    
    self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
    [self.view addSubview:self.exploreView];
@@ -166,14 +177,6 @@
    self.exploreView.backgroundColor = [UIColor orangeColor];
    self.activeView = self.exploreView;
    self.buttonTopRight.hidden = !self.exploreView.isDetailViewPresented;
-}
-
-
-- (void)newActivityAdded:(NSNotification *)notification{
-   
-   Activity *newActivity = notification.object;
-   NSLog(@"%@", newActivity.activityName);
-   [self.activities addObject:newActivity];
 }
 
 - (void)didReceiveMemoryWarning {
