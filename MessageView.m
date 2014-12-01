@@ -59,7 +59,9 @@
 - (NSArray *)getRecipients{
     NSMutableArray *numbers = [[NSMutableArray alloc] init];
     for (PersonBar *personBar in self.personBarArray) {
-        [numbers addObject:personBar.person.phoneNumber];
+        if (![numbers containsObject:personBar.person.phoneNumber]) {
+            [numbers addObject:personBar.person.phoneNumber];
+        }
     }
     return numbers;
 }
