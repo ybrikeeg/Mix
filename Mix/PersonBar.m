@@ -49,10 +49,10 @@
    return self;
 }
 
-- (void)tap:(UITapGestureRecognizer *)gesture {
+- (void)tap:(UITapGestureRecognizer *)gesture
+{
    NSLog(@"TOUCHED!");
    self.isSelected = !self.isSelected;
-   
 }
 
 -(void)setIsSelected:(bool)isSelected
