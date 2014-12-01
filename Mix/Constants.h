@@ -9,12 +9,14 @@
 #ifndef Mix_Constants_h
 #define Mix_Constants_h
 
-#define ACTIVITY_BAR_HEIGHT 80
+#define THEME_COLOR [UIColor colorWithRed:26.0f/255.0f green:139.0f/255.0f blue:178.0f/255.0f alpha:1.0f]
+
+#define ACTIVITY_BAR_HEIGHT 100
 #define EXPANDED_BAR_HEIGHT (self.scrollView.frame.size.height)
 #define BORDER_HEIGHT 1
 
 //tab bar
-#define INDICATOR_HEIGHT 2
+#define INDICATOR_HEIGHT 3
 
 
 //used in the message views

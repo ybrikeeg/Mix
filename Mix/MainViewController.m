@@ -43,15 +43,15 @@
 - (void)viewDidLoad {
    
    [super viewDidLoad];
-
+   
    [self createTabBar];
 }
 
 - (void)animateIndicator:(UIButton *)sender
 {
    self.buttonTopRight.hidden = self.exploreView.isDetailViewPresented;
-
-   [UIView animateWithDuration:0.2f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
+   
+   [UIView animateWithDuration:0.25f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
       self.selectionIndicator.frame = CGRectMake(sender.frame.origin.x, self.selectionIndicator.frame.origin.y, self.selectionIndicator.frame.size.width, self.selectionIndicator.frame.size.height);
    }completion:^(BOOL finished){
    }];
@@ -70,8 +70,10 @@
 - (void)create:(UIButton *)sender
 {
    [self animateIndicator:sender];
-    [self.view bringSubviewToFront:self.createView];
-    self.activeView = self.createView;
+   [self.view bringSubviewToFront:self.createView];
+   self.activeView = self.createView;
+   self.buttonTopRight.hidden = YES;
+   
 }
 
 - (void)recent:(UIButton *)sender
@@ -81,7 +83,7 @@
    self.activeView = self.recentView;
    self.buttonTopRight.titleLabel.text = @"Done";
    self.buttonTopRight.hidden = !self.recentView.isDetailViewPresented;
-
+   
 }
 
 - (void)message:(UIButton *)sender
@@ -102,13 +104,14 @@
    }else if (self.activeView == self.recentView){
       [self.recentView done:nil];
    }
-
+   
 }
 
 - (void)createTabBar
 {
+   
    self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.height + self.view.frame.size.width, 50)];
-   self.navBar.backgroundColor = [UIColor yellowColor];
+   self.navBar.backgroundColor = THEME_COLOR;
    [self.view addSubview:self.navBar];
    
    UILabel *mix = [[UILabel alloc] init];
@@ -122,38 +125,62 @@
    [self.buttonTopRight setTitle:@"Done" forState:UIControlStateNormal];
    self.buttonTopRight.frame = CGRectMake(self.view.frame.size.width - 60, self.navBar.frame.size.height - 40   , 60, 40);
    [self.buttonTopRight.titleLabel setTextAlignment: NSTextAlignmentCenter];
-   self.buttonTopRight.backgroundColor = [UIColor blueColor];
+   [self.buttonTopRight setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
    [self.navBar addSubview:self.buttonTopRight];
    
    self.tabView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navBar.frame.origin.y + self.navBar.frame.size.height, self.view.frame.size.width, 40)];
+   self.tabView.backgroundColor = [UIColor whiteColor];
    [self.view addSubview:self.tabView];
    
+   UIView *b = [[UIView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.size.height - 1, self.view.frame.size.width, 1)];
+   b.backgroundColor = THEME_COLOR;
+   [self.tabView addSubview:b];
+   
    self.selectionIndicator = [[UIView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.size.height - INDICATOR_HEIGHT, self.tabView.frame.size.width/4, INDICATOR_HEIGHT)];
-   self.selectionIndicator.backgroundColor = [UIColor greenColor];
+   self.selectionIndicator.backgroundColor = THEME_COLOR;
    [self.tabView addSubview:self.selectionIndicator];
    
    self.explore = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.explore addTarget:self action:@selector(explore:) forControlEvents:UIControlEventTouchUpInside];
    [self.explore setTitle:@"Explore" forState:UIControlStateNormal];
    self.explore.frame = CGRectMake(0, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
+   [self.explore setTitleColor:THEME_COLOR forState:UIControlStateNormal];
    [self.tabView addSubview:self.explore];
+   
+   UIView *s1 = [[UIView alloc] initWithFrame:CGRectMake(self.explore.frame.size.width, 0, 1, self.explore.frame.size.height)];
+   s1.backgroundColor = THEME_COLOR;
+   [self.tabView addSubview:s1];
+   
    
    self.create = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.create addTarget:self action:@selector(create:) forControlEvents:UIControlEventTouchUpInside];
    [self.create setTitle:@"Create" forState:UIControlStateNormal];
    self.create.frame = CGRectMake(self.tabView.frame.size.width/4, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
+   [self.create setTitleColor:THEME_COLOR forState:UIControlStateNormal];
    [self.tabView addSubview:self.create];
+   
+   UIView *s2 = [[UIView alloc] initWithFrame:CGRectMake(self.create.frame.origin.x +  self.create.frame.size.width, 0, 1, self.explore.frame.size.height)];
+   s2.backgroundColor = THEME_COLOR;
+   [self.tabView addSubview:s2];
    
    self.recent = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.recent addTarget:self action:@selector(recent:) forControlEvents:UIControlEventTouchUpInside];
    [self.recent setTitle:@"Recent" forState:UIControlStateNormal];
    self.recent.frame = CGRectMake(self.tabView.frame.size.width/2, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
+   [self.recent setTitleColor:THEME_COLOR forState:UIControlStateNormal];
    [self.tabView addSubview:self.recent];
+   
+   UIView *s3 = [[UIView alloc] initWithFrame:CGRectMake(self.recent.frame.origin.x +  self.recent.frame.size.width, 0, 1, self.explore.frame.size.height)];
+   s3.backgroundColor = THEME_COLOR;
+   [self.tabView addSubview:s3];
+
    
    self.message = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.message addTarget:self action:@selector(message:) forControlEvents:UIControlEventTouchUpInside];
    [self.message setTitle:@"Message" forState:UIControlStateNormal];
    self.message.frame = CGRectMake(3 * self.tabView.frame.size.width/4, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
+   [self.message setTitleColor:THEME_COLOR forState:UIControlStateNormal];
+   
    [self.tabView addSubview:self.message];
 }
 
@@ -165,11 +192,9 @@
    
    self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
    [self.view addSubview:self.messageView];
-   self.messageView.backgroundColor = [UIColor purpleColor];
    
-    self.createView = [[CreateView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
-    [self.view addSubview:self.createView];
-    self.createView.backgroundColor = [UIColor purpleColor];
+   self.createView = [[CreateView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
+   [self.view addSubview:self.createView];
    
    self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
    [self.view addSubview:self.exploreView];
@@ -208,10 +233,10 @@
       picker.recipients = rec;
       NSLog(@"sending");
       [self presentViewController:picker animated:YES completion:NULL];
-
+      
    }else{
       NSLog(@"not sending");
-
+      
    }
 }
 
@@ -228,7 +253,7 @@
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller
                  didFinishWithResult:(MessageComposeResult)result
 {
-    [self dismissViewControllerAnimated:YES completion:NULL];
+   [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end

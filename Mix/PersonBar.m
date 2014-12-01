@@ -24,7 +24,7 @@
        self.person = person;
        
       int sideLength = frame.size.height - 2*EDGE_INSET;
-      self.profilePic = [[UIImageView alloc] initWithFrame:CGRectMake(EDGE_INSET, EDGE_INSET, sideLength, sideLength)];
+      self.profilePic = [[UIImageView alloc] initWithFrame:CGRectMake(EDGE_INSET * 2, EDGE_INSET, sideLength, sideLength)];
       [self.profilePic setImage:[UIImage imageNamed:person.imageName]];
       self.profilePic.backgroundColor = [UIColor orangeColor];
       CAShapeLayer *shape = [CAShapeLayer layer];
@@ -36,8 +36,7 @@
       self.nameLabel = [[UILabel alloc] init];
       self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", person.firstName, person.lastName];
       [self.nameLabel sizeToFit];
-      self.nameLabel.center = CGPointMake(self.profilePic.frame.origin.x + self.profilePic.frame.size.width + EDGE_INSET + self.nameLabel.frame.size.width/2, EDGE_INSET + self.nameLabel.frame.size.height/2);
-            self.nameLabel.backgroundColor = [UIColor blueColor];
+      self.nameLabel.center = CGPointMake(self.profilePic.frame.origin.x + self.profilePic.frame.size.width + EDGE_INSET + self.nameLabel.frame.size.width/2, self.frame.size.height/2);
       [self addSubview:self.nameLabel];
       
       
@@ -65,10 +64,9 @@
 {
    if (isSelected){
       [self.checkImage setImage:[UIImage imageNamed:@"check"]];
-      self.checkImage.backgroundColor = [UIColor greenColor];
    }else{
-      [self.checkImage setImage:[UIImage imageNamed:@"notCheck"]];
-      self.checkImage.backgroundColor = [UIColor redColor];
+      [self.checkImage setImage:[UIImage imageNamed:@"nocheck"]];
+      
    }
    _isSelected = isSelected;
 }

@@ -65,13 +65,9 @@
             sub.alpha = 0.0f;
          }
       }
-      //self.startTimeLabel.frame = CGRectMake(INSET, self.frame.size.height/2 - self.startTimeLabel.bounds.size.height, self.startTimeLabel.bounds.size.width, self.startTimeLabel.bounds.size.height);
+
       self.endTimeLabel.frame = CGRectMake(INSET, self.frame.size.height/2, self.endTimeLabel.frame.size.width, self.endTimeLabel.frame.size.height);
 
-      
-      //self.distanceLabel.frame = CGRectMake(self.bounds.size.width - INSET - self.distanceLabel.frame.size.width, self.frame.size.height/2 - self.distanceLabel.frame.size.height/2, self.distanceLabel.frame.size.width, self.distanceLabel.frame.size.height);
-
-      
    }completion:^(BOOL finished){
 
    }];
@@ -129,7 +125,6 @@
    self.titleLabel.tag = KEEP_VISIBLE_TAG;
    self.titleLabel.adjustsFontSizeToFitWidth = YES;
    self.titleLabel.center = CGPointMake(self.titleLabel.center.x, self.frame.size.height/3);
-   //self.titleLabel.backgroundColor = [UIColor greenColor];
    [self addSubview:self.titleLabel];
    
    //underline title
@@ -154,12 +149,11 @@
    [self addSubview:self.creatorImage];
    
    UILabel *createLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.creatorImage.frame.origin.x, self.creatorImage.frame.size.height, self.creatorImage.frame.size.width, self.frame.size.height - self.creatorImage.frame.size.height)];
-   createLabel.text = [NSString stringWithFormat:@"%@ %@", self.activity.creator.firstName, self.activity.creator.lastName];
+   createLabel.text = [NSString stringWithFormat:@"%@ %@.", self.activity.creator.firstName, [self.activity.creator.lastName substringToIndex: 1]];
    createLabel.font = [UIFont fontWithName:FONT_NAME size:28.0f];
    createLabel.tag = KEEP_VISIBLE_TAG;
    createLabel.adjustsFontSizeToFitWidth = YES;
    [createLabel setTextAlignment:NSTextAlignmentCenter];
-
    [self addSubview:createLabel];
    
    int timeWidth =  self.titleLabel.frame.size.width/2;

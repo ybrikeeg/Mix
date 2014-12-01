@@ -125,6 +125,7 @@
 }
 
 - (void)loadActivityBars{
+
    for (int i = 0; i < [self.data count]; i ++){
       ActivityBar *bar = [[ActivityBar alloc] initWithFrame: CGRectMake(0, ACTIVITY_BAR_HEIGHT * i, self.bounds.size.width, ACTIVITY_BAR_HEIGHT) withActivty: self.data[i]];
       bar.tag = i;
