@@ -59,7 +59,6 @@
    self.activeView = self.exploreView;
    self.buttonTopRight.hidden = !self.exploreView.isDetailViewPresented;
    self.buttonTopRight.titleLabel.text = @"Done";
-
 }
 
 - (void)create:(UIButton *)sender
@@ -73,6 +72,7 @@
    [self.view bringSubviewToFront:self.recentView];
    self.activeView = self.recentView;
    self.buttonTopRight.titleLabel.text = @"Done";
+   self.buttonTopRight.hidden = !self.recentView.isDetailViewPresented;
 
 }
 
@@ -99,7 +99,6 @@
 
 - (void)createTabBar
 {
-   
    self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.height + self.view.frame.size.width, 50)];
    self.navBar.backgroundColor = [UIColor yellowColor];
    [self.view addSubview:self.navBar];
