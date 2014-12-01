@@ -11,10 +11,12 @@
 #import "ActivityHeaderBar.h"
 #import "PersonBar.h"
 #import "Person.h"
+#import <MessageUI/MessageUI.h>
 
 @interface MessageView ()
 @property (nonatomic, strong) NSArray *pastActivites;
 @property (nonatomic, strong) UIScrollView *messageScrollView;
+@property (nonatomic, strong, readwrite) NSMutableArray *personBarArray;
 @end
 @implementation MessageView
 
@@ -25,6 +27,7 @@
       self.pastActivites = [[MockData sharedObj] getPastEvents];
       self.messageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
       [self addSubview:self.messageScrollView];
+       self.personBarArray = [[NSMutableArray alloc] init];
       [self createView];
    }
    
@@ -43,6 +46,7 @@
       for (int j = 0; j < [activity.participants count]; j++){
          Person *person = [activity.participants objectAtIndex:j];
          PersonBar *bar = [[PersonBar alloc] initWithFrame:CGRectMake(EDGE_INSET, ycoord, self.frame.size.width - 2*EDGE_INSET, header.frame.size.height) withPerson:person];
+          [self.personBarArray addObject:bar];
          [self.messageScrollView addSubview:bar];
          ycoord += header.frame.size.height;
       }
@@ -50,6 +54,14 @@
    
    ycoord += 50;//height of last person bar
    [self.messageScrollView setContentSize:CGSizeMake(self.frame.size.width, ycoord)];
+}
+
+- (NSArray *)getRecipients{
+    NSMutableArray *numbers = [[NSMutableArray alloc] init];
+    for (PersonBar *personBar in self.personBarArray) {
+        [numbers addObject:personBar.person.phoneNumber];
+    }
+    return numbers;
 }
 
 @end

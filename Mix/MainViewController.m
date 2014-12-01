@@ -10,10 +10,11 @@
 #import "Activity.h"
 #import "ActivityExploreView.h"
 #import "MessageView.h"
+#import <MessageUI/MessageUI.h>
 
 #import "MockData.h"
 
-@interface MainViewController ()
+@interface MainViewController ()<MFMessageComposeViewControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *activities;
 @property (nonatomic, strong) ActivityExploreView *exploreView;
 @property (nonatomic, strong) MessageView *messageView;
@@ -130,6 +131,45 @@
 - (void)didReceiveMemoryWarning {
    [super didReceiveMemoryWarning];
    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Compose Mail/SMS
+
+// -------------------------------------------------------------------------------
+//	displayMailComposerSheet
+//  Displays an SMS composition interface inside the application.
+// -------------------------------------------------------------------------------
+- (void)displaySMSComposerSheet
+{
+    MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+    picker.messageComposeDelegate = self;
+    
+    // You can specify one or more preconfigured recipients.  The user has
+    // the option to remove or add recipients from the message composer view
+    // controller.
+    /* picker.recipients = @[@"Phone number here"]; */
+    
+    // You can specify the initial message text that will appear in the message
+    // composer view controller.
+    picker.recipients = self.messageView.getRecipients;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+
+#pragma mark - Delegate Methods
+
+
+// -------------------------------------------------------------------------------
+//	messageComposeViewController:didFinishWithResult:
+//  Dismisses the message composition interface when users tap Cancel or Send.
+//  Proceeds to update the feedback message field with the result of the
+//  operation.
+// -------------------------------------------------------------------------------
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller
+                 didFinishWithResult:(MessageComposeResult)result
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end

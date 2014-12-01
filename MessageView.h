@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface MessageView : UIView
-
+- (NSArray *)getRecipients;
 @end

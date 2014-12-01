@@ -11,8 +11,7 @@
 #import "Constants.h"
 
 @interface PersonBar : UIView
-
 @property (nonatomic) bool isSelected;
+@property (nonatomic, strong, readonly) Person *person;
 - (instancetype)initWithFrame:(CGRect)frame withPerson:(Person *)person;
-
 @end
