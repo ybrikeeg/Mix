@@ -121,7 +121,6 @@
       
    }];
    return;
-   
 }
 
 - (void)loadActivityBars{
@@ -151,9 +150,7 @@
 }
 
 - (void)newActivityAdded:(NSNotification *)notification{
-    
     Activity *newActivity = notification.object;
-    NSLog(@"%@: fuck my ass", newActivity.activityName);
     [self.data addObject:newActivity];
     [self loadActivityBars];
 }

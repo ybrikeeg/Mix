@@ -108,7 +108,6 @@
    [self.delegate joinedActivity];
 }
 
-#define FONT_NAME @"Avenir-Medium"
 
 - (void)createLabels{
    self.categoryImage = [[UIImageView alloc] initWithFrame:CGRectMake(EDGE_INSET, 0, CHECK_IMAGE_SIDE, CHECK_IMAGE_SIDE)];
@@ -130,11 +129,7 @@
    //underline title
    self.underline = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.titleLabel.frame.size.width, 2)];
    self.underline.center = CGPointMake(self.titleLabel.center.x, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height);
-   CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
-   CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
-   CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-   UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
-   self.underline.backgroundColor = color;
+   self.underline.backgroundColor = THEME_COLOR;
    self.underline.tag = KEEP_VISIBLE_TAG;
    [self addSubview:self.underline];
    

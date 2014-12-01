@@ -116,9 +116,16 @@
    
    UILabel *mix = [[UILabel alloc] init];
    mix.text = @"Mix";
+   mix.font = [UIFont fontWithName:FONT_NAME size:28.0f];
    [mix sizeToFit];
-   mix.center = self.navBar.center;
+   mix.frame = CGRectMake(self.view.center.x - mix.frame.size.width/2, self.navBar.frame.size.height - mix.frame.size.height, mix.frame.size.width, mix.frame.size.height);
    [self.navBar addSubview:mix];
+   
+   UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(mix.frame.origin.x - mix.frame.size.height + 6, mix.frame.origin.y, mix.frame.size.height * .75, mix.frame.size.height * .75)];
+   [logo setImage:[UIImage imageNamed:@"logo"]];
+   logo.center = CGPointMake(logo.center.x, mix.center.y);
+   [self.navBar addSubview:logo];
+   
    
    self.buttonTopRight = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.buttonTopRight addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
