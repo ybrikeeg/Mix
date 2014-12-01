@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D6694141A2C870100F08236 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6694131A2C870100F08236 /* MessageUI.framework */; };
+		3D6694171A2C8FEA00F08236 /* CreateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D6694161A2C8FEA00F08236 /* CreateView.m */; };
 		3DBDE05D1A2BC98800356AA4 /* AddActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBDE05C1A2BC98800356AA4 /* AddActivityViewController.m */; };
 		42518CCE1A2C524400C2F2B3 /* MockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CCD1A2C524400C2F2B3 /* MockData.m */; };
 		42518CD11A2C52B000C2F2B3 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CD01A2C52B000C2F2B3 /* Person.m */; };
@@ -39,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		3D6694131A2C870100F08236 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		3D6694151A2C8FEA00F08236 /* CreateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateView.h; sourceTree = "<group>"; };
+		3D6694161A2C8FEA00F08236 /* CreateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateView.m; sourceTree = "<group>"; };
 		3DBDE05B1A2BC98800356AA4 /* AddActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddActivityViewController.h; sourceTree = "<group>"; };
 		3DBDE05C1A2BC98800356AA4 /* AddActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddActivityViewController.m; sourceTree = "<group>"; };
 		42518CCC1A2C524400C2F2B3 /* MockData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockData.h; sourceTree = "<group>"; };
@@ -94,6 +97,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D6694181A2C8FF100F08236 /* CreateView */ = {
+			isa = PBXGroup;
+			children = (
+				3D6694151A2C8FEA00F08236 /* CreateView.h */,
+				3D6694161A2C8FEA00F08236 /* CreateView.m */,
+			);
+			name = CreateView;
+			sourceTree = "<group>";
+		};
 		42518CDB1A2C650500C2F2B3 /* MessageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +165,7 @@
 				4264EB011A1BE86C0028078D /* ActivityBar.h */,
 				4264EB021A1BE86C0028078D /* ActivityBar.m */,
 				42518CDB1A2C650500C2F2B3 /* MessageView */,
+				3D6694181A2C8FF100F08236 /* CreateView */,
 				42518CDF1A2C7C8900C2F2B3 /* Model */,
 				42518CCC1A2C524400C2F2B3 /* MockData.h */,
 				42518CCD1A2C524400C2F2B3 /* MockData.m */,
@@ -301,6 +314,7 @@
 				4264EB031A1BE86C0028078D /* ActivityBar.m in Sources */,
 				42518CD41A2C5D0300C2F2B3 /* PersonBar.m in Sources */,
 				42518CCE1A2C524400C2F2B3 /* MockData.m in Sources */,
+				3D6694171A2C8FEA00F08236 /* CreateView.m in Sources */,
 				4264EAFF1A1BE7CC0028078D /* Activity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
