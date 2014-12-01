@@ -9,6 +9,8 @@
 #import "MainViewController.h"
 #import "Activity.h"
 #import "ActivityExploreView.h"
+#import "RecentActivityView.h"
+
 #import "MessageView.h"
 #import <MessageUI/MessageUI.h>
 
@@ -18,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray *activities;
 @property (nonatomic, strong) ActivityExploreView *exploreView;
 @property (nonatomic, strong) MessageView *messageView;
+@property (nonatomic, strong) RecentActivityView *recentView;
 
 @property (nonatomic, strong) UIView *tabView;
 @property (nonatomic, strong) UIView *selectionIndicator;
@@ -55,6 +58,7 @@
    [self.view bringSubviewToFront:self.exploreView];
    self.activeView = self.exploreView;
    self.buttonTopRight.hidden = !self.exploreView.isDetailViewPresented;
+   self.buttonTopRight.titleLabel.text = @"Done";
 
 }
 
@@ -66,6 +70,10 @@
 - (void)recent:(UIButton *)sender
 {
    [self animateIndicator:sender];
+   [self.view bringSubviewToFront:self.recentView];
+   self.activeView = self.recentView;
+   self.buttonTopRight.titleLabel.text = @"Done";
+
 }
 
 - (void)message:(UIButton *)sender
@@ -73,6 +81,8 @@
    [self animateIndicator:sender];
    [self.view bringSubviewToFront:self.messageView];
    self.activeView = self.messageView;
+   self.buttonTopRight.hidden = NO;
+   self.buttonTopRight.titleLabel.text = @"Send";
 }
 
 - (void)done:(UIButton *)sender
@@ -81,6 +91,8 @@
       [self.exploreView done:nil];
    }else if (self.activeView == self.messageView){
       [self displaySMSComposerSheet];
+   }else if (self.activeView == self.recentView){
+      [self.recentView done:nil];
    }
 
 }
@@ -139,6 +151,11 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+   
+   self.recentView = [[RecentActivityView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
+   self.recentView.doneButton = self.buttonTopRight;
+   [self.view addSubview:self.recentView];
+   
    self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
    [self.view addSubview:self.messageView];
    self.messageView.backgroundColor = [UIColor purpleColor];
@@ -173,19 +190,27 @@
 // -------------------------------------------------------------------------------
 - (void)displaySMSComposerSheet
 {
-    MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
-    picker.messageComposeDelegate = self;
-    
-    // You can specify one or more preconfigured recipients.  The user has
-    // the option to remove or add recipients from the message composer view
-    // controller.
-    /* picker.recipients = @[@"Phone number here"]; */
-    
-    // You can specify the initial message text that will appear in the message
-    // composer view controller.
-    picker.recipients = self.messageView.getRecipients;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
+   NSArray *rec = self.messageView.getRecipients;
+   if ([rec count] > 0){
+      NSLog(@"sending");
+      MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+      picker.messageComposeDelegate = self;
+      
+      // You can specify one or more preconfigured recipients.  The user has
+      // the option to remove or add recipients from the message composer view
+      // controller.
+      /* picker.recipients = @[@"Phone number here"]; */
+      
+      // You can specify the initial message text that will appear in the message
+      // composer view controller.
+      picker.recipients = rec;
+      NSLog(@"sending");
+      [self presentViewController:picker animated:YES completion:NULL];
+
+   }else{
+      NSLog(@"not sending");
+
+   }
 }
 
 
