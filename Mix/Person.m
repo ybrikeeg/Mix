@@ -10,4 +10,14 @@
 
 @implementation Person
 
+- (instancetype)initWithFirstName:(NSString *)first lastName:(NSString *)last number:(NSString *)number{
+   self = [super init];
+   if (self) {
+      self.firstName = first;
+      self.lastName = last;
+      self.phoneNumber = number;
+   }
+   
+   return self;
+}
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "Person.h"
 
 @interface Activity : NSObject
 
@@ -19,5 +20,9 @@
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic) CGFloat distance;
 @property (nonatomic) bool activityJoined;
+
+@property (nonatomic, strong) Person *creator;
+@property (nonatomic, strong) NSString *category;
+@property (nonatomic, strong) NSString *date;//ex: 11/14
 
 @end

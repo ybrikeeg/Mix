@@ -9,6 +9,7 @@
 #import "FirstViewController.h"
 #import "Activity.h"
 #import "ActivityExploreView.h"
+#import "MockData.h"
 
 @interface FirstViewController ()
 @property (nonatomic, strong) NSMutableArray *activities;
@@ -21,6 +22,7 @@
 
 
 - (void)viewDidLoad {
+   
    [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newActivityAdded:) name:@"newActivityAdded" object:nil];
    

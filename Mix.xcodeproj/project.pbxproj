@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3DBDE05D1A2BC98800356AA4 /* AddActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBDE05C1A2BC98800356AA4 /* AddActivityViewController.m */; };
+		42518CCE1A2C524400C2F2B3 /* MockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CCD1A2C524400C2F2B3 /* MockData.m */; };
+		42518CD11A2C52B000C2F2B3 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CD01A2C52B000C2F2B3 /* Person.m */; };
 		4264EAD51A1BE7A70028078D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EAD41A1BE7A70028078D /* main.m */; };
 		4264EAD81A1BE7A70028078D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EAD71A1BE7A70028078D /* AppDelegate.m */; };
 		4264EADB1A1BE7A70028078D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EADA1A1BE7A70028078D /* FirstViewController.m */; };
@@ -35,6 +37,10 @@
 /* Begin PBXFileReference section */
 		3DBDE05B1A2BC98800356AA4 /* AddActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddActivityViewController.h; sourceTree = "<group>"; };
 		3DBDE05C1A2BC98800356AA4 /* AddActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddActivityViewController.m; sourceTree = "<group>"; };
+		42518CCC1A2C524400C2F2B3 /* MockData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockData.h; sourceTree = "<group>"; };
+		42518CCD1A2C524400C2F2B3 /* MockData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockData.m; sourceTree = "<group>"; };
+		42518CCF1A2C52B000C2F2B3 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		42518CD01A2C52B000C2F2B3 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		4264EACF1A1BE7A70028078D /* Mix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4264EAD31A1BE7A70028078D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4264EAD41A1BE7A70028078D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -116,6 +122,10 @@
 				4264EB021A1BE86C0028078D /* ActivityBar.m */,
 				4264EAFB1A1BE7CC0028078D /* Activity.h */,
 				4264EAFC1A1BE7CC0028078D /* Activity.m */,
+				42518CCF1A2C52B000C2F2B3 /* Person.h */,
+				42518CD01A2C52B000C2F2B3 /* Person.m */,
+				42518CCC1A2C524400C2F2B3 /* MockData.h */,
+				42518CCD1A2C524400C2F2B3 /* MockData.m */,
 				4264EADF1A1BE7A70028078D /* Main.storyboard */,
 				4264EAE21A1BE7A70028078D /* Images.xcassets */,
 				4264EAE41A1BE7A70028078D /* LaunchScreen.xib */,
@@ -252,11 +262,13 @@
 			files = (
 				4264EADE1A1BE7A70028078D /* SecondViewController.m in Sources */,
 				4264EB001A1BE7CC0028078D /* ActivityExploreView.m in Sources */,
+				42518CD11A2C52B000C2F2B3 /* Person.m in Sources */,
 				4264EAD81A1BE7A70028078D /* AppDelegate.m in Sources */,
 				3DBDE05D1A2BC98800356AA4 /* AddActivityViewController.m in Sources */,
 				4264EADB1A1BE7A70028078D /* FirstViewController.m in Sources */,
 				4264EAD51A1BE7A70028078D /* main.m in Sources */,
 				4264EB031A1BE86C0028078D /* ActivityBar.m in Sources */,
+				42518CCE1A2C524400C2F2B3 /* MockData.m in Sources */,
 				4264EAFF1A1BE7CC0028078D /* Activity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
