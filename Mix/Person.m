@@ -16,7 +16,7 @@
       self.firstName = first;
       self.lastName = last;
       self.phoneNumber = number;
-       self.imageName = [NSString stringWithFormat:@"%@_%@.png", self.firstName.lowercaseString, self.lastName.lowercaseString];
+       self.imageName = [NSString stringWithFormat:@"%@_%@.png", self.firstName, self.lastName];
    }
    
    return self;

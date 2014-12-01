@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) UIView *tabView;
 @property (nonatomic, strong) UIView *selectionIndicator;
+@property (nonatomic, strong) UIView *navBar;
 @end
 
 @implementation MainViewController
@@ -32,9 +33,7 @@
    [super viewDidLoad];
    
    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newActivityAdded:) name:@"newActivityAdded" object:nil];
-   
    [self createTabBar];
-   
 }
 
 - (void)animateIndicator:(UIButton *)sender
@@ -49,12 +48,6 @@
 - (void)explore:(UIButton *)sender
 {
    [self animateIndicator:sender];
-   if (!self.exploreView){
-      self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.tabView.frame.size.height)];
-      [self.view addSubview:self.exploreView];
-      self.exploreView.backgroundColor = [UIColor orangeColor];
-   }
-   
    [self.view bringSubviewToFront:self.exploreView];
 }
 
@@ -71,18 +64,17 @@
 - (void)message:(UIButton *)sender
 {
    [self animateIndicator:sender];
-   if (!self.messageView){
-      self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.tabView.frame.size.height)];
-      [self.view addSubview:self.messageView];
-      self.messageView.backgroundColor = [UIColor purpleColor];
-   }
-   
    [self.view bringSubviewToFront:self.messageView];
 }
 
 - (void)createTabBar
 {
-   self.tabView = [[UIView alloc] initWithFrame:CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, self.view.frame.size.width, 40)];
+   
+   self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.height + self.view.frame.size.width, 50)];
+   self.navBar.backgroundColor = [UIColor yellowColor];
+   [self.view addSubview:self.navBar];
+   
+   self.tabView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navBar.frame.origin.y + self.navBar.frame.size.height, self.view.frame.size.width, 40)];
    self.tabView.backgroundColor = [UIColor blackColor];
    [self.view addSubview:self.tabView];
    
@@ -115,9 +107,14 @@
    [self.tabView addSubview:message];
 }
 - (void)viewWillAppear:(BOOL)animated{
-   self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.tabView.frame.size.height)];
+   self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
+   [self.view addSubview:self.messageView];
+   self.messageView.backgroundColor = [UIColor purpleColor];
+   
+   
+   self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
    [self.view addSubview:self.exploreView];
-   self.exploreView.backgroundColor = [UIColor orangeColor];   
+   self.exploreView.backgroundColor = [UIColor orangeColor];
 }
 
 

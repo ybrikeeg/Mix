@@ -25,8 +25,13 @@
        
       int sideLength = frame.size.height - 2*EDGE_INSET;
       self.profilePic = [[UIImageView alloc] initWithFrame:CGRectMake(EDGE_INSET, EDGE_INSET, sideLength, sideLength)];
-      //[self.profilePic setImage:[UIImage imageNamed:person.imageName]];
+      [self.profilePic setImage:[UIImage imageNamed:person.imageName]];
       self.profilePic.backgroundColor = [UIColor orangeColor];
+      //self.profilePic.layer.cornerRadius = sideLength/2;
+      CAShapeLayer *shape = [CAShapeLayer layer];
+      UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:self.profilePic.bounds];
+      shape.path = path.CGPath;
+      self.profilePic.layer.mask = shape;
       [self addSubview:self.profilePic];
       
       self.nameLabel = [[UILabel alloc] init];

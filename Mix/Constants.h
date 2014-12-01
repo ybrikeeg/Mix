@@ -9,7 +9,7 @@
 #ifndef Mix_Constants_h
 #define Mix_Constants_h
 
-#define ACTIVITY_BAR_HEIGHT 100
+#define ACTIVITY_BAR_HEIGHT 120
 #define EXPANDED_BAR_HEIGHT (self.scrollView.frame.size.height)
 #define BORDER_HEIGHT 1
 
