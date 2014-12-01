@@ -9,6 +9,7 @@
 #import "ActivityExploreView.h"
 #import "ActivityBar.h"
 #import "Constants.h"
+#import "MockData.h"
 
 @interface ActivityExploreView ()
 @property (nonatomic, strong) NSArray *data;
@@ -25,7 +26,8 @@
 {
    self = [super initWithFrame:frame];
    if (self) {
-      self.data = data;
+       self.data = [[MockData sharedObj] getUpcomingActivities];
+       NSLog(@"%@", self.data);
       [self initializeData];
       [self loadActivityBars];
       

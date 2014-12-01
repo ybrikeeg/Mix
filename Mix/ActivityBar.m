@@ -112,6 +112,7 @@
 
 - (void)createLabels{
    //create title label
+    NSLog(@"created title label");
    self.titleLabel = [[UILabel alloc] init];
    self.titleLabel.text = self.activity.activityName;
    self.titleLabel.font = [UIFont fontWithName:FONT_NAME size:28.0f];
@@ -121,6 +122,7 @@
    [self addSubview:self.titleLabel];
    
    //underline title
+    NSLog(@"created underline title");
    self.underline = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.titleLabel.frame.size.width, 2)];
    self.underline.center = CGPointMake(self.titleLabel.center.x, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height);
    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
@@ -194,7 +196,8 @@
       [self.profileScrollView addSubview:thumbnail];
       
       UILabel *firstName = [[UILabel alloc] init];
-      firstName.text = [self.activity.participants objectAtIndex:i];
+       NSLog(@"%@", self.activity.participants);
+      firstName.text = [[self.activity.participants objectAtIndex:i] firstName];
       firstName.font = [UIFont fontWithName:FONT_NAME size:12.0f];
       [firstName sizeToFit];
       firstName.tag = MAKE_INVISIBLE_TAG;
@@ -202,7 +205,7 @@
       [self.profileScrollView addSubview:firstName];
       
       UILabel *lastName = [[UILabel alloc] init];
-      lastName.text = @"Last";
+      lastName.text = [[self.activity.participants objectAtIndex:i] lastName];
       lastName.font = [UIFont fontWithName:FONT_NAME size:12.0f];
       [lastName sizeToFit];
       lastName.tag = MAKE_INVISIBLE_TAG;

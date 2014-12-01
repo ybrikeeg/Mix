@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface MockData : NSObject
-
-
++ (MockData *) sharedObj;
+- (NSArray *)getUpcomingActivities;
 @end

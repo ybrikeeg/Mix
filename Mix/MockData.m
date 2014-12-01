@@ -12,10 +12,23 @@
 
 @interface MockData ()
 @property (nonatomic, strong) NSMutableArray *personLibrary;
+@property (nonatomic, strong) NSMutableArray *upcomingActivities;
 @end
 
 @implementation MockData
 
++ (MockData *) sharedObj
+{
+    static MockData * shared = nil;
+    static dispatch_once_t onceTocken;
+    dispatch_once(&onceTocken, ^{
+        
+        shared = [[MockData alloc] init];
+        [shared createPersonLibrary];
+        [shared createUpcomingActivities];
+    });
+    return shared;
+}
 
 - (NSString *)generateRandomNumber
 {
@@ -35,9 +48,12 @@
 
 
 - (NSArray *)getUpcomingActivities{
-   
-    NSMutableArray *activities = [[NSMutableArray alloc] init];
-   
+    return self.upcomingActivities;
+}
+
+- (void)createUpcomingActivities{
+    self.upcomingActivities = [[NSMutableArray alloc] init];
+    
     Activity *act1 = [[Activity alloc] init];
     act1.activityName = @"Roller Hockey";
     act1.descriptionText = @"Lets play roller hockey at the skating rink";
@@ -46,12 +62,12 @@
     act1.participants = @[[self.personLibrary objectAtIndex:0], [self.personLibrary objectAtIndex:1], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:3], [self.personLibrary objectAtIndex:4], [self.personLibrary objectAtIndex:5], [self.personLibrary objectAtIndex:6], [self.personLibrary objectAtIndex:7]];
     act1.address = @"Sandhill road";
     act1.distance = 1.3f;
-
+    
     act1.creator = [act1.participants firstObject];
     act1.category = @"Sport";
     act1.date = @"11/27";
-   
-   
+    
+    
     Activity *act2 = [[Activity alloc] init];
     act2.activityName = @"Pottery";
     act2.descriptionText = @"Let go make a pot";
@@ -60,12 +76,12 @@
     act2.participants = @[[self.personLibrary objectAtIndex:8], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:10]];
     act2.address = @"1345 Middlefield Ave";
     act2.distance = 5.8f;
-
+    
     act2.creator = [act2.participants firstObject];
     act2.category = @"Craft";
     act2.date = @"11/27";
-   
-
+    
+    
     Activity *act3 = [[Activity alloc] init];
     act3.activityName = @"Concert in the Park";
     act3.descriptionText = @"Lets go to a concert";
@@ -105,16 +121,16 @@
     act5.category = @"Social";
     act5.date = @"11/27";
     
-    [activities addObject:act1];
-    [activities addObject:act2];
-    [activities addObject:act3];
-    [activities addObject:act4];
-    [activities addObject:act5];
-    return activities;
+    [self.upcomingActivities addObject:act1];
+    [self.upcomingActivities addObject:act2];
+    [self.upcomingActivities addObject:act3];
+    [self.upcomingActivities addObject:act4];
+    [self.upcomingActivities addObject:act5];
 }
 
 - (void)createPersonLibrary
 {
+    self.personLibrary = [[NSMutableArray alloc] init];
    Person *p1 = [[Person alloc] initWithFirstName:@"Kirby" lastName:@"Gee" number:[self generateRandomNumber]];
    Person *p2 = [[Person alloc] initWithFirstName:@"William" lastName:@"Huang" number:[self generateRandomNumber]];
    Person *p3 = [[Person alloc] initWithFirstName:@"Cesca" lastName:@"Fleischer" number:[self generateRandomNumber]];
