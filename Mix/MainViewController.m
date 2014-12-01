@@ -52,7 +52,6 @@
       self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.tabView.frame.size.height)];
       [self.view addSubview:self.exploreView];
       self.exploreView.backgroundColor = [UIColor orangeColor];
-      NSLog(@"Frame: %@", NSStringFromCGRect(self.exploreView.frame));
    }
    
    [self.view bringSubviewToFront:self.exploreView];
@@ -74,7 +73,6 @@
    if (!self.messageView){
       self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.tabView.frame.size.height)];
       [self.view addSubview:self.messageView];
-      NSLog(@"Frame: %@", NSStringFromCGRect(self.messageView.frame));
       self.messageView.backgroundColor = [UIColor purpleColor];
    }
    
@@ -116,10 +114,9 @@
    [self.tabView addSubview:message];
 }
 - (void)viewWillAppear:(BOOL)animated{
-   //    self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height) withData:self.activities];
-   //    [self.view addSubview:self.exploreView];
-   
-   
+   self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.tabView.frame.size.height)];
+   [self.view addSubview:self.exploreView];
+   self.exploreView.backgroundColor = [UIColor orangeColor];   
 }
 
 

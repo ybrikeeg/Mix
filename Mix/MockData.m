@@ -43,7 +43,6 @@
          
       }
    }
-   NSLog(@"Number: %@", number);
    return number;
 }
 
