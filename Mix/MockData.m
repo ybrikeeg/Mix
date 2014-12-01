@@ -13,6 +13,7 @@
 @interface MockData ()
 @property (nonatomic, strong) NSMutableArray *personLibrary;
 @property (nonatomic, strong) NSMutableArray *upcomingActivities;
+@property (nonatomic, strong) NSMutableArray *pastActivities;
 @end
 
 @implementation MockData
@@ -26,6 +27,7 @@
         shared = [[MockData alloc] init];
         [shared createPersonLibrary];
         [shared createUpcomingActivities];
+        [shared createPastActivities];
     });
     return shared;
 }
@@ -49,6 +51,10 @@
 
 - (NSArray *)getUpcomingActivities{
     return self.upcomingActivities;
+}
+
+- (NSArray *)getPastEvents{
+    return self.pastActivities;
 }
 
 - (void)createUpcomingActivities{
@@ -92,7 +98,7 @@
     act3.distance = 3.4f;
     
     act3.creator = [act3.participants firstObject];
-    act3.category = @"Fine Art";
+    act3.category = @"Fine Arts";
     act3.date = @"11/27";
     
     Activity *act4 = [[Activity alloc] init];
@@ -120,6 +126,83 @@
     act5.creator = [act5.participants firstObject];
     act5.category = @"Social";
     act5.date = @"11/27";
+    
+    [self.upcomingActivities addObject:act1];
+    [self.upcomingActivities addObject:act2];
+    [self.upcomingActivities addObject:act3];
+    [self.upcomingActivities addObject:act4];
+    [self.upcomingActivities addObject:act5];
+}
+
+- (void)createPastActivities{
+    self.pastActivities = [[NSMutableArray alloc] init];
+    
+    Activity *act1 = [[Activity alloc] init];
+    act1.activityName = @"Soccer";
+    act1.descriptionText = @"Lets play soccer at the field";
+    act1.startTime = @"9:00am";
+    act1.endTime = @"12:00pm";
+    act1.participants = @[[self.personLibrary objectAtIndex:4], [self.personLibrary objectAtIndex:3], [self.personLibrary objectAtIndex:6], [self.personLibrary objectAtIndex:10], [self.personLibrary objectAtIndex:17], [self.personLibrary objectAtIndex:16], [self.personLibrary objectAtIndex:7], [self.personLibrary objectAtIndex:19]];
+    act1.address = @"Soccer Field";
+    act1.distance = 1.5f;
+    
+    act1.creator = [act1.participants firstObject];
+    act1.category = @"Sport";
+    act1.date = @"11/26";
+    
+    
+    Activity *act2 = [[Activity alloc] init];
+    act2.activityName = @"Underwater Basket Weaving";
+    act2.descriptionText = @"Let make a basket underwater";
+    act2.startTime = @"4:00pm";
+    act2.endTime = @"5:00pm";
+    act2.participants = @[[self.personLibrary objectAtIndex:5], [self.personLibrary objectAtIndex:18], [self.personLibrary objectAtIndex:13]];
+    act2.address = @"618 Escondido Rd.";
+    act2.distance = 3.8f;
+    
+    act2.creator = [act2.participants firstObject];
+    act2.category = @"Craft";
+    act2.date = @"11/24";
+    
+    
+    Activity *act3 = [[Activity alloc] init];
+    act3.activityName = @"Painting";
+    act3.descriptionText = @"Lets go paint a picture";
+    act3.startTime = @"3:00pm";
+    act3.endTime = @"5:30pm";
+    act3.participants = @[[self.personLibrary objectAtIndex:11], [self.personLibrary objectAtIndex:12]];
+    act3.address = @"Crothers";
+    act3.distance = 3.8f;
+    
+    act3.creator = [act3.participants firstObject];
+    act3.category = @"Fine Arts";
+    act3.date = @"11/23";
+    
+    Activity *act4 = [[Activity alloc] init];
+    act4.activityName = @"CS103 PSET";
+    act4.descriptionText = @"Lets work on the 103 PSET";
+    act4.startTime = @"8:00pm";
+    act4.endTime = @"11:59pm";
+    act4.participants = @[[self.personLibrary objectAtIndex:19], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:9]];
+    act4.address = @"Old Union";
+    act4.distance = 2.1f;
+    
+    act4.creator = [act4.participants firstObject];
+    act4.category = @"Education";
+    act4.date = @"11/25";
+    
+    Activity *act5 = [[Activity alloc] init];
+    act5.activityName = @"Picnic at Lake Lag";
+    act5.descriptionText = @"Lets have a picnic around Lake Lag";
+    act5.startTime = @"11:00am";
+    act5.endTime = @"12:00pm";
+    act5.participants = @[[self.personLibrary objectAtIndex:7], [self.personLibrary objectAtIndex:10], [self.personLibrary objectAtIndex:14]];
+    act5.address = @"Lake Lag";
+    act5.distance = 4.4f;
+    
+    act5.creator = [act5.participants firstObject];
+    act5.category = @"Social";
+    act5.date = @"11/26";
     
     [self.upcomingActivities addObject:act1];
     [self.upcomingActivities addObject:act2];

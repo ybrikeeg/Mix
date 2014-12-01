@@ -11,4 +11,5 @@
 @interface MockData : NSObject
 + (MockData *) sharedObj;
 - (NSArray *)getUpcomingActivities;
+- (NSArray *)getPastEvents;
 @end
