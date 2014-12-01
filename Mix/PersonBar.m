@@ -57,7 +57,6 @@
 
 -(void)setIsSelected:(bool)isSelected
 {
-   NSLog(@"Selection");
    if (isSelected){
       [self.checkImage setImage:[UIImage imageNamed:@"check"]];
       self.checkImage.backgroundColor = [UIColor greenColor];
