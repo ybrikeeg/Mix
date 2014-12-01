@@ -15,6 +15,8 @@
 		42518CD41A2C5D0300C2F2B3 /* PersonBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CD31A2C5D0300C2F2B3 /* PersonBar.m */; };
 		42518CDA1A2C62DE00C2F2B3 /* MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CD91A2C62DE00C2F2B3 /* MessageView.m */; };
 		42518CDE1A2C652500C2F2B3 /* ActivityHeaderBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CDD1A2C652500C2F2B3 /* ActivityHeaderBar.m */; };
+		42518CE41A2C900D00C2F2B3 /* RecentActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CE31A2C900D00C2F2B3 /* RecentActivityView.m */; };
+		42518CE71A2C901700C2F2B3 /* RecentBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CE61A2C901700C2F2B3 /* RecentBar.m */; };
 		4264EAD51A1BE7A70028078D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EAD41A1BE7A70028078D /* main.m */; };
 		4264EAD81A1BE7A70028078D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EAD71A1BE7A70028078D /* AppDelegate.m */; };
 		4264EADB1A1BE7A70028078D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EADA1A1BE7A70028078D /* MainViewController.m */; };
@@ -54,6 +56,10 @@
 		42518CD91A2C62DE00C2F2B3 /* MessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageView.m; path = ../MessageView.m; sourceTree = "<group>"; };
 		42518CDC1A2C652500C2F2B3 /* ActivityHeaderBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityHeaderBar.h; sourceTree = "<group>"; };
 		42518CDD1A2C652500C2F2B3 /* ActivityHeaderBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityHeaderBar.m; sourceTree = "<group>"; };
+		42518CE21A2C900D00C2F2B3 /* RecentActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentActivityView.h; sourceTree = "<group>"; };
+		42518CE31A2C900D00C2F2B3 /* RecentActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentActivityView.m; sourceTree = "<group>"; };
+		42518CE51A2C901700C2F2B3 /* RecentBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentBar.h; sourceTree = "<group>"; };
+		42518CE61A2C901700C2F2B3 /* RecentBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentBar.m; sourceTree = "<group>"; };
 		4264EACF1A1BE7A70028078D /* Mix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4264EAD31A1BE7A70028078D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4264EAD41A1BE7A70028078D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -130,6 +136,28 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		42518CE01A2C8FD600C2F2B3 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				4264EAFD1A1BE7CC0028078D /* ActivityExploreView.h */,
+				4264EAFE1A1BE7CC0028078D /* ActivityExploreView.m */,
+				4264EB011A1BE86C0028078D /* ActivityBar.h */,
+				4264EB021A1BE86C0028078D /* ActivityBar.m */,
+			);
+			name = Explore;
+			sourceTree = "<group>";
+		};
+		42518CE11A2C8FEC00C2F2B3 /* Recent */ = {
+			isa = PBXGroup;
+			children = (
+				42518CE21A2C900D00C2F2B3 /* RecentActivityView.h */,
+				42518CE31A2C900D00C2F2B3 /* RecentActivityView.m */,
+				42518CE51A2C901700C2F2B3 /* RecentBar.h */,
+				42518CE61A2C901700C2F2B3 /* RecentBar.m */,
+			);
+			name = Recent;
+			sourceTree = "<group>";
+		};
 		4264EAC61A1BE7A70028078D = {
 			isa = PBXGroup;
 			children = (
@@ -160,10 +188,8 @@
 				4264EADA1A1BE7A70028078D /* MainViewController.m */,
 				3DBDE05B1A2BC98800356AA4 /* AddActivityViewController.h */,
 				3DBDE05C1A2BC98800356AA4 /* AddActivityViewController.m */,
-				4264EAFD1A1BE7CC0028078D /* ActivityExploreView.h */,
-				4264EAFE1A1BE7CC0028078D /* ActivityExploreView.m */,
-				4264EB011A1BE86C0028078D /* ActivityBar.h */,
-				4264EB021A1BE86C0028078D /* ActivityBar.m */,
+				42518CE11A2C8FEC00C2F2B3 /* Recent */,
+				42518CE01A2C8FD600C2F2B3 /* Explore */,
 				42518CDB1A2C650500C2F2B3 /* MessageView */,
 				3D6694181A2C8FF100F08236 /* CreateView */,
 				42518CDF1A2C7C8900C2F2B3 /* Model */,
@@ -304,8 +330,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				42518CDE1A2C652500C2F2B3 /* ActivityHeaderBar.m in Sources */,
+				42518CE41A2C900D00C2F2B3 /* RecentActivityView.m in Sources */,
 				42518CDA1A2C62DE00C2F2B3 /* MessageView.m in Sources */,
 				4264EB001A1BE7CC0028078D /* ActivityExploreView.m in Sources */,
+				42518CE71A2C901700C2F2B3 /* RecentBar.m in Sources */,
 				42518CD11A2C52B000C2F2B3 /* Person.m in Sources */,
 				4264EAD81A1BE7A70028078D /* AppDelegate.m in Sources */,
 				3DBDE05D1A2BC98800356AA4 /* AddActivityViewController.m in Sources */,

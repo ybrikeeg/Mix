@@ -9,6 +9,8 @@
 #import "MainViewController.h"
 #import "Activity.h"
 #import "ActivityExploreView.h"
+#import "RecentActivityView.h"
+
 #import "MessageView.h"
 #import "CreateView.h"
 #import <MessageUI/MessageUI.h>
@@ -19,6 +21,7 @@
 @property (nonatomic, strong) NSMutableArray *activities;
 @property (nonatomic, strong) ActivityExploreView *exploreView;
 @property (nonatomic, strong) MessageView *messageView;
+@property (nonatomic, strong) RecentActivityView *recentView;
 @property (nonatomic, strong) CreateView *createView;
 
 @property (nonatomic, strong) UIView *tabView;
@@ -61,7 +64,7 @@
    [self.view bringSubviewToFront:self.exploreView];
    self.activeView = self.exploreView;
    self.buttonTopRight.hidden = !self.exploreView.isDetailViewPresented;
-
+   self.buttonTopRight.titleLabel.text = @"Done";
 }
 
 - (void)create:(UIButton *)sender
@@ -74,6 +77,11 @@
 - (void)recent:(UIButton *)sender
 {
    [self animateIndicator:sender];
+   [self.view bringSubviewToFront:self.recentView];
+   self.activeView = self.recentView;
+   self.buttonTopRight.titleLabel.text = @"Done";
+   self.buttonTopRight.hidden = !self.recentView.isDetailViewPresented;
+
 }
 
 - (void)message:(UIButton *)sender
@@ -81,6 +89,8 @@
    [self animateIndicator:sender];
    [self.view bringSubviewToFront:self.messageView];
    self.activeView = self.messageView;
+   self.buttonTopRight.hidden = NO;
+   self.buttonTopRight.titleLabel.text = @"Send";
 }
 
 - (void)done:(UIButton *)sender
@@ -89,14 +99,14 @@
       [self.exploreView done:nil];
    }else if (self.activeView == self.messageView){
       [self displaySMSComposerSheet];
+   }else if (self.activeView == self.recentView){
+      [self.recentView done:nil];
    }
 
-   
 }
 
 - (void)createTabBar
 {
-   
    self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.height + self.view.frame.size.width, 50)];
    self.navBar.backgroundColor = [UIColor yellowColor];
    [self.view addSubview:self.navBar];
@@ -110,12 +120,12 @@
    self.buttonTopRight = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.buttonTopRight addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
    [self.buttonTopRight setTitle:@"Done" forState:UIControlStateNormal];
-   [self.buttonTopRight sizeToFit];
-   self.buttonTopRight.frame = CGRectMake(self.view.frame.size.width - EDGE_INSET - self.buttonTopRight.frame.size.width, self.navBar.frame.size.height - EDGE_INSET - self.buttonTopRight.frame.size.height, self.buttonTopRight.frame.size.width, self.buttonTopRight.frame.size.height);
+   self.buttonTopRight.frame = CGRectMake(self.view.frame.size.width - 60, self.navBar.frame.size.height - 40   , 60, 40);
+   [self.buttonTopRight.titleLabel setTextAlignment: NSTextAlignmentCenter];
+   self.buttonTopRight.backgroundColor = [UIColor blueColor];
    [self.navBar addSubview:self.buttonTopRight];
    
    self.tabView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navBar.frame.origin.y + self.navBar.frame.size.height, self.view.frame.size.width, 40)];
-   self.tabView.backgroundColor = [UIColor blackColor];
    [self.view addSubview:self.tabView];
    
    self.selectionIndicator = [[UIView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.size.height - INDICATOR_HEIGHT, self.tabView.frame.size.width/4, INDICATOR_HEIGHT)];
@@ -148,6 +158,11 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+   
+   self.recentView = [[RecentActivityView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
+   self.recentView.doneButton = self.buttonTopRight;
+   [self.view addSubview:self.recentView];
+   
    self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
    [self.view addSubview:self.messageView];
    self.messageView.backgroundColor = [UIColor purpleColor];
@@ -177,19 +192,27 @@
 // -------------------------------------------------------------------------------
 - (void)displaySMSComposerSheet
 {
-    MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
-    picker.messageComposeDelegate = self;
-    
-    // You can specify one or more preconfigured recipients.  The user has
-    // the option to remove or add recipients from the message composer view
-    // controller.
-    /* picker.recipients = @[@"Phone number here"]; */
-    
-    // You can specify the initial message text that will appear in the message
-    // composer view controller.
-    picker.recipients = self.messageView.getRecipients;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
+   NSArray *rec = self.messageView.getRecipients;
+   if ([rec count] > 0){
+      NSLog(@"sending");
+      MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+      picker.messageComposeDelegate = self;
+      
+      // You can specify one or more preconfigured recipients.  The user has
+      // the option to remove or add recipients from the message composer view
+      // controller.
+      /* picker.recipients = @[@"Phone number here"]; */
+      
+      // You can specify the initial message text that will appear in the message
+      // composer view controller.
+      picker.recipients = rec;
+      NSLog(@"sending");
+      [self presentViewController:picker animated:YES completion:NULL];
+
+   }else{
+      NSLog(@"not sending");
+
+   }
 }
 
 
