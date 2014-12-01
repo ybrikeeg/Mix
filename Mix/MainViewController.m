@@ -32,9 +32,7 @@
    [super viewDidLoad];
    
    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newActivityAdded:) name:@"newActivityAdded" object:nil];
-   
    [self createTabBar];
-   
 }
 
 - (void)animateIndicator:(UIButton *)sender
@@ -49,7 +47,6 @@
 - (void)explore:(UIButton *)sender
 {
    [self animateIndicator:sender];
-   
    [self.view bringSubviewToFront:self.exploreView];
 }
 
@@ -66,12 +63,6 @@
 - (void)message:(UIButton *)sender
 {
    [self animateIndicator:sender];
-   if (!self.messageView){
-      self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
-      [self.view addSubview:self.messageView];
-      self.messageView.backgroundColor = [UIColor purpleColor];
-   }
-   
    [self.view bringSubviewToFront:self.messageView];
 }
 
@@ -115,9 +106,14 @@
    [self.tabView addSubview:message];
 }
 - (void)viewWillAppear:(BOOL)animated{
+   self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
+   [self.view addSubview:self.messageView];
+   self.messageView.backgroundColor = [UIColor purpleColor];
+   
+   
    self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
    [self.view addSubview:self.exploreView];
-   self.exploreView.backgroundColor = [UIColor orangeColor];   
+   self.exploreView.backgroundColor = [UIColor orangeColor];
 }
 
 
