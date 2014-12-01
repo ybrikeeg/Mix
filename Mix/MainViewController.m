@@ -79,6 +79,8 @@
 {
    if (self.activeView == self.exploreView){
       [self.exploreView done:nil];
+   }else if (self.activeView == self.messageView){
+      [self displaySMSComposerSheet];
    }
 
    
@@ -136,6 +138,7 @@
    message.frame = CGRectMake(3 * self.tabView.frame.size.width/4, 0, self.tabView.frame.size.width/4, self.tabView.frame.size.height);
    [self.tabView addSubview:message];
 }
+
 - (void)viewWillAppear:(BOOL)animated{
    self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
    [self.view addSubview:self.messageView];
