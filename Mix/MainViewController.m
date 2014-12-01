@@ -83,7 +83,6 @@
       [self displaySMSComposerSheet];
    }
 
-   
 }
 
 - (void)createTabBar
@@ -102,12 +101,12 @@
    self.buttonTopRight = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.buttonTopRight addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
    [self.buttonTopRight setTitle:@"Done" forState:UIControlStateNormal];
-   [self.buttonTopRight sizeToFit];
-   self.buttonTopRight.frame = CGRectMake(self.view.frame.size.width - EDGE_INSET - self.buttonTopRight.frame.size.width, self.navBar.frame.size.height - EDGE_INSET - self.buttonTopRight.frame.size.height, self.buttonTopRight.frame.size.width, self.buttonTopRight.frame.size.height);
+   self.buttonTopRight.frame = CGRectMake(self.view.frame.size.width - 60, self.navBar.frame.size.height - 40   , 60, 40);
+   [self.buttonTopRight.titleLabel setTextAlignment: NSTextAlignmentCenter];
+   self.buttonTopRight.backgroundColor = [UIColor blueColor];
    [self.navBar addSubview:self.buttonTopRight];
    
    self.tabView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navBar.frame.origin.y + self.navBar.frame.size.height, self.view.frame.size.width, 40)];
-   self.tabView.backgroundColor = [UIColor blackColor];
    [self.view addSubview:self.tabView];
    
    self.selectionIndicator = [[UIView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.size.height - INDICATOR_HEIGHT, self.tabView.frame.size.width/4, INDICATOR_HEIGHT)];
