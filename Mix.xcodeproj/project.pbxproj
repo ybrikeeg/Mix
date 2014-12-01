@@ -10,6 +10,9 @@
 		3DBDE05D1A2BC98800356AA4 /* AddActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBDE05C1A2BC98800356AA4 /* AddActivityViewController.m */; };
 		42518CCE1A2C524400C2F2B3 /* MockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CCD1A2C524400C2F2B3 /* MockData.m */; };
 		42518CD11A2C52B000C2F2B3 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CD01A2C52B000C2F2B3 /* Person.m */; };
+		42518CD41A2C5D0300C2F2B3 /* PersonBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CD31A2C5D0300C2F2B3 /* PersonBar.m */; };
+		42518CDA1A2C62DE00C2F2B3 /* MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CD91A2C62DE00C2F2B3 /* MessageView.m */; };
+		42518CDE1A2C652500C2F2B3 /* ActivityHeaderBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CDD1A2C652500C2F2B3 /* ActivityHeaderBar.m */; };
 		4264EAD51A1BE7A70028078D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EAD41A1BE7A70028078D /* main.m */; };
 		4264EAD81A1BE7A70028078D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EAD71A1BE7A70028078D /* AppDelegate.m */; };
 		4264EADB1A1BE7A70028078D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EADA1A1BE7A70028078D /* FirstViewController.m */; };
@@ -41,6 +44,12 @@
 		42518CCD1A2C524400C2F2B3 /* MockData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockData.m; sourceTree = "<group>"; };
 		42518CCF1A2C52B000C2F2B3 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		42518CD01A2C52B000C2F2B3 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		42518CD21A2C5D0300C2F2B3 /* PersonBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonBar.h; sourceTree = "<group>"; };
+		42518CD31A2C5D0300C2F2B3 /* PersonBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonBar.m; sourceTree = "<group>"; };
+		42518CD81A2C62DE00C2F2B3 /* MessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageView.h; path = ../MessageView.h; sourceTree = "<group>"; };
+		42518CD91A2C62DE00C2F2B3 /* MessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageView.m; path = ../MessageView.m; sourceTree = "<group>"; };
+		42518CDC1A2C652500C2F2B3 /* ActivityHeaderBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityHeaderBar.h; sourceTree = "<group>"; };
+		42518CDD1A2C652500C2F2B3 /* ActivityHeaderBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityHeaderBar.m; sourceTree = "<group>"; };
 		4264EACF1A1BE7A70028078D /* Mix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4264EAD31A1BE7A70028078D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4264EAD41A1BE7A70028078D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -85,6 +94,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42518CDB1A2C650500C2F2B3 /* MessageView */ = {
+			isa = PBXGroup;
+			children = (
+				42518CD81A2C62DE00C2F2B3 /* MessageView.h */,
+				42518CD91A2C62DE00C2F2B3 /* MessageView.m */,
+				42518CD21A2C5D0300C2F2B3 /* PersonBar.h */,
+				42518CD31A2C5D0300C2F2B3 /* PersonBar.m */,
+				42518CDC1A2C652500C2F2B3 /* ActivityHeaderBar.h */,
+				42518CDD1A2C652500C2F2B3 /* ActivityHeaderBar.m */,
+			);
+			name = MessageView;
+			sourceTree = "<group>";
+		};
 		4264EAC61A1BE7A70028078D = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +142,7 @@
 				4264EAFE1A1BE7CC0028078D /* ActivityExploreView.m */,
 				4264EB011A1BE86C0028078D /* ActivityBar.h */,
 				4264EB021A1BE86C0028078D /* ActivityBar.m */,
+				42518CDB1A2C650500C2F2B3 /* MessageView */,
 				4264EAFB1A1BE7CC0028078D /* Activity.h */,
 				4264EAFC1A1BE7CC0028078D /* Activity.m */,
 				42518CCF1A2C52B000C2F2B3 /* Person.h */,
@@ -260,6 +283,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42518CDE1A2C652500C2F2B3 /* ActivityHeaderBar.m in Sources */,
+				42518CDA1A2C62DE00C2F2B3 /* MessageView.m in Sources */,
 				4264EADE1A1BE7A70028078D /* SecondViewController.m in Sources */,
 				4264EB001A1BE7CC0028078D /* ActivityExploreView.m in Sources */,
 				42518CD11A2C52B000C2F2B3 /* Person.m in Sources */,
@@ -268,6 +293,7 @@
 				4264EADB1A1BE7A70028078D /* FirstViewController.m in Sources */,
 				4264EAD51A1BE7A70028078D /* main.m in Sources */,
 				4264EB031A1BE86C0028078D /* ActivityBar.m in Sources */,
+				42518CD41A2C5D0300C2F2B3 /* PersonBar.m in Sources */,
 				42518CCE1A2C524400C2F2B3 /* MockData.m in Sources */,
 				4264EAFF1A1BE7CC0028078D /* Activity.m in Sources */,
 			);
