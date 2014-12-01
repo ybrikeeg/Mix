@@ -11,6 +11,4 @@
 @interface ActivityExploreView : UIView <ActivityBarDelegate>
 
 
-- (instancetype)initWithFrame:(CGRect)frame withData:(NSArray *)data;
-
 @end

@@ -22,7 +22,7 @@
 @end
 @implementation ActivityExploreView
 
-- (instancetype)initWithFrame:(CGRect)frame withData:(NSArray *)data
+- (instancetype)initWithFrame:(CGRect)frame
 {
    self = [super initWithFrame:frame];
    if (self) {

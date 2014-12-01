@@ -48,9 +48,14 @@
 - (void)explore:(UIButton *)sender
 {
    [self animateIndicator:sender];
-   self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.tabView.frame.size.height)];
-   [self.view addSubview:self.exploreView];
-   NSLog(@"Frame: %@", NSStringFromCGRect(self.exploreView.frame));
+   if (!self.exploreView){
+      self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.tabView.frame.size.height)];
+      [self.view addSubview:self.exploreView];
+      self.exploreView.backgroundColor = [UIColor orangeColor];
+      NSLog(@"Frame: %@", NSStringFromCGRect(self.exploreView.frame));
+   }
+   
+   [self.view bringSubviewToFront:self.exploreView];
 }
 
 - (void)create:(UIButton *)sender
@@ -66,10 +71,14 @@
 - (void)message:(UIButton *)sender
 {
    [self animateIndicator:sender];
-   self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.tabView.frame.size.height)];
-   [self.view addSubview:self.messageView];
-   NSLog(@"Frame: %@", NSStringFromCGRect(self.messageView.frame));
-   self.messageView.backgroundColor = [UIColor purpleColor];
+   if (!self.messageView){
+      self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.tabView.frame.size.height)];
+      [self.view addSubview:self.messageView];
+      NSLog(@"Frame: %@", NSStringFromCGRect(self.messageView.frame));
+      self.messageView.backgroundColor = [UIColor purpleColor];
+   }
+   
+   [self.view bringSubviewToFront:self.messageView];
 }
 
 - (void)createTabBar
