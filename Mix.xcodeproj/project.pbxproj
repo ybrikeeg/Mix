@@ -15,8 +15,7 @@
 		42518CDE1A2C652500C2F2B3 /* ActivityHeaderBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CDD1A2C652500C2F2B3 /* ActivityHeaderBar.m */; };
 		4264EAD51A1BE7A70028078D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EAD41A1BE7A70028078D /* main.m */; };
 		4264EAD81A1BE7A70028078D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EAD71A1BE7A70028078D /* AppDelegate.m */; };
-		4264EADB1A1BE7A70028078D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EADA1A1BE7A70028078D /* FirstViewController.m */; };
-		4264EADE1A1BE7A70028078D /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EADD1A1BE7A70028078D /* SecondViewController.m */; };
+		4264EADB1A1BE7A70028078D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4264EADA1A1BE7A70028078D /* MainViewController.m */; };
 		4264EAE11A1BE7A70028078D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4264EADF1A1BE7A70028078D /* Main.storyboard */; };
 		4264EAE31A1BE7A70028078D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4264EAE21A1BE7A70028078D /* Images.xcassets */; };
 		4264EAE61A1BE7A70028078D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4264EAE41A1BE7A70028078D /* LaunchScreen.xib */; };
@@ -55,10 +54,8 @@
 		4264EAD41A1BE7A70028078D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4264EAD61A1BE7A70028078D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4264EAD71A1BE7A70028078D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4264EAD91A1BE7A70028078D /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		4264EADA1A1BE7A70028078D /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		4264EADC1A1BE7A70028078D /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		4264EADD1A1BE7A70028078D /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		4264EAD91A1BE7A70028078D /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		4264EADA1A1BE7A70028078D /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		4264EAE01A1BE7A70028078D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4264EAE21A1BE7A70028078D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4264EAE51A1BE7A70028078D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -132,12 +129,10 @@
 				4264EB061A1C15F90028078D /* Constants.h */,
 				4264EAD61A1BE7A70028078D /* AppDelegate.h */,
 				4264EAD71A1BE7A70028078D /* AppDelegate.m */,
-				4264EAD91A1BE7A70028078D /* FirstViewController.h */,
-				4264EADA1A1BE7A70028078D /* FirstViewController.m */,
+				4264EAD91A1BE7A70028078D /* MainViewController.h */,
+				4264EADA1A1BE7A70028078D /* MainViewController.m */,
 				3DBDE05B1A2BC98800356AA4 /* AddActivityViewController.h */,
 				3DBDE05C1A2BC98800356AA4 /* AddActivityViewController.m */,
-				4264EADC1A1BE7A70028078D /* SecondViewController.h */,
-				4264EADD1A1BE7A70028078D /* SecondViewController.m */,
 				4264EAFD1A1BE7CC0028078D /* ActivityExploreView.h */,
 				4264EAFE1A1BE7CC0028078D /* ActivityExploreView.m */,
 				4264EB011A1BE86C0028078D /* ActivityBar.h */,
@@ -285,12 +280,11 @@
 			files = (
 				42518CDE1A2C652500C2F2B3 /* ActivityHeaderBar.m in Sources */,
 				42518CDA1A2C62DE00C2F2B3 /* MessageView.m in Sources */,
-				4264EADE1A1BE7A70028078D /* SecondViewController.m in Sources */,
 				4264EB001A1BE7CC0028078D /* ActivityExploreView.m in Sources */,
 				42518CD11A2C52B000C2F2B3 /* Person.m in Sources */,
 				4264EAD81A1BE7A70028078D /* AppDelegate.m in Sources */,
 				3DBDE05D1A2BC98800356AA4 /* AddActivityViewController.m in Sources */,
-				4264EADB1A1BE7A70028078D /* FirstViewController.m in Sources */,
+				4264EADB1A1BE7A70028078D /* MainViewController.m in Sources */,
 				4264EAD51A1BE7A70028078D /* main.m in Sources */,
 				4264EB031A1BE86C0028078D /* ActivityBar.m in Sources */,
 				42518CD41A2C5D0300C2F2B3 /* PersonBar.m in Sources */,

@@ -24,7 +24,7 @@
       int sideLength = frame.size.height - 2*EDGE_INSET;
       self.profilePic = [[UIImageView alloc] initWithFrame:CGRectMake(EDGE_INSET, EDGE_INSET, sideLength, sideLength)];
       //[self.profilePic setImage:[UIImage imageNamed:person.imageName]];
-      self.profilePic.backgroundColor = [UIColor yellowColor];
+      self.profilePic.backgroundColor = [UIColor orangeColor];
       [self addSubview:self.profilePic];
       
       self.nameLabel = [[UILabel alloc] init];
@@ -39,16 +39,22 @@
       [self addSubview:self.checkImage];
       
       self.isSelected = NO;
+      
+      
+      UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+      singleTap.numberOfTapsRequired = 1;
+      [self addGestureRecognizer:singleTap];
    }
    
    return self;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+- (void)tap:(UITapGestureRecognizer *)gesture
+{
    NSLog(@"TOUCHED!");
    self.isSelected = !self.isSelected;
-   
 }
+
 -(void)setIsSelected:(bool)isSelected
 {
    NSLog(@"Selection");

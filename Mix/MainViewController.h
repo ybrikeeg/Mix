@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #include <AudioToolbox/AudioToolbox.h>
-@interface FirstViewController : UIViewController
+
+@interface MainViewController : UIViewController
 
 @end

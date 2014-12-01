@@ -6,20 +6,20 @@
 //  Copyright (c) 2014 Kirby Gee - Stanford Univeristy. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "MainViewController.h"
 #import "Activity.h"
 #import "ActivityExploreView.h"
 #import "MessageView.h"
 
 #import "MockData.h"
 
-@interface FirstViewController ()
+@interface MainViewController ()
 @property (nonatomic, strong) NSMutableArray *activities;
 @property (nonatomic, strong) ActivityExploreView *exploreView;
 @property (nonatomic, strong) MessageView *messageView;
 @end
 
-@implementation FirstViewController
+@implementation MainViewController
 
 
 
