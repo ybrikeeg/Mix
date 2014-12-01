@@ -174,7 +174,7 @@
    self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
    [self.view addSubview:self.exploreView];
    self.exploreView.doneButton = self.buttonTopRight;
-   self.exploreView.backgroundColor = [UIColor orangeColor];
+   self.exploreView.backgroundColor = [UIColor lightGrayColor];
    self.activeView = self.exploreView;
    self.buttonTopRight.hidden = !self.exploreView.isDetailViewPresented;
 }

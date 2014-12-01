@@ -145,7 +145,7 @@
    
    int sideLength = 50;
 
-   self.creatorImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - EDGE_INSET - sideLength, self.frame.size.height/2 - sideLength/2, sideLength, sideLength)];
+   self.creatorImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - EDGE_INSET - sideLength, EDGE_INSET, sideLength, sideLength)];
    [self.creatorImage setImage:[UIImage imageNamed:self.activity.creator.imageName]];
    CAShapeLayer *shape = [CAShapeLayer layer];
    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:self.creatorImage.bounds];
@@ -153,19 +153,35 @@
    self.creatorImage.layer.mask = shape;
    [self addSubview:self.creatorImage];
    
-   int timeWidth = self.creatorImage.frame.origin.x - (self.titleLabel.frame.origin.x + self.titleLabel.frame.size.width);
-   NSLog(@"width: %d", timeWidth);
-   timeWidth = self.titleLabel.frame.size.width/2;
-   self.startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height, timeWidth, self.frame.size.height - (self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height))];
-   NSLog(@"frame: %@", NSStringFromCGRect(self.startTimeLabel.frame));
+   UILabel *createLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.creatorImage.frame.origin.x, self.creatorImage.frame.size.height, self.creatorImage.frame.size.width, self.frame.size.height - self.creatorImage.frame.size.height)];
+   createLabel.text = [NSString stringWithFormat:@"%@ %@", self.activity.creator.firstName, self.activity.creator.lastName];
+   createLabel.font = [UIFont fontWithName:FONT_NAME size:28.0f];
+   createLabel.tag = KEEP_VISIBLE_TAG;
+   createLabel.adjustsFontSizeToFitWidth = YES;
+   [createLabel setTextAlignment:NSTextAlignmentCenter];
+
+   [self addSubview:createLabel];
+   
+   int timeWidth =  self.titleLabel.frame.size.width/2;
+   int timeHeight = self.frame.size.height - (self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height);
+
+   UIImageView *timeImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + timeHeight/4, timeHeight/2, timeHeight/2)];
+   [timeImage setImage:[UIImage imageNamed:@"time"]];
+   [self addSubview:timeImage];
+   
+   self.startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(3 + timeImage.frame.size.width + self.titleLabel.frame.origin.x, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height, timeWidth - timeImage.frame.size.width, timeHeight)];
    self.startTimeLabel.adjustsFontSizeToFitWidth = YES;
    self.startTimeLabel.text = [NSString stringWithFormat:@"%@-%@", self.activity.startTime, self.activity.endTime];
-   //self.startTimeLabel.backgroundColor = color;
-   [self.startTimeLabel setTextAlignment:NSTextAlignmentLeft];
+   self.startTimeLabel.font = [UIFont fontWithName:FONT_NAME size:14.0f];
    [self addSubview:self.startTimeLabel];
 
+   
+   UIImageView *distanceImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.startTimeLabel.frame.origin.x + self.startTimeLabel.frame.size.width, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + timeHeight/4, timeHeight/2, timeHeight/2)];
+   [distanceImage setImage:[UIImage imageNamed:@"distance"]];
+   [self addSubview:distanceImage];
+   
    //distnace
-   self.distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.startTimeLabel.frame.origin.x + self.startTimeLabel.frame.size.width, self.startTimeLabel.frame.origin.y, timeWidth, self.startTimeLabel.frame.size.height)];
+   self.distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(3 + distanceImage.frame.size.width + self.startTimeLabel.frame.origin.x + self.startTimeLabel.frame.size.width, self.startTimeLabel.frame.origin.y, timeWidth - distanceImage.frame.size.width, self.startTimeLabel.frame.size.height)];
    self.distanceLabel.text = [NSString stringWithFormat:@"%.01f mi away", self.activity.distance];
    self.distanceLabel.font = [UIFont fontWithName:FONT_NAME size:14.0f];
    self.distanceLabel.tag = KEEP_VISIBLE_TAG;
