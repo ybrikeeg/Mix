@@ -9,12 +9,14 @@
 #import "FirstViewController.h"
 #import "Activity.h"
 #import "ActivityExploreView.h"
+#import "MessageView.h"
+
 #import "MockData.h"
 
 @interface FirstViewController ()
 @property (nonatomic, strong) NSMutableArray *activities;
 @property (nonatomic, strong) ActivityExploreView *exploreView;
-
+@property (nonatomic, strong) MessageView *messageView;
 @end
 
 @implementation FirstViewController
@@ -27,13 +29,15 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newActivityAdded:) name:@"newActivityAdded" object:nil];
    
    [self createActivities];
-   NSLog(@"t: %f" ,self.tabBarController.tabBar.frame.size.height);
-   NSLog(@"t: %f" , [UIApplication sharedApplication].statusBarFrame.size.height);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabBarController.tabBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height) withData:self.activities];
-    [self.view addSubview:self.exploreView];
+//    self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height) withData:self.activities];
+//    [self.view addSubview:self.exploreView];
+   
+   self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height)];
+   [self.view addSubview:self.messageView];
+   self.messageView.backgroundColor = [UIColor yellowColor];
 }
 
 - (void)createActivities{
