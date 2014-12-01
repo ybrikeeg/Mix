@@ -12,6 +12,7 @@
 @property (nonatomic, strong) UIImageView *profilePic;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIImageView *checkImage;
+@property (nonatomic, strong, readwrite) Person *person;
 @end
 
 
@@ -20,7 +21,8 @@
 - (instancetype)initWithFrame:(CGRect)frame withPerson:(Person *)person{
    self = [super initWithFrame:frame];
    if (self) {
-      
+       self.person = person;
+       
       int sideLength = frame.size.height - 2*EDGE_INSET;
       self.profilePic = [[UIImageView alloc] initWithFrame:CGRectMake(EDGE_INSET, EDGE_INSET, sideLength, sideLength)];
       [self.profilePic setImage:[UIImage imageNamed:person.imageName]];

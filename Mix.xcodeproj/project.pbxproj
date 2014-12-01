@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D6694141A2C870100F08236 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6694131A2C870100F08236 /* MessageUI.framework */; };
 		3DBDE05D1A2BC98800356AA4 /* AddActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBDE05C1A2BC98800356AA4 /* AddActivityViewController.m */; };
 		42518CCE1A2C524400C2F2B3 /* MockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CCD1A2C524400C2F2B3 /* MockData.m */; };
 		42518CD11A2C52B000C2F2B3 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CD01A2C52B000C2F2B3 /* Person.m */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D6694131A2C870100F08236 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3DBDE05B1A2BC98800356AA4 /* AddActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddActivityViewController.h; sourceTree = "<group>"; };
 		3DBDE05C1A2BC98800356AA4 /* AddActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddActivityViewController.m; sourceTree = "<group>"; };
 		42518CCC1A2C524400C2F2B3 /* MockData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockData.h; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D6694141A2C870100F08236 /* MessageUI.framework in Frameworks */,
 				4264EB081A1C28930028078D /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +121,7 @@
 		4264EAC61A1BE7A70028078D = {
 			isa = PBXGroup;
 			children = (
+				3D6694131A2C870100F08236 /* MessageUI.framework */,
 				4264EB071A1C28930028078D /* MapKit.framework */,
 				4264EAD11A1BE7A70028078D /* Mix */,
 				4264EAEE1A1BE7A70028078D /* MixTests */,
