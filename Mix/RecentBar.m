@@ -75,13 +75,9 @@
    [UIView animateWithDuration:.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
       self.bottomBorder.center = CGPointMake(self.center.x, frame.size.height - 1);
       self.frame = frame;
-      NSLog(@"expand bar frame: %@", NSStringFromCGRect(frame));
       
-      
-      //self.startTimeLabel.center = CGPointMake(self.startTimeLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT - self.startTimeLabel.frame.size.height/2);
       self.endTimeLabel.center = CGPointMake(self.endTimeLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT + self.endTimeLabel.frame.size.height/2);
       
-      //self.distanceLabel.center = CGPointMake(self.distanceLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT);
       for (UIView *sub in self.subviews){
          if (sub.tag == MAKE_INVISIBLE_TAG){
             sub.alpha = 1.0f;

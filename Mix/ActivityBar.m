@@ -77,13 +77,9 @@
    [UIView animateWithDuration:.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
       self.bottomBorder.center = CGPointMake(self.center.x, frame.size.height - 1);
       self.frame = frame;
-      NSLog(@"expand bar frame: %@", NSStringFromCGRect(frame));
 
-      
-      //self.startTimeLabel.center = CGPointMake(self.startTimeLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT - self.startTimeLabel.frame.size.height/2);
       self.endTimeLabel.center = CGPointMake(self.endTimeLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT + self.endTimeLabel.frame.size.height/2);
 
-      //self.distanceLabel.center = CGPointMake(self.distanceLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT);
       for (UIView *sub in self.subviews){
          if (sub.tag == MAKE_INVISIBLE_TAG){
             sub.alpha = 1.0f;
@@ -154,7 +150,7 @@
    int timeWidth =  self.titleLabel.frame.size.width/2;
    int timeHeight = self.frame.size.height - (self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height);
 
-   UIImageView *timeImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + timeHeight/4, timeHeight/2, timeHeight/2)];
+   UIImageView *timeImage = [[UIImageView alloc] initWithFrame:CGRectMake(4 + self.titleLabel.frame.origin.x, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + timeHeight/4, timeHeight/2, timeHeight/2)];
    [timeImage setImage:[UIImage imageNamed:@"time"]];
    [self addSubview:timeImage];
    
@@ -165,7 +161,7 @@
    [self addSubview:self.startTimeLabel];
 
    
-   UIImageView *distanceImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.startTimeLabel.frame.origin.x + self.startTimeLabel.frame.size.width, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + timeHeight/4, timeHeight/2, timeHeight/2)];
+   UIImageView *distanceImage = [[UIImageView alloc] initWithFrame:CGRectMake(6 + self.startTimeLabel.frame.origin.x + self.startTimeLabel.frame.size.width, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + timeHeight/4, timeHeight/2, timeHeight/2)];
    [distanceImage setImage:[UIImage imageNamed:@"distance"]];
    [self addSubview:distanceImage];
    
@@ -243,17 +239,22 @@
    locationTitle.tag = MAKE_INVISIBLE_TAG;
    [self addSubview:locationTitle];
    
-   CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(-37.00, 100.00) radius:10 identifier:@"idd"];
+   
+   
+   CLLocationCoordinate2D zoomLocation;
+   zoomLocation.latitude = 37.4300;
+   zoomLocation.longitude= -122.1700;
    self.map = [[MKMapView alloc] initWithFrame:CGRectMake(INSET, locationTitle.frame.origin.y + locationTitle.frame.size.height, self.frame.size.width - 2*INSET, 80)];
    self.map.rotateEnabled = YES;
    self.map.pitchEnabled = YES;
    self.map.showsUserLocation = YES;
    self.map.userInteractionEnabled = YES;
    self.map.tag = MAKE_INVISIBLE_TAG;
-   [self.map setRegion:MKCoordinateRegionMakeWithDistance(region.center, 1000, 1000) animated:YES];
-
+   MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 1000, 1000);
+   [self.map setRegion:viewRegion animated:YES];
+   
    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-   [annotation setCoordinate:region.center];
+   [annotation setCoordinate:zoomLocation];
    [self.map addAnnotation:annotation];
    [self.map  selectAnnotation:annotation animated:YES];
    [self addSubview:self.map];
