@@ -271,8 +271,10 @@
    self.joinButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.joinButton addTarget:self action:@selector(join:) forControlEvents:UIControlEventTouchUpInside];
    [self.joinButton setTitle:@"Join" forState:UIControlStateNormal];
+   self.joinButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:28.0f];
+   [self.joinButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];
    [[self.joinButton layer] setBorderWidth:2.0f];
-   [self.joinButton.layer setBorderColor:[[UIColor colorWithRed:37/255.0f green:217/255.0f blue:0/255.0f alpha:1.0f] CGColor]];
+   [self.joinButton.layer setBorderColor:THEME_COLOR.CGColor];
 
    self.joinButton.tag = MAKE_INVISIBLE_TAG;
    self.joinButton.frame = CGRectMake(INSET, self.addressLabel.frame.origin.y + self.addressLabel.frame.size.height, self.frame.size.width - 2*INSET, 60);

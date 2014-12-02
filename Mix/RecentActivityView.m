@@ -29,7 +29,7 @@
       self.data = [[[MockData sharedObj] getPastEvents] mutableCopy];
       [self initializeData];
       [self loadActivityBars];
-
+      self.backgroundColor = [UIColor lightGrayColor];
       UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
       [self addGestureRecognizer:tap];
       

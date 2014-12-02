@@ -118,7 +118,7 @@
 - (void)createTabBar
 {
    
-   self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.height + self.view.frame.size.width, 50)];
+   self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.height + self.view.frame.size.width, 60)];
    self.navBar.backgroundColor = THEME_COLOR;
    [self.view addSubview:self.navBar];
    
