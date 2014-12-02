@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3D6694141A2C870100F08236 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6694131A2C870100F08236 /* MessageUI.framework */; };
 		3D6694171A2C8FEA00F08236 /* CreateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D6694161A2C8FEA00F08236 /* CreateView.m */; };
+		3D66941A1A2DA31B00F08236 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6694191A2DA31B00F08236 /* UIKit.framework */; };
 		42518CCE1A2C524400C2F2B3 /* MockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CCD1A2C524400C2F2B3 /* MockData.m */; };
 		42518CD11A2C52B000C2F2B3 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CD01A2C52B000C2F2B3 /* Person.m */; };
 		42518CD41A2C5D0300C2F2B3 /* PersonBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 42518CD31A2C5D0300C2F2B3 /* PersonBar.m */; };
@@ -43,6 +44,7 @@
 		3D6694131A2C870100F08236 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3D6694151A2C8FEA00F08236 /* CreateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateView.h; sourceTree = "<group>"; };
 		3D6694161A2C8FEA00F08236 /* CreateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateView.m; sourceTree = "<group>"; };
+		3D6694191A2DA31B00F08236 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		42518CCC1A2C524400C2F2B3 /* MockData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockData.h; sourceTree = "<group>"; };
 		42518CCD1A2C524400C2F2B3 /* MockData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockData.m; sourceTree = "<group>"; };
 		42518CCF1A2C52B000C2F2B3 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D66941A1A2DA31B00F08236 /* UIKit.framework in Frameworks */,
 				3D6694141A2C870100F08236 /* MessageUI.framework in Frameworks */,
 				4264EB081A1C28930028078D /* MapKit.framework in Frameworks */,
 			);
@@ -158,6 +161,7 @@
 		4264EAC61A1BE7A70028078D = {
 			isa = PBXGroup;
 			children = (
+				3D6694191A2DA31B00F08236 /* UIKit.framework */,
 				3D6694131A2C870100F08236 /* MessageUI.framework */,
 				4264EB071A1C28930028078D /* MapKit.framework */,
 				4264EAD11A1BE7A70028078D /* Mix */,

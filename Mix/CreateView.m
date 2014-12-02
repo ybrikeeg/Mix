@@ -8,8 +8,9 @@
 
 #import "CreateView.h"
 #import "Activity.h"
+#import <UIKit/UIKit.h>
 
-@interface CreateView ()
+@interface CreateView () <UIPickerViewDelegate, UIPickerViewDataSource>
 @property (strong, nonatomic) UILabel *activityLabel;
 @property (strong, nonatomic) UITextField *activityNameTextField;
 @property (strong, nonatomic) UILabel *addressLabel;
@@ -18,6 +19,9 @@
 @property (nonatomic, strong) UITextField *startTime;
 @property (strong, nonatomic) UILabel *endTimeLabel;
 @property (nonatomic, strong) UITextField *endTime;
+@property (nonatomic, strong) UILabel *categoryLabel;
+@property (nonatomic, strong) UIPickerView *categoryPicker;
+@property (nonatomic, strong) NSArray *pickerArray;
 @property (strong, nonatomic) UILabel *descriptionLabel;
 @property (strong, nonatomic) UITextView *descriptionTextField;
 @property (strong, nonatomic) UIButton *submit;
@@ -33,35 +37,45 @@
         self.activityLabel.text = @"Activity:";
         [self addSubview:self.activityLabel];
         
-        self.activityNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(20.0, 40.0, self.bounds.size.width - 40.0, 25.0)];
+        self.activityNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(20.0, 35.0, self.bounds.size.width - 40.0, 25.0)];
         [self addSubview:self.activityNameTextField];
         
-        self.addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 80.0, 75.0, 20.0)];
+        self.addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 65.0, 75.0, 20.0)];
         self.addressLabel.text = @"Address:";
         [self addSubview:self.addressLabel];
         
-        self.addressTextField = [[UITextField alloc] initWithFrame:CGRectMake(20.0, 110.0, self.bounds.size.width - 40.0, 25.0)];
+        self.addressTextField = [[UITextField alloc] initWithFrame:CGRectMake(20.0, 90.0, self.bounds.size.width - 40.0, 25.0)];
         [self addSubview:self.addressTextField];
         
-        self.startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 150.0, 90.0, 20.0)];
+        self.startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 120.0, 90.0, 20.0)];
         self.startTimeLabel.text = @"Start Time:";
         [self addSubview:self.startTimeLabel];
         
-        self.startTime = [[UITextField alloc] initWithFrame:CGRectMake(20.0, 180.0, self.bounds.size.width - 40.0, 25.0)];
+        self.startTime = [[UITextField alloc] initWithFrame:CGRectMake(20.0, 145.0, (self.bounds.size.width - 60.0)/2, 25.0)];
         [self addSubview:self.startTime];
         
-        self.endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 220.0, 90.0, 20.0)];
+        self.endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.bounds.size.width/2 + 10, 120.0, 90.0, 20.0)];
         self.endTimeLabel.text = @"End Time:";
         [self addSubview:self.endTimeLabel];
         
-        self.endTime = [[UITextField alloc] initWithFrame:CGRectMake(20.0, 250.0, self.bounds.size.width - 40.0, 25.0)];
+        self.endTime = [[UITextField alloc] initWithFrame:CGRectMake(self.bounds.size.width/2 + 10, 145.0, (self.bounds.size.width - 60.0)/2, 25.0)];
         [self addSubview:self.endTime];
         
-        self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 290.0, 110.0, 20.0)];
+        self.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 175.0, 90.0, 20.0)];
+        self.categoryLabel.text = @"Category:";
+        [self addSubview:self.categoryLabel];
+        
+        self.pickerArray = @[@"Sport", @"Fine Arts", @"Craft", @"Education", @"Social"];
+        self.categoryPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(70.0, 160.0, self.bounds.size.width - 140.0, 5.0)];
+        self.categoryPicker.dataSource = self;
+        self.categoryPicker.delegate = self;
+        [self addSubview:self.categoryPicker];
+        
+        self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 310.0, 110.0, 20.0)];
         self.descriptionLabel.text = @"Description:";
         [self addSubview:self.descriptionLabel];
         
-        self.descriptionTextField = [[UITextView alloc] initWithFrame:CGRectMake(20.0, 320.0, self.bounds.size.width - 40.0, 100.0)];
+        self.descriptionTextField = [[UITextView alloc] initWithFrame:CGRectMake(20.0, 340.0, self.bounds.size.width - 40.0, 100.0)];
         [self addSubview:self.descriptionTextField];
        self.descriptionTextField.layer.borderWidth = 1.0f;
        self.descriptionTextField.layer.borderColor = [[UIColor grayColor] CGColor];
@@ -106,9 +120,24 @@
     newAct.participants = @[];
     newAct.address = self.addressTextField.text;
     newAct.distance = 5.8f;
+    newAct.category = [self.pickerArray objectAtIndex:[self.categoryPicker selectedRowInComponent:0]];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"newActivityAdded" object:newAct];
 }
 
+#pragma mark - Picker View Shit
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return self.pickerArray.count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    return [self.pickerArray objectAtIndex:row];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
