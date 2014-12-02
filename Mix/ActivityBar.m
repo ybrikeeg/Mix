@@ -98,7 +98,7 @@
 
 - (void)join:(UIButton*)button{
    self.activity.activityJoined = YES;
-   self.backgroundColor = [UIColor colorWithRed:212/255.0f green:228/255.0f blue:245/255.0f alpha:1.0f];
+   self.backgroundColor = JOINED_COLOR;
    [self.categoryImage setImage:[UIImage imageNamed:@"check"]];
 
    //self.layer.borderColor = [UIColor colorWithRed:37/255.0f green:217/255.0f blue:0/255.0f alpha:1.0f].CGColor;
@@ -190,6 +190,7 @@
    self.descriptionTextView.font = [UIFont fontWithName:FONT_NAME size:14.0f];
    self.descriptionTextView.editable = NO;
    self.descriptionTextView.tag = MAKE_INVISIBLE_TAG;
+   self.descriptionTextView.backgroundColor = [UIColor clearColor];
    [self addSubview:self.descriptionTextView];
    
    UILabel *participantsTitle = [[UILabel alloc] initWithFrame:CGRectMake(INSET, self.descriptionTextView.frame.origin.y + self.descriptionTextView.frame.size.height, self.frame.size.width - 2*INSET, 80)];
