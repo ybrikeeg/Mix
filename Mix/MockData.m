@@ -188,7 +188,7 @@
     
     act4.creator = [act4.participants firstObject];
     act4.category = @"Education";
-    act4.date = @"11/25";
+    act4.date = @"11/20";
     
     Activity *act5 = [[Activity alloc] init];
     act5.activityName = @"Picnic at Lake Lag";
@@ -201,7 +201,7 @@
     
     act5.creator = [act5.participants firstObject];
     act5.category = @"Social";
-    act5.date = @"11/26";
+    act5.date = @"11/15";
     
     [self.pastActivities addObject:act1];
     [self.pastActivities addObject:act2];

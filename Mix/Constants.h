@@ -13,7 +13,7 @@
 #define FONT_NAME @"Avenir-Medium"
 
 
-#define ACTIVITY_BAR_HEIGHT 100
+#define ACTIVITY_BAR_HEIGHT 110
 #define EXPANDED_BAR_HEIGHT (self.scrollView.frame.size.height)
 #define BORDER_HEIGHT 1
 

@@ -98,8 +98,11 @@
 
 - (void)join:(UIButton*)button{
    self.activity.activityJoined = YES;
-   self.layer.borderColor = [UIColor colorWithRed:37/255.0f green:217/255.0f blue:0/255.0f alpha:1.0f].CGColor;
-   self.layer.borderWidth = 2.0f;
+   self.backgroundColor = [UIColor colorWithRed:212/255.0f green:228/255.0f blue:245/255.0f alpha:1.0f];
+   [self.categoryImage setImage:[UIImage imageNamed:@"check"]];
+
+   //self.layer.borderColor = [UIColor colorWithRed:37/255.0f green:217/255.0f blue:0/255.0f alpha:1.0f].CGColor;
+   //self.layer.borderWidth = 2.0f;
    [self bringSubviewToFront:self.underline];
    [self.delegate joinedActivity];
 }
@@ -108,7 +111,6 @@
 - (void)createLabels{
    self.categoryImage = [[UIImageView alloc] initWithFrame:CGRectMake(EDGE_INSET, 0, CHECK_IMAGE_SIDE, CHECK_IMAGE_SIDE)];
    self.categoryImage.center = CGPointMake(self.categoryImage.center.x, self.frame.size.height/2);
-   //self.categoryImage.backgroundColor = [UIColor redColor];
    [self.categoryImage setImage:[UIImage imageNamed:[self.activity.category.lowercaseString stringByReplacingOccurrencesOfString:@" " withString:@"_"]]];
    [self addSubview:self.categoryImage];
    
@@ -240,24 +242,24 @@
    [self addSubview:locationTitle];
    
    
-   
-   CLLocationCoordinate2D zoomLocation;
-   zoomLocation.latitude = 37.4300;
-   zoomLocation.longitude= -122.1700;
+   //causes crash
+//   CLLocationCoordinate2D zoomLocation;
+//   zoomLocation.latitude = 37.4300;
+//   zoomLocation.longitude= -122.1700;
    self.map = [[MKMapView alloc] initWithFrame:CGRectMake(INSET, locationTitle.frame.origin.y + locationTitle.frame.size.height, self.frame.size.width - 2*INSET, 80)];
-   self.map.rotateEnabled = YES;
-   self.map.pitchEnabled = YES;
-   self.map.showsUserLocation = YES;
-   self.map.userInteractionEnabled = YES;
-   self.map.tag = MAKE_INVISIBLE_TAG;
-   MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 1000, 1000);
-   [self.map setRegion:viewRegion animated:YES];
-   
-   MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-   [annotation setCoordinate:zoomLocation];
-   [self.map addAnnotation:annotation];
-   [self.map  selectAnnotation:annotation animated:YES];
-   [self addSubview:self.map];
+//   self.map.rotateEnabled = YES;
+//   self.map.pitchEnabled = YES;
+//   self.map.showsUserLocation = YES;
+//   self.map.userInteractionEnabled = YES;
+//   self.map.tag = MAKE_INVISIBLE_TAG;
+//   MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 1000, 1000);
+//   [self.map setRegion:viewRegion animated:YES];
+//   
+//   MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+//   [annotation setCoordinate:zoomLocation];
+//   [self.map addAnnotation:annotation];
+//   [self.map  selectAnnotation:annotation animated:YES];
+//   [self addSubview:self.map];
    
    self.addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(INSET, self.map.frame.origin.y + self.map.frame.size.height, self.frame.size.width - 2*INSET, 40)];
    self.addressLabel.text = self.activity.address;

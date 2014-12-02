@@ -236,20 +236,20 @@
    locationTitle.tag = MAKE_INVISIBLE_TAG;
    [self addSubview:locationTitle];
    
-   CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(-37.00, 100.00) radius:10 identifier:@"idd"];
-   self.map = [[MKMapView alloc] initWithFrame:CGRectMake(INSET, locationTitle.frame.origin.y + locationTitle.frame.size.height, self.frame.size.width - 2*INSET, 80)];
-   self.map.rotateEnabled = YES;
-   self.map.pitchEnabled = YES;
-   self.map.showsUserLocation = YES;
-   self.map.userInteractionEnabled = YES;
-   self.map.tag = MAKE_INVISIBLE_TAG;
-   [self.map setRegion:MKCoordinateRegionMakeWithDistance(region.center, 1000, 1000) animated:YES];
-   
-   MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-   [annotation setCoordinate:region.center];
-   [self.map addAnnotation:annotation];
-   [self.map  selectAnnotation:annotation animated:YES];
-   [self addSubview:self.map];
+//   CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(-37.00, 100.00) radius:10 identifier:@"idd"];
+//   self.map = [[MKMapView alloc] initWithFrame:CGRectMake(INSET, locationTitle.frame.origin.y + locationTitle.frame.size.height, self.frame.size.width - 2*INSET, 80)];
+//   self.map.rotateEnabled = YES;
+//   self.map.pitchEnabled = YES;
+//   self.map.showsUserLocation = YES;
+//   self.map.userInteractionEnabled = YES;
+//   self.map.tag = MAKE_INVISIBLE_TAG;
+//   [self.map setRegion:MKCoordinateRegionMakeWithDistance(region.center, 1000, 1000) animated:YES];
+//   
+//   MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+//   [annotation setCoordinate:region.center];
+//   [self.map addAnnotation:annotation];
+//   [self.map  selectAnnotation:annotation animated:YES];
+//   [self addSubview:self.map];
    
    self.addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(INSET, self.map.frame.origin.y + self.map.frame.size.height, self.frame.size.width - 2*INSET, 40)];
    self.addressLabel.text = self.activity.address;

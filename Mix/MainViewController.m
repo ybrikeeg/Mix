@@ -125,6 +125,7 @@
    UILabel *mix = [[UILabel alloc] init];
    mix.text = @"Mix";
    mix.font = [UIFont fontWithName:FONT_NAME size:28.0f];
+   [mix setTextColor:[UIColor whiteColor]];
    [mix sizeToFit];
    mix.frame = CGRectMake(self.view.center.x - mix.frame.size.width/2, self.navBar.frame.size.height - mix.frame.size.height, mix.frame.size.width, mix.frame.size.height);
    [self.navBar addSubview:mix];
@@ -143,7 +144,7 @@
    [self.buttonTopRight setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
    [self.navBar addSubview:self.buttonTopRight];
    
-   self.tabView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navBar.frame.origin.y + self.navBar.frame.size.height, self.view.frame.size.width, 40)];
+   self.tabView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navBar.frame.origin.y + self.navBar.frame.size.height, self.view.frame.size.width, 50)];
    self.tabView.backgroundColor = [UIColor whiteColor];
    [self.view addSubview:self.tabView];
    
