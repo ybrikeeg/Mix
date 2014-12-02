@@ -78,7 +78,7 @@
     act2.descriptionText = @"Let go make a pot";
     act2.startTime = @"2p";
     act2.endTime = @"3p";
-    act2.participants = @[[self.personLibrary objectAtIndex:8], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:10]];
+    act2.participants = @[[self.personLibrary objectAtIndex:8], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:5]];
     act2.address = @"1345 Middlefield Ave";
     act2.distance = 5.8f;
     
@@ -92,7 +92,7 @@
     act3.descriptionText = @"Lets go to a concert";
     act3.startTime = @"8p";
     act3.endTime = @"11p";
-    act3.participants = @[[self.personLibrary objectAtIndex:11], [self.personLibrary objectAtIndex:12], [self.personLibrary objectAtIndex:13], [self.personLibrary objectAtIndex:14], [self.personLibrary objectAtIndex:15]];
+    act3.participants = @[[self.personLibrary objectAtIndex:3], [self.personLibrary objectAtIndex:0], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:7], [self.personLibrary objectAtIndex:8]];
     act3.address = @"The park";
     act3.distance = 3.4f;
     
@@ -105,7 +105,7 @@
     act4.descriptionText = @"Lets study together for 107";
     act4.startTime = @"9p";
     act4.endTime = @"11p";
-    act4.participants = @[[self.personLibrary objectAtIndex:16], [self.personLibrary objectAtIndex:17], [self.personLibrary objectAtIndex:18], [self.personLibrary objectAtIndex:19], [self.personLibrary objectAtIndex:15]];
+    act4.participants = @[[self.personLibrary objectAtIndex:1], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:6], [self.personLibrary objectAtIndex:7], [self.personLibrary objectAtIndex:3]];
     act4.address = @"Old Union";
     act4.distance = 2.1f;
     
@@ -141,7 +141,7 @@
     act1.descriptionText = @"Lets play soccer at the field";
     act1.startTime = @"9a";
     act1.endTime = @"12p";
-    act1.participants = @[[self.personLibrary objectAtIndex:4], [self.personLibrary objectAtIndex:3], [self.personLibrary objectAtIndex:6], [self.personLibrary objectAtIndex:10], [self.personLibrary objectAtIndex:17], [self.personLibrary objectAtIndex:16], [self.personLibrary objectAtIndex:7], [self.personLibrary objectAtIndex:19]];
+    act1.participants = @[[self.personLibrary objectAtIndex:4], [self.personLibrary objectAtIndex:3], [self.personLibrary objectAtIndex:6], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:1], [self.personLibrary objectAtIndex:0], [self.personLibrary objectAtIndex:7]];
     act1.address = @"Soccer Field";
     act1.distance = 1.5f;
     
@@ -155,7 +155,7 @@
     act2.descriptionText = @"Let make a basket underwater";
     act2.startTime = @"4p";
     act2.endTime = @"5p";
-    act2.participants = @[[self.personLibrary objectAtIndex:5], [self.personLibrary objectAtIndex:18], [self.personLibrary objectAtIndex:13]];
+    act2.participants = @[[self.personLibrary objectAtIndex:5], [self.personLibrary objectAtIndex:4], [self.personLibrary objectAtIndex:2]];
     act2.address = @"618 Escondido Rd.";
     act2.distance = 3.8f;
     
@@ -169,7 +169,7 @@
     act3.descriptionText = @"Lets go paint a picture";
     act3.startTime = @"3p";
     act3.endTime = @"5p";
-    act3.participants = @[[self.personLibrary objectAtIndex:11], [self.personLibrary objectAtIndex:12]];
+    act3.participants = @[[self.personLibrary objectAtIndex:8], [self.personLibrary objectAtIndex:9]];
     act3.address = @"Crothers";
     act3.distance = 3.8f;
     
@@ -182,7 +182,7 @@
     act4.descriptionText = @"Lets work on the 103 PSET";
     act4.startTime = @"8p";
     act4.endTime = @"11p";
-    act4.participants = @[[self.personLibrary objectAtIndex:19], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:9]];
+    act4.participants = @[[self.personLibrary objectAtIndex:1], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:3]];
     act4.address = @"Old Union";
     act4.distance = 2.1f;
     
@@ -195,7 +195,7 @@
     act5.descriptionText = @"Lets have a picnic around Lake Lag";
     act5.startTime = @"11a";
     act5.endTime = @"12p";
-    act5.participants = @[[self.personLibrary objectAtIndex:7], [self.personLibrary objectAtIndex:10], [self.personLibrary objectAtIndex:14]];
+    act5.participants = @[[self.personLibrary objectAtIndex:7], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:4]];
     act5.address = @"Lake Lag";
     act5.distance = 4.4f;
     
@@ -223,16 +223,16 @@
    Person *p8 = [[Person alloc] initWithFirstName:@"Lillian" lastName:@"Mechum" number:[self generateRandomNumber]];
    Person *p9 = [[Person alloc] initWithFirstName:@"Gavin" lastName:@"Avery" number:[self generateRandomNumber]];
    Person *p10 = [[Person alloc] initWithFirstName:@"Christina" lastName:@"Chen" number:[self generateRandomNumber]];
-   Person *p11 = [[Person alloc] initWithFirstName:@"Mike" lastName:@"Precup" number:[self generateRandomNumber]];
-   Person *p12 = [[Person alloc] initWithFirstName:@"Astul" lastName:@"Hernandez" number:[self generateRandomNumber]];
-   Person *p13 = [[Person alloc] initWithFirstName:@"Jamie" lastName:@"Helyar" number:[self generateRandomNumber]];
-   Person *p14 = [[Person alloc] initWithFirstName:@"Kitty" lastName:@"Kwan" number:[self generateRandomNumber]];
-   Person *p15 = [[Person alloc] initWithFirstName:@"Kunle" lastName:@"Awejone" number:[self generateRandomNumber]];
-   Person *p16 = [[Person alloc] initWithFirstName:@"Daniel" lastName:@"Stuart" number:[self generateRandomNumber]];
-   Person *p17 = [[Person alloc] initWithFirstName:@"Grace" lastName:@"Stayner" number:[self generateRandomNumber]];
-   Person *p18 = [[Person alloc] initWithFirstName:@"Rachel" lastName:@"Smith" number:[self generateRandomNumber]];
-   Person *p19 = [[Person alloc] initWithFirstName:@"Holly" lastName:@"Wilsom" number:[self generateRandomNumber]];
-   Person *p20 = [[Person alloc] initWithFirstName:@"Miles" lastName:@"Kool" number:[self generateRandomNumber]];
+//   Person *p11 = [[Person alloc] initWithFirstName:@"Mike" lastName:@"Precup" number:[self generateRandomNumber]];
+//   Person *p12 = [[Person alloc] initWithFirstName:@"Astul" lastName:@"Hernandez" number:[self generateRandomNumber]];
+//   Person *p13 = [[Person alloc] initWithFirstName:@"Jamie" lastName:@"Helyar" number:[self generateRandomNumber]];
+//   Person *p14 = [[Person alloc] initWithFirstName:@"Kitty" lastName:@"Kwan" number:[self generateRandomNumber]];
+//   Person *p15 = [[Person alloc] initWithFirstName:@"Kunle" lastName:@"Awejone" number:[self generateRandomNumber]];
+//   Person *p16 = [[Person alloc] initWithFirstName:@"Daniel" lastName:@"Stuart" number:[self generateRandomNumber]];
+//   Person *p17 = [[Person alloc] initWithFirstName:@"Grace" lastName:@"Stayner" number:[self generateRandomNumber]];
+//   Person *p18 = [[Person alloc] initWithFirstName:@"Rachel" lastName:@"Smith" number:[self generateRandomNumber]];
+//   Person *p19 = [[Person alloc] initWithFirstName:@"Holly" lastName:@"Wilsom" number:[self generateRandomNumber]];
+//   Person *p20 = [[Person alloc] initWithFirstName:@"Miles" lastName:@"Kool" number:[self generateRandomNumber]];
    
    [self.personLibrary addObject:p1];
    [self.personLibrary addObject:p2];
@@ -244,16 +244,16 @@
    [self.personLibrary addObject:p8];
    [self.personLibrary addObject:p9];
    [self.personLibrary addObject:p10];
-   [self.personLibrary addObject:p11];
-   [self.personLibrary addObject:p12];
-   [self.personLibrary addObject:p13];
-   [self.personLibrary addObject:p14];
-   [self.personLibrary addObject:p15];
-   [self.personLibrary addObject:p16];
-   [self.personLibrary addObject:p17];
-   [self.personLibrary addObject:p18];
-   [self.personLibrary addObject:p19];
-   [self.personLibrary addObject:p20];
+//   [self.personLibrary addObject:p11];
+//   [self.personLibrary addObject:p12];
+//   [self.personLibrary addObject:p13];
+//   [self.personLibrary addObject:p14];
+//   [self.personLibrary addObject:p15];
+//   [self.personLibrary addObject:p16];
+//   [self.personLibrary addObject:p17];
+//   [self.personLibrary addObject:p18];
+//   [self.personLibrary addObject:p19];
+//   [self.personLibrary addObject:p20];
    
 }
 
