@@ -29,12 +29,20 @@
 @property (nonatomic, strong) UIView *navBar;
 @property (nonatomic, strong) UIButton *buttonTopRight;
 @property (nonatomic, strong) UIView *activeView;
-@property (nonatomic, strong) UIButton *filterButton;
 
 @property (nonatomic, strong) UIButton *explore;
 @property (nonatomic, strong) UIButton *create;
 @property (nonatomic, strong) UIButton *recent;
 @property (nonatomic, strong) UIButton *message;
+
+
+@property (nonatomic, strong) UIView *filterView;
+@property (nonatomic, strong) UIButton *sportsButton;
+@property (nonatomic, strong) UIButton *craftsButton;
+@property (nonatomic, strong) UIButton *fineArtsButton;
+@property (nonatomic, strong) UIButton *educationButton;
+@property (nonatomic, strong) UIButton *socialButton;
+@property (nonatomic, strong) UIButton *removeButton;
 @end
 
 @implementation MainViewController
@@ -54,8 +62,116 @@
    self.createView = [[CreateView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
    
    self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
+
+   [self createFilterView];
 }
 
+- (void)setFilter:(NSString *)filter{
+   NSLog(@"Setting filter: %@", filter);
+   self.filterView.hidden = YES;
+}
+- (void)sports:(UIButton *)button{
+   [self setFilter:button.titleLabel.text];
+
+}
+- (void)crafts:(UIButton *)button{
+   [self setFilter:button.titleLabel.text];
+
+}
+- (void)fineArts:(UIButton *)button{
+   [self setFilter:button.titleLabel.text];
+
+}
+- (void)education:(UIButton *)button{
+   [self setFilter:button.titleLabel.text];
+
+}
+- (void)social:(UIButton *)button{
+   [self setFilter:button.titleLabel.text];
+
+}
+- (void)remove:(UIButton *)button{
+   [self setFilter:button.titleLabel.text];
+}
+
+- (void)createFilterView{
+   
+   self.filterView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navBar.frame.origin.y + self.navBar.frame.size.height, self.view.frame.size.width, 50)];
+   self.filterView.backgroundColor = [UIColor whiteColor];
+   [self.view addSubview:self.filterView];
+   
+   UIView *b = [[UIView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.size.height - 1, self.view.frame.size.width, 1)];
+   b.backgroundColor = THEME_COLOR;
+   [self.filterView addSubview:b];
+   
+   self.sportsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   [self.sportsButton addTarget:self action:@selector(sports:) forControlEvents:UIControlEventTouchUpInside];
+   [self.sportsButton setTitle:@"Sports" forState:UIControlStateNormal];
+   self.sportsButton.frame = CGRectMake(0, 0, self.filterView.frame.size.width/6, self.filterView.frame.size.height);
+   [self.sportsButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];
+   [self.filterView addSubview:self.sportsButton];
+   
+   UIView *s1 = [[UIView alloc] initWithFrame:CGRectMake(self.sportsButton.frame.size.width, 0, 1, self.sportsButton.frame.size.height)];
+   s1.backgroundColor = THEME_COLOR;
+   [self.filterView addSubview:s1];
+   
+   
+   self.craftsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   [self.craftsButton addTarget:self action:@selector(crafts:) forControlEvents:UIControlEventTouchUpInside];
+   [self.craftsButton setTitle:@"Crafts" forState:UIControlStateNormal];
+   self.craftsButton.frame = CGRectMake(self.filterView.frame.size.width/6, 0, self.filterView.frame.size.width/6, self.filterView.frame.size.height);
+   [self.craftsButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];
+   [self.filterView addSubview:self.craftsButton];
+   
+   UIView *s2 = [[UIView alloc] initWithFrame:CGRectMake(self.craftsButton.frame.origin.x +  self.craftsButton.frame.size.width, 0, 1, self.craftsButton.frame.size.height)];
+   s2.backgroundColor = THEME_COLOR;
+   [self.filterView addSubview:s2];
+   
+   self.fineArtsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   [self.fineArtsButton addTarget:self action:@selector(fineArts:) forControlEvents:UIControlEventTouchUpInside];
+   [self.fineArtsButton setTitle:@"Recent" forState:UIControlStateNormal];
+   self.fineArtsButton.frame = CGRectMake(self.filterView.frame.size.width/3, 0, self.filterView.frame.size.width/6, self.filterView.frame.size.height);
+   [self.fineArtsButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];
+   [self.filterView addSubview:self.fineArtsButton];
+   
+   UIView *s3 = [[UIView alloc] initWithFrame:CGRectMake(self.fineArtsButton.frame.origin.x +  self.fineArtsButton.frame.size.width, 0, 1, self.sportsButton.frame.size.height)];
+   s3.backgroundColor = THEME_COLOR;
+   [self.filterView addSubview:s3];
+   
+   
+   self.educationButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   [self.educationButton addTarget:self action:@selector(education:) forControlEvents:UIControlEventTouchUpInside];
+   [self.educationButton setTitle:@"Message" forState:UIControlStateNormal];
+   self.educationButton.frame = CGRectMake(self.filterView.frame.size.width/2 + 3, 0, self.filterView.frame.size.width/6, self.filterView.frame.size.height);
+   self.socialButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+   [self.educationButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];
+   [self.filterView addSubview:self.educationButton];
+   
+   UIView *s4 = [[UIView alloc] initWithFrame:CGRectMake(self.educationButton.frame.origin.x +  self.educationButton.frame.size.width, 0, 1, self.sportsButton.frame.size.height)];
+   s4.backgroundColor = THEME_COLOR;
+   [self.filterView addSubview:s4];
+   
+   self.socialButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   [self.socialButton addTarget:self action:@selector(social:) forControlEvents:UIControlEventTouchUpInside];
+   [self.socialButton setTitle:@"Education" forState:UIControlStateNormal];
+   self.socialButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+   self.socialButton.frame = CGRectMake(2 * self.filterView.frame.size.width/3 + 3, 0, self.filterView.frame.size.width/6, self.filterView.frame.size.height);
+   [self.socialButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];
+   [self.filterView addSubview:self.socialButton];
+   
+   UIView *s5 = [[UIView alloc] initWithFrame:CGRectMake(self.socialButton.frame.origin.x +  self.socialButton.frame.size.width, 0, 1, self.sportsButton.frame.size.height)];
+   s5.backgroundColor = THEME_COLOR;
+   [self.filterView addSubview:s5];
+   
+   self.removeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   [self.removeButton addTarget:self action:@selector(remove:) forControlEvents:UIControlEventTouchUpInside];
+   [self.removeButton setTitle:@"Remove" forState:UIControlStateNormal];
+   self.removeButton.frame = CGRectMake(5 * self.filterView.frame.size.width/6 + 3, 0, self.filterView.frame.size.width/6, self.filterView.frame.size.height);
+   [self.removeButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];
+   [self.filterView addSubview:self.removeButton];
+
+   self.filterView.hidden = YES;
+}
 - (void)animateIndicator:(UIButton *)sender
 {
    self.buttonTopRight.hidden = self.exploreView.isDetailViewPresented;
@@ -84,17 +200,14 @@
 - (void)create:(UIButton *)sender
 {
    [self animateIndicator:sender];
-   self.filterButton.hidden = YES;
    [self.view bringSubviewToFront:self.createView];
    self.activeView = self.createView;
    self.buttonTopRight.hidden = YES;
-   
 }
 
 - (void)recent:(UIButton *)sender
 {
    [self animateIndicator:sender];
-   self.filterButton.hidden = YES;
    [self.view bringSubviewToFront:self.recentView];
    self.activeView = self.recentView;
    [self.buttonTopRight setTitle:@"Done" forState:UIControlStateNormal];
@@ -106,18 +219,22 @@
 - (void)message:(UIButton *)sender
 {
    [self animateIndicator:sender];
-   self.filterButton.hidden = YES;
    [self.view bringSubviewToFront:self.messageView];
    self.activeView = self.messageView;
    self.buttonTopRight.hidden = NO;
    [self.buttonTopRight setTitle:@"Send" forState:UIControlStateNormal];
-   
    [self.buttonTopRight.titleLabel sizeToFit];
 }
 
 - (void)done:(UIButton *)sender
 {
    if (self.activeView == self.exploreView){
+      
+      if ([self.buttonTopRight.titleLabel.text isEqualToString:@"Filter"]){
+         self.filterView.hidden = NO;
+      }else if ([self.buttonTopRight.titleLabel.text isEqualToString:@"Done"]){
+         self.filterView.hidden = YES;
+      }
       [self.exploreView done:nil];
    }else if (self.activeView == self.messageView){
       [self displaySMSComposerSheet];
