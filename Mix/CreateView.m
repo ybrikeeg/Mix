@@ -8,6 +8,7 @@
 
 #import "CreateView.h"
 #import "Activity.h"
+#import "MockData.h"
 #import <UIKit/UIKit.h>
 
 @interface CreateView () <UIPickerViewDelegate, UIPickerViewDataSource>
@@ -125,7 +126,10 @@
     newAct.descriptionText = self.descriptionTextField.text;
     newAct.startTime = self.startTime.text;
     newAct.endTime = self.endTime.text;
-    newAct.participants = @[];
+    newAct.participants = @[[[[MockData sharedObj] getPersonLibrary] objectAtIndex:10]];
+    newAct.creator = [newAct.participants objectAtIndex:0];
+    newAct.activityJoined = true;
+    newAct.currentParticipants = 1;
     newAct.address = self.addressTextField.text;
     newAct.distance = 5.8f;
     newAct.category = [self.pickerArray objectAtIndex:[self.categoryPicker selectedRowInComponent:0]];

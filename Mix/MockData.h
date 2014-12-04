@@ -12,4 +12,5 @@
 + (MockData *) sharedObj;
 - (NSArray *)getUpcomingActivities;
 - (NSArray *)getPastEvents;
+- (NSArray *)getPersonLibrary;
 @end
