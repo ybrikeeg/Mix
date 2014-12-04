@@ -10,7 +10,7 @@
 #define Mix_Constants_h
 
 #define THEME_COLOR [UIColor colorWithRed:37.0f/255.0f green:101.0f/255.0f blue:199.0f/255.0f alpha:1.0f]
-#define JOINED_COLOR [UIColor colorWithRed:22/255.0 green:160/255.0f blue:13/255.0 alpha:1.0]
+#define JOINED_COLOR [UIColor colorWithRed:22/255.0f green:160/255.0f blue:13/255.0f alpha:1.0f]
 #define UNJOINED_COLOR [UIColor colorWithRed:191/255.0 green:44/255.0f blue:71/255.0 alpha:1.0]
 
 #define FONT_NAME @"HelveticaNeue-Light"
