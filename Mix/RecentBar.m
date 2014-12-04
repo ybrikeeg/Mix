@@ -199,6 +199,7 @@
    self.descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(INSET, descriptionTitle.frame.origin.y + descriptionTitle.frame.size.height, self.frame.size.width - 2*INSET, 35)];
    self.descriptionTextView.text = self.activity.descriptionText;
    self.descriptionTextView.font = [UIFont fontWithName:FONT_NAME size:14.0f];
+   self.descriptionTextView.backgroundColor = [UIColor clearColor];
    self.descriptionTextView.editable = NO;
    self.descriptionTextView.tag = MAKE_INVISIBLE_TAG;
    [self addSubview:self.descriptionTextView];
