@@ -97,7 +97,6 @@
       bottom = !act.activity.activityJoined;
    }
    
-   NSLog(@"Top: %d Bottom: %d", top, bottom);
    [self done:nil];
 }
 

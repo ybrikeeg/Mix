@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UIImageView *categoryImage;
 @property (nonatomic, strong) UIImageView *creatorImage;
 @property (nonatomic, strong) CAGradientLayer *gradient;
+
 @end
 
 @implementation ActivityBar
@@ -46,6 +47,7 @@
       UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
       self.backgroundColor = color;
       self.backgroundColor = [UIColor whiteColor];
+
       [self createLabels];
       [self createBorders];
       
@@ -112,13 +114,24 @@
 }
 
 - (void)join:(UIButton*)button{
-   self.activity.activityJoined = YES;
-    self.activity.currentParticipants += 1;
-   self.backgroundColor = JOINED_COLOR;
-   [self.categoryImage setImage:[UIImage imageNamed:@"check"]];
-  
-   [self bringSubviewToFront:self.underline];
-   [self.delegate joinedActivity];
+   self.activity.activityJoined = !self.activity.activityJoined;
+   
+   if (self.activity.activityJoined){
+      
+      [self.categoryImage setImage:[UIImage imageNamed:@"check"]];
+      [self.joinButton setTitle:@"Unjoin" forState:UIControlStateNormal];
+      [self.joinButton setTitleColor:UNJOINED_COLOR forState:UIControlStateNormal];
+      [self.joinButton.layer setBorderColor:UNJOINED_COLOR.CGColor];
+      [self bringSubviewToFront:self.underline];
+      [self.delegate joinedActivity];
+   }else{
+      [self.categoryImage setImage:[UIImage imageNamed:[self.activity.category.lowercaseString stringByReplacingOccurrencesOfString:@" " withString:@"_"]]];
+      [self.joinButton setTitle:@"Join" forState:UIControlStateNormal];
+      [self.joinButton setTitleColor:JOINED_COLOR forState:UIControlStateNormal];
+      [self.joinButton.layer setBorderColor:JOINED_COLOR.CGColor];
+      [self bringSubviewToFront:self.underline];
+      [self.delegate joinedActivity];
+   }
 }
 
 
@@ -287,9 +300,9 @@
    [self.joinButton addTarget:self action:@selector(join:) forControlEvents:UIControlEventTouchUpInside];
    [self.joinButton setTitle:@"Join" forState:UIControlStateNormal];
    self.joinButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:28.0f];
-   [self.joinButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];
+   [self.joinButton setTitleColor:JOINED_COLOR forState:UIControlStateNormal];
    [[self.joinButton layer] setBorderWidth:2.0f];
-   [self.joinButton.layer setBorderColor:THEME_COLOR.CGColor];
+   [self.joinButton.layer setBorderColor:JOINED_COLOR.CGColor];
    
    self.joinButton.tag = MAKE_INVISIBLE_TAG;
    self.joinButton.frame = CGRectMake(INSET, self.addressLabel.frame.origin.y + self.addressLabel.frame.size.height, self.frame.size.width - 2*INSET, 60);
