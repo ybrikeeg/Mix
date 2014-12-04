@@ -21,6 +21,9 @@
 @property (nonatomic) CGFloat distance;
 @property (nonatomic) bool activityJoined;
 
+@property (nonatomic) int participantCapacity;
+@property (nonatomic) int currentParticipants;
+
 @property (nonatomic, strong) Person *creator;
 @property (nonatomic, strong) NSString *category;
 @property (nonatomic, strong) NSString *date;//ex: 11/14

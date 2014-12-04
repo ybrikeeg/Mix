@@ -223,7 +223,7 @@
    Person *p8 = [[Person alloc] initWithFirstName:@"Lillian" lastName:@"Mechum" number:[self generateRandomNumber]];
    Person *p9 = [[Person alloc] initWithFirstName:@"Gavin" lastName:@"Avery" number:[self generateRandomNumber]];
    Person *p10 = [[Person alloc] initWithFirstName:@"Christina" lastName:@"Chen" number:[self generateRandomNumber]];
-//   Person *p11 = [[Person alloc] initWithFirstName:@"Mike" lastName:@"Precup" number:[self generateRandomNumber]];
+   Person *p11 = [[Person alloc] initWithFirstName:@"Mike" lastName:@"Precup" number:[self generateRandomNumber]];
 //   Person *p12 = [[Person alloc] initWithFirstName:@"Astul" lastName:@"Hernandez" number:[self generateRandomNumber]];
 //   Person *p13 = [[Person alloc] initWithFirstName:@"Jamie" lastName:@"Helyar" number:[self generateRandomNumber]];
 //   Person *p14 = [[Person alloc] initWithFirstName:@"Kitty" lastName:@"Kwan" number:[self generateRandomNumber]];
@@ -244,7 +244,7 @@
    [self.personLibrary addObject:p8];
    [self.personLibrary addObject:p9];
    [self.personLibrary addObject:p10];
-//   [self.personLibrary addObject:p11];
+   [self.personLibrary addObject:p11];
 //   [self.personLibrary addObject:p12];
 //   [self.personLibrary addObject:p13];
 //   [self.personLibrary addObject:p14];
@@ -255,6 +255,10 @@
 //   [self.personLibrary addObject:p19];
 //   [self.personLibrary addObject:p20];
    
+}
+
+- (NSArray *)getPersonLibrary{
+    return self.personLibrary;
 }
 
 @end
