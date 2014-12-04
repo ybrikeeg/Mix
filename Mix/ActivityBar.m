@@ -121,6 +121,7 @@
    
    if (self.activity.activityJoined){
        self.activity.currentParticipants += 1;
+       [self.activity addParticipant];
        self.participantsTitle.text = [NSString stringWithFormat:@"Participants %d/%d", self.activity.currentParticipants, self.activity.participantCapacity];
       [self.categoryImage setImage:[UIImage imageNamed:@"check"]];
       [self.joinButton setTitle:@"Unjoin" forState:UIControlStateNormal];
@@ -128,8 +129,11 @@
       [self.joinButton.layer setBorderColor:UNJOINED_COLOR.CGColor];
       [self bringSubviewToFront:self.underline];
       [self.delegate joinedActivity];
+       [self.profileScrollView removeFromSuperview];
+       [self makeScrollView];
    }else{
        self.activity.currentParticipants -= 1;
+       [self.activity removeParticipant];
        self.participantsTitle.text = [NSString stringWithFormat:@"Participants %d/%d", self.activity.currentParticipants, self.activity.participantCapacity];
       [self.categoryImage setImage:[UIImage imageNamed:[self.activity.category.lowercaseString stringByReplacingOccurrencesOfString:@" " withString:@"_"]]];
       [self.joinButton setTitle:@"Join" forState:UIControlStateNormal];
@@ -137,6 +141,8 @@
       [self.joinButton.layer setBorderColor:JOINED_COLOR.CGColor];
       [self bringSubviewToFront:self.underline];
       [self.delegate joinedActivity];
+       [self.profileScrollView removeFromSuperview];
+       [self makeScrollView];
    }
 }
 
@@ -233,39 +239,7 @@
    self.participantsTitle.tag = MAKE_INVISIBLE_TAG;
    [self addSubview:self.participantsTitle];
    
-   self.profileScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(INSET, self.participantsTitle.frame.origin.y + self.participantsTitle.frame.size.height, self.frame.size.width - 2*INSET, 100)];
-   //self.profileScrollView.backgroundColor = [UIColor blueColor];
-   self.profileScrollView.tag = MAKE_INVISIBLE_TAG;
-   self.profileScrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-   
-   for (int i = 0; i < [self.activity.participants count]; i++){
-      UIImageView *thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(i * 60, 0, 60, 60)];
-      thumbnail.image = [UIImage imageNamed:[[self.activity.participants objectAtIndex:i] imageName]];
-      CAShapeLayer *shape = [CAShapeLayer layer];
-      UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:thumbnail.bounds];
-      shape.path = path.CGPath;
-      thumbnail.layer.mask = shape;
-      [self.profileScrollView addSubview:thumbnail];
-      
-      UILabel *firstName = [[UILabel alloc] init];
-      firstName.text = [[self.activity.participants objectAtIndex:i] firstName];
-      firstName.font = [UIFont fontWithName:FONT_NAME size:12.0f];
-      [firstName sizeToFit];
-      firstName.tag = MAKE_INVISIBLE_TAG;
-      firstName.center = CGPointMake(thumbnail.center.x, thumbnail.frame.origin.y + thumbnail.frame.size.height + firstName.frame.size.height/2);
-      [self.profileScrollView addSubview:firstName];
-      
-      UILabel *lastName = [[UILabel alloc] init];
-      lastName.text = [[self.activity.participants objectAtIndex:i] lastName];
-      lastName.font = [UIFont fontWithName:FONT_NAME size:12.0f];
-      [lastName sizeToFit];
-      lastName.tag = MAKE_INVISIBLE_TAG;
-      lastName.center = CGPointMake(thumbnail.center.x, firstName.center.y + firstName.frame.size.height/2 + lastName.frame.size.height/2);
-      [self.profileScrollView addSubview:lastName];
-      
-   }
-   self.profileScrollView.contentSize = CGSizeMake([self.activity.participants count] * 60, 80);
-   [self addSubview:self.profileScrollView];
+    [self makeScrollView];
    
    
    UILabel *locationTitle = [[UILabel alloc] initWithFrame:CGRectMake(INSET, self.profileScrollView.frame.origin.y + self.profileScrollView.frame.size.height, self.frame.size.width - 2*INSET, 80)];
@@ -318,6 +292,42 @@
    [self addSubview:self.joinButton];
    
    [self contractView];
+}
+
+- (void)makeScrollView{
+    self.profileScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(INSET, self.participantsTitle.frame.origin.y + self.participantsTitle.frame.size.height, self.frame.size.width - 2*INSET, 100)];
+    //self.profileScrollView.backgroundColor = [UIColor blueColor];
+    self.profileScrollView.tag = MAKE_INVISIBLE_TAG;
+    self.profileScrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    
+    for (int i = 0; i < [self.activity.participants count]; i++){
+        UIImageView *thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(i * 60, 0, 60, 60)];
+        thumbnail.image = [UIImage imageNamed:[[self.activity.participants objectAtIndex:i] imageName]];
+        CAShapeLayer *shape = [CAShapeLayer layer];
+        UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:thumbnail.bounds];
+        shape.path = path.CGPath;
+        thumbnail.layer.mask = shape;
+        [self.profileScrollView addSubview:thumbnail];
+        
+        UILabel *firstName = [[UILabel alloc] init];
+        firstName.text = [[self.activity.participants objectAtIndex:i] firstName];
+        firstName.font = [UIFont fontWithName:FONT_NAME size:12.0f];
+        [firstName sizeToFit];
+        firstName.tag = MAKE_INVISIBLE_TAG;
+        firstName.center = CGPointMake(thumbnail.center.x, thumbnail.frame.origin.y + thumbnail.frame.size.height + firstName.frame.size.height/2);
+        [self.profileScrollView addSubview:firstName];
+        
+        UILabel *lastName = [[UILabel alloc] init];
+        lastName.text = [[self.activity.participants objectAtIndex:i] lastName];
+        lastName.font = [UIFont fontWithName:FONT_NAME size:12.0f];
+        [lastName sizeToFit];
+        lastName.tag = MAKE_INVISIBLE_TAG;
+        lastName.center = CGPointMake(thumbnail.center.x, firstName.center.y + firstName.frame.size.height/2 + lastName.frame.size.height/2);
+        [self.profileScrollView addSubview:lastName];
+        
+    }
+    self.profileScrollView.contentSize = CGSizeMake([self.activity.participants count] * 60, 80);
+    [self addSubview:self.profileScrollView];
 }
 
 @end

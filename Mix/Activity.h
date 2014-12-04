@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "Person.h"
+#import "MockData.h"
 
 @interface Activity : NSObject
 
@@ -16,7 +17,7 @@
 @property (nonatomic, strong) NSString *descriptionText;
 @property (nonatomic, strong) NSString *startTime;
 @property (nonatomic, strong) NSString *endTime;
-@property (nonatomic, strong) NSArray *participants;
+@property (nonatomic, strong) NSMutableArray *participants;
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic) CGFloat distance;
 @property (nonatomic) bool activityJoined;
@@ -27,5 +28,8 @@
 @property (nonatomic, strong) Person *creator;
 @property (nonatomic, strong) NSString *category;
 @property (nonatomic, strong) NSString *date;//ex: 11/14
+
+- (void)addParticipant;
+- (void)removeParticipant;
 
 @end
