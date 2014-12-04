@@ -8,6 +8,11 @@
 
 #import "Activity.h"
 
+
+@interface Activity ()
+
+@end
+
 @implementation Activity
 
 - (instancetype)init{
@@ -17,6 +22,14 @@
    }
    
    return self;
+}
+
+- (void)addParticipant{
+    [self.participants addObject:[[[MockData sharedObj] getPersonLibrary] objectAtIndex:10]];
+}
+
+- (void)removeParticipant{
+    [self.participants removeLastObject];
 }
 
 @end
