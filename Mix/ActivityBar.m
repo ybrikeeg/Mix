@@ -117,7 +117,7 @@
    self.activity.activityJoined = !self.activity.activityJoined;
    
    if (self.activity.activityJoined){
-      
+       self.activity.currentParticipants += 1;
       [self.categoryImage setImage:[UIImage imageNamed:@"check"]];
       [self.joinButton setTitle:@"Unjoin" forState:UIControlStateNormal];
       [self.joinButton setTitleColor:UNJOINED_COLOR forState:UIControlStateNormal];
@@ -125,6 +125,7 @@
       [self bringSubviewToFront:self.underline];
       [self.delegate joinedActivity];
    }else{
+       self.activity.currentParticipants -= 1;
       [self.categoryImage setImage:[UIImage imageNamed:[self.activity.category.lowercaseString stringByReplacingOccurrencesOfString:@" " withString:@"_"]]];
       [self.joinButton setTitle:@"Join" forState:UIControlStateNormal];
       [self.joinButton setTitleColor:JOINED_COLOR forState:UIControlStateNormal];
