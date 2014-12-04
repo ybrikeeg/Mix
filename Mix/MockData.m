@@ -61,7 +61,7 @@
     
     Activity *act1 = [[Activity alloc] init];
     act1.activityName = @"Roller Hockey";
-    act1.descriptionText = @"Lets play roller hockey at the skating rink";
+    act1.descriptionText = @"Let's play roller hockey at the skating rink";
     act1.startTime = @"10a";
     act1.endTime = @"12p";
     act1.participants = [@[[self.personLibrary objectAtIndex:0], [self.personLibrary objectAtIndex:1], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:3], [self.personLibrary objectAtIndex:4], [self.personLibrary objectAtIndex:5], [self.personLibrary objectAtIndex:6], [self.personLibrary objectAtIndex:7]] mutableCopy];
@@ -77,7 +77,7 @@
     
     Activity *act2 = [[Activity alloc] init];
     act2.activityName = @"Pottery";
-    act2.descriptionText = @"Let go make a pot";
+    act2.descriptionText = @"Let's go make a pot";
     act2.startTime = @"2p";
     act2.endTime = @"3p";
     act2.participants = [@[[self.personLibrary objectAtIndex:8], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:5]] mutableCopy];
@@ -93,7 +93,7 @@
     
     Activity *act3 = [[Activity alloc] init];
     act3.activityName = @"Concert in the Park";
-    act3.descriptionText = @"Lets go to a concert";
+    act3.descriptionText = @"Let's go to a concert";
     act3.startTime = @"8p";
     act3.endTime = @"11p";
     act3.participants = [@[[self.personLibrary objectAtIndex:3], [self.personLibrary objectAtIndex:0], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:7], [self.personLibrary objectAtIndex:8]] mutableCopy];
@@ -108,7 +108,7 @@
     
     Activity *act4 = [[Activity alloc] init];
     act4.activityName = @"CS107 Study Session";
-    act4.descriptionText = @"Lets study together for 107";
+    act4.descriptionText = @"Let's study together for 107";
     act4.startTime = @"9p";
     act4.endTime = @"11p";
     act4.participants = [@[[self.personLibrary objectAtIndex:1], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:6], [self.personLibrary objectAtIndex:7], [self.personLibrary objectAtIndex:3]]mutableCopy];
@@ -123,7 +123,7 @@
     
     Activity *act5 = [[Activity alloc] init];
     act5.activityName = @"Beer Pong";
-    act5.descriptionText = @"Lets play beer pong in the morning";
+    act5.descriptionText = @"Let's play beer pong in the morning";
     act5.startTime = @"8a";
     act5.endTime = @"9a";
     act5.participants = [@[[self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:5], [self.personLibrary objectAtIndex:8]]mutableCopy];
@@ -148,7 +148,7 @@
     
     Activity *act1 = [[Activity alloc] init];
     act1.activityName = @"Soccer";
-    act1.descriptionText = @"Lets play soccer at the field";
+    act1.descriptionText = @"Let's play soccer at the field";
     act1.startTime = @"9a";
     act1.endTime = @"12p";
     act1.participants = [@[[self.personLibrary objectAtIndex:4], [self.personLibrary objectAtIndex:3], [self.personLibrary objectAtIndex:6], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:1], [self.personLibrary objectAtIndex:0], [self.personLibrary objectAtIndex:7]]mutableCopy];
@@ -164,7 +164,7 @@
     
     Activity *act2 = [[Activity alloc] init];
     act2.activityName = @"Underwater Basket Weaving";
-    act2.descriptionText = @"Let make a basket underwater";
+    act2.descriptionText = @"Let's make a basket underwater";
     act2.startTime = @"4p";
     act2.endTime = @"5p";
     act2.participants = [@[[self.personLibrary objectAtIndex:5], [self.personLibrary objectAtIndex:4], [self.personLibrary objectAtIndex:2]]mutableCopy];
@@ -180,7 +180,7 @@
     
     Activity *act3 = [[Activity alloc] init];
     act3.activityName = @"Painting";
-    act3.descriptionText = @"Lets go paint a picture";
+    act3.descriptionText = @"Let's go paint a picture";
     act3.startTime = @"3p";
     act3.endTime = @"5p";
     act3.participants = [@[[self.personLibrary objectAtIndex:8], [self.personLibrary objectAtIndex:9]]mutableCopy];
@@ -195,7 +195,7 @@
     
     Activity *act4 = [[Activity alloc] init];
     act4.activityName = @"CS103 PSET";
-    act4.descriptionText = @"Lets work on the 103 PSET";
+    act4.descriptionText = @"Let's work on the 103 PSET";
     act4.startTime = @"8p";
     act4.endTime = @"11p";
     act4.participants = [@[[self.personLibrary objectAtIndex:1], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:3]]mutableCopy];
@@ -210,7 +210,7 @@
     
     Activity *act5 = [[Activity alloc] init];
     act5.activityName = @"Picnic at Lake Lag";
-    act5.descriptionText = @"Lets have a picnic around Lake Lag";
+    act5.descriptionText = @"Let's have a picnic around Lake Lag";
     act5.startTime = @"11a";
     act5.endTime = @"12p";
     act5.participants = [@[[self.personLibrary objectAtIndex:7], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:4]]mutableCopy];
