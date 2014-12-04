@@ -23,6 +23,8 @@
 @property (nonatomic, strong) UILabel *categoryLabel;
 @property (nonatomic, strong) UIPickerView *categoryPicker;
 @property (nonatomic, strong) NSArray *pickerArray;
+@property (nonatomic, strong) UILabel *participantsLabel;
+@property (nonatomic, strong) UITextField *participantsTextField;
 @property (strong, nonatomic) UILabel *descriptionLabel;
 @property (strong, nonatomic) UITextView *descriptionTextField;
 @property (strong, nonatomic) UIButton *submit;
@@ -72,11 +74,18 @@
         self.categoryPicker.delegate = self;
         [self addSubview:self.categoryPicker];
         
-        self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 310.0, 110.0, 20.0)];
+        self.participantsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 310.0, 200.0, 20.0)];
+        self.participantsLabel.text = @"Number of Participants:";
+        [self addSubview:self.participantsLabel];
+        
+        self.participantsTextField = [[UITextField alloc] initWithFrame:CGRectMake(20.0, 340.0, self.bounds.size.width - 40.0, 25.0)];
+        [self addSubview:self.participantsTextField];
+        
+        self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 370.0, 110.0, 20.0)];
         self.descriptionLabel.text = @"Description:";
         [self addSubview:self.descriptionLabel];
         
-        self.descriptionTextField = [[UITextView alloc] initWithFrame:CGRectMake(20.0, 340.0, self.bounds.size.width - 40.0, 100.0)];
+        self.descriptionTextField = [[UITextView alloc] initWithFrame:CGRectMake(20.0, 400.0, self.bounds.size.width - 40.0, 100.0)];
         [self addSubview:self.descriptionTextField];
        self.descriptionTextField.layer.borderWidth = 1.0f;
        self.descriptionTextField.layer.borderColor = [[UIColor grayColor] CGColor];
@@ -94,7 +103,7 @@
        self.submit = [UIButton buttonWithType:UIButtonTypeRoundedRect];
        [self.submit addTarget:self action:@selector(submitPressed:) forControlEvents:UIControlEventTouchUpInside];
        [self.submit setTitle:@"Submit" forState:UIControlStateNormal];
-       self.submit.frame = CGRectMake(80.0, 440.0, self.bounds.size.width - 160.0, 30.0);
+       self.submit.frame = CGRectMake(80.0, 510.0, self.bounds.size.width - 160.0, 30.0);
        [self addSubview:self.submit];
        
        
@@ -130,6 +139,7 @@
     newAct.creator = [newAct.participants objectAtIndex:0];
     newAct.activityJoined = true;
     newAct.currentParticipants = 1;
+    newAct.participantCapacity = [self.participantsTextField.text intValue];
     newAct.address = self.addressTextField.text;
     newAct.distance = 5.8f;
     newAct.category = [self.pickerArray objectAtIndex:[self.categoryPicker selectedRowInComponent:0]];
