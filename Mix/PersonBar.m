@@ -32,7 +32,7 @@
       shape.path = path.CGPath;
       self.profilePic.layer.mask = shape;
       [self addSubview:self.profilePic];
-      
+
       self.nameLabel = [[UILabel alloc] init];
       self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", person.firstName, person.lastName];
       [self.nameLabel sizeToFit];

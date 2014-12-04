@@ -23,6 +23,7 @@
 
 @property (nonatomic, strong) UIImageView *categoryImage;
 @property (nonatomic, strong) UIImageView *creatorImage;
+@property (nonatomic, strong) CAGradientLayer *gradient;
 @end
 
 @implementation ActivityBar
@@ -38,7 +39,7 @@
       self.clipsToBounds = YES;
       self.activity = activity;
       self.originalFrame = frame;
-
+      
       CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
       CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
       CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
@@ -47,15 +48,27 @@
       self.backgroundColor = [UIColor whiteColor];
       [self createLabels];
       [self createBorders];
+      
+      self.gradient = [CAGradientLayer layer];
+      [self updateGradient];
    }
    
    return self;
+}
+
+- (void)updateGradient{
+   self.gradient.frame = self.bounds;
+   UIColor *startColour = [UIColor colorWithHue:0.0f saturation:0.0f brightness:1.0f alpha:1.0];
+   UIColor *endColour = [UIColor colorWithHue:0 saturation:0 brightness:0.93 alpha:1.0];
+   self.gradient.colors = [NSArray arrayWithObjects:(id)[startColour CGColor], (id)[endColour CGColor], nil];
+   [self.layer insertSublayer:self.gradient atIndex:0];
 }
 
 /*
  * Contracts the expanded view into a smaller view
  */
 - (void)contractView{
+   [self updateGradient];
    [UIView animateWithDuration:0.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
       self.frame = self.originalFrame;
       self.bottomBorder.frame = CGRectMake(0, self.frame.size.height - BORDER_HEIGHT, self.frame.size.width, BORDER_HEIGHT);
@@ -65,34 +78,36 @@
             sub.alpha = 0.0f;
          }
       }
-
+      
       self.endTimeLabel.frame = CGRectMake(INSET, self.frame.size.height/2, self.endTimeLabel.frame.size.width, self.endTimeLabel.frame.size.height);
-
+      
    }completion:^(BOOL finished){
 
    }];
 }
 
 - (void)expandBarWithFrame:(CGRect)frame{
+
    [UIView animateWithDuration:.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
       self.bottomBorder.center = CGPointMake(self.center.x, frame.size.height - 1);
       self.frame = frame;
+      [self updateGradient];
 
       self.endTimeLabel.center = CGPointMake(self.endTimeLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT + self.endTimeLabel.frame.size.height/2);
-
+      
       for (UIView *sub in self.subviews){
          if (sub.tag == MAKE_INVISIBLE_TAG){
             sub.alpha = 1.0f;
          }
       }
    }completion:^(BOOL finished){
-      
+
    }];
 }
 
 - (void)createBorders{
    self.bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - BORDER_HEIGHT, self.frame.size.width, BORDER_HEIGHT)];
-   self.bottomBorder.backgroundColor = [UIColor blackColor];
+   self.bottomBorder.backgroundColor = [UIColor lightGrayColor];
    [self addSubview:self.bottomBorder];
 }
 
@@ -100,9 +115,7 @@
    self.activity.activityJoined = YES;
    self.backgroundColor = JOINED_COLOR;
    [self.categoryImage setImage:[UIImage imageNamed:@"check"]];
-
-   //self.layer.borderColor = [UIColor colorWithRed:37/255.0f green:217/255.0f blue:0/255.0f alpha:1.0f].CGColor;
-   //self.layer.borderWidth = 2.0f;
+  
    [self bringSubviewToFront:self.underline];
    [self.delegate joinedActivity];
 }
@@ -132,7 +145,7 @@
    [self addSubview:self.underline];
    
    int sideLength = 50;
-
+   
    self.creatorImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - EDGE_INSET - sideLength, EDGE_INSET, sideLength, sideLength)];
    [self.creatorImage setImage:[UIImage imageNamed:self.activity.creator.imageName]];
    CAShapeLayer *shape = [CAShapeLayer layer];
@@ -151,7 +164,7 @@
    
    int timeWidth =  self.titleLabel.frame.size.width/2;
    int timeHeight = self.frame.size.height - (self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height);
-
+   
    UIImageView *timeImage = [[UIImageView alloc] initWithFrame:CGRectMake(4 + self.titleLabel.frame.origin.x, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + timeHeight/4, timeHeight/2, timeHeight/2)];
    [timeImage setImage:[UIImage imageNamed:@"time"]];
    [self addSubview:timeImage];
@@ -161,7 +174,7 @@
    self.startTimeLabel.text = [NSString stringWithFormat:@"%@-%@", self.activity.startTime, self.activity.endTime];
    self.startTimeLabel.font = [UIFont fontWithName:FONT_NAME size:14.0f];
    [self addSubview:self.startTimeLabel];
-
+   
    
    UIImageView *distanceImage = [[UIImageView alloc] initWithFrame:CGRectMake(6 + self.startTimeLabel.frame.origin.x + self.startTimeLabel.frame.size.width, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + timeHeight/4, timeHeight/2, timeHeight/2)];
    [distanceImage setImage:[UIImage imageNamed:@"distance"]];
@@ -184,7 +197,7 @@
    [descriptionTitle sizeToFit];
    descriptionTitle.tag = MAKE_INVISIBLE_TAG;
    [self addSubview:descriptionTitle];
-
+   
    self.descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(INSET, descriptionTitle.frame.origin.y + descriptionTitle.frame.size.height, self.frame.size.width - 2*INSET, 35)];
    self.descriptionTextView.text = self.activity.descriptionText;
    self.descriptionTextView.font = [UIFont fontWithName:FONT_NAME size:14.0f];
@@ -204,7 +217,7 @@
    //self.profileScrollView.backgroundColor = [UIColor blueColor];
    self.profileScrollView.tag = MAKE_INVISIBLE_TAG;
    self.profileScrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-
+   
    for (int i = 0; i < [self.activity.participants count]; i++){
       UIImageView *thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(i * 60, 0, 60, 60)];
       thumbnail.image = [UIImage imageNamed:[[self.activity.participants objectAtIndex:i] imageName]];
@@ -244,29 +257,29 @@
    
    
    //causes crash
-//   CLLocationCoordinate2D zoomLocation;
-//   zoomLocation.latitude = 37.4300;
-//   zoomLocation.longitude= -122.1700;
+   //   CLLocationCoordinate2D zoomLocation;
+   //   zoomLocation.latitude = 37.4300;
+   //   zoomLocation.longitude= -122.1700;
    self.map = [[MKMapView alloc] initWithFrame:CGRectMake(INSET, locationTitle.frame.origin.y + locationTitle.frame.size.height, self.frame.size.width - 2*INSET, 80)];
-//   self.map.rotateEnabled = YES;
-//   self.map.pitchEnabled = YES;
-//   self.map.showsUserLocation = YES;
-//   self.map.userInteractionEnabled = YES;
-//   self.map.tag = MAKE_INVISIBLE_TAG;
-//   MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 1000, 1000);
-//   [self.map setRegion:viewRegion animated:YES];
-//   
-//   MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-//   [annotation setCoordinate:zoomLocation];
-//   [self.map addAnnotation:annotation];
-//   [self.map  selectAnnotation:annotation animated:YES];
-//   [self addSubview:self.map];
+   //   self.map.rotateEnabled = YES;
+   //   self.map.pitchEnabled = YES;
+   //   self.map.showsUserLocation = YES;
+   //   self.map.userInteractionEnabled = YES;
+   //   self.map.tag = MAKE_INVISIBLE_TAG;
+   //   MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 1000, 1000);
+   //   [self.map setRegion:viewRegion animated:YES];
+   //
+   //   MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+   //   [annotation setCoordinate:zoomLocation];
+   //   [self.map addAnnotation:annotation];
+   //   [self.map  selectAnnotation:annotation animated:YES];
+   //   [self addSubview:self.map];
    
    self.addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(INSET, self.map.frame.origin.y + self.map.frame.size.height, self.frame.size.width - 2*INSET, 40)];
    self.addressLabel.text = self.activity.address;
    self.addressLabel.font = [UIFont fontWithName:FONT_NAME size:14.0f];
    self.addressLabel.tag = MAKE_INVISIBLE_TAG;
-
+   
    [self addSubview:self.addressLabel];
    
    self.joinButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -276,7 +289,7 @@
    [self.joinButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];
    [[self.joinButton layer] setBorderWidth:2.0f];
    [self.joinButton.layer setBorderColor:THEME_COLOR.CGColor];
-
+   
    self.joinButton.tag = MAKE_INVISIBLE_TAG;
    self.joinButton.frame = CGRectMake(INSET, self.addressLabel.frame.origin.y + self.addressLabel.frame.size.height, self.frame.size.width - 2*INSET, 60);
    [self addSubview:self.joinButton];
