@@ -71,7 +71,7 @@
     act1.distance = 1.3f;
     
     act1.creator = [act1.participants firstObject];
-    act1.category = @"Sport";
+    act1.category = @"Sports";
     act1.date = @"11/27";
     
     
@@ -87,7 +87,7 @@
     act2.distance = 5.8f;
     
     act2.creator = [act2.participants firstObject];
-    act2.category = @"Craft";
+    act2.category = @"Crafts";
     act2.date = @"11/27";
     
     
@@ -158,7 +158,7 @@
     act1.distance = 1.5f;
     
     act1.creator = [act1.participants firstObject];
-    act1.category = @"Sport";
+    act1.category = @"Sports";
     act1.date = @"11/26";
     
     
@@ -174,7 +174,7 @@
     act2.distance = 3.8f;
     
     act2.creator = [act2.participants firstObject];
-    act2.category = @"Craft";
+    act2.category = @"Crafts";
     act2.date = @"11/24";
     
     
