@@ -68,7 +68,7 @@
       self.categoryLabel.text = @"Category:";
       [self addSubview:self.categoryLabel];
       
-      self.pickerArray = @[@"Sport", @"Fine Arts", @"Craft", @"Education", @"Social"];
+      self.pickerArray = @[@"Sports", @"Fine Arts", @"Crafts", @"Education", @"Social"];
       self.categoryPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(70.0, 160.0, self.bounds.size.width - 140.0, 5.0)];
       self.categoryPicker.dataSource = self;
       self.categoryPicker.delegate = self;
@@ -136,7 +136,7 @@
    newAct.descriptionText = self.descriptionTextField.text;
    newAct.startTime = self.startTime.text;
    newAct.endTime = self.endTime.text;
-   newAct.participants = @[[[[MockData sharedObj] getPersonLibrary] objectAtIndex:10]];
+   newAct.participants = [@[[[[MockData sharedObj] getPersonLibrary] objectAtIndex:10]]mutableCopy];
    newAct.creator = [newAct.participants objectAtIndex:0];
    newAct.activityJoined = true;
    newAct.currentParticipants = 1;
