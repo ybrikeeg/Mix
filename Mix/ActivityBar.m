@@ -113,6 +113,7 @@
 
 - (void)join:(UIButton*)button{
    self.activity.activityJoined = YES;
+    self.activity.currentParticipants += 1;
    self.backgroundColor = JOINED_COLOR;
    [self.categoryImage setImage:[UIImage imageNamed:@"check"]];
   
