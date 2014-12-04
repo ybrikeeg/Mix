@@ -116,7 +116,7 @@
    [self addSubview:self.bottomBorder];
 }
 
-- (void)join:(UIButton*)button{
+- (void)join:(UIButton *)button{
    self.activity.activityJoined = !self.activity.activityJoined;
    
    if (self.activity.activityJoined){

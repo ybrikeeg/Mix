@@ -15,8 +15,8 @@
 @property (nonatomic, strong) NSMutableArray *data;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray *allBars;
-@property (nonatomic, strong) NSMutableArray *filteredBars;
-@property (nonatomic, strong) NSString *currentFilterString;
+//@property (nonatomic, strong) NSMutableArray *filteredBars;
+//@property (nonatomic, strong) NSString *currentFilterString;
 @property (nonatomic, strong) ActivityBar *tappedBar;
 @end
 
@@ -27,10 +27,10 @@
    self = [super initWithFrame:frame];
    if (self) {
        self.data = [[[MockData sharedObj] getUpcomingActivities] mutableCopy];
-       self.currentFilterString = @"";
+       //self.currentFilterString = @"";
       [self initializeData];
       [self loadActivityBars];
-       [self filterBy:@""];
+       //[self filterBy:@""];
       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newActivityAdded:) name:@"newActivityAdded" object:nil];
       UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
       [self addGestureRecognizer:tap];
@@ -50,7 +50,7 @@
 - (void)tapGesture:(UITapGestureRecognizer *)sender {
    if (self.isDetailViewPresented) return;
    self.isDetailViewPresented = YES;
-   for (ActivityBar *bar in self.filteredBars){
+   for (ActivityBar *bar in self.allBars){
       CGPoint pointInSubjectsView = [sender locationInView:bar];
       BOOL pointInsideObject = [bar pointInside:pointInSubjectsView withEvent:nil];
       if(pointInsideObject){
@@ -63,7 +63,7 @@
             //distnace all subviews above tappedBar need to move in the y direction
             CGFloat moveAboveSubviewsDistance = bar.frame.origin.y - (newCenter.y - EXPANDED_BAR_HEIGHT/2);
             CGFloat moveBelowSubviewsDistance = (newCenter.y - EXPANDED_BAR_HEIGHT/2 + EXPANDED_BAR_HEIGHT) - (bar.frame.origin.y + bar.frame.size.height);
-            for (ActivityBar *subs in self.filteredBars){
+            for (ActivityBar *subs in self.allBars){
                if (subs.tag > bar.tag){
                   subs.center = CGPointMake(subs.center.x, subs.center.y + moveBelowSubviewsDistance);
                }else if (subs.tag < bar.tag){
@@ -90,16 +90,16 @@
  */
 - (void)joinedActivity{
    //NSLog(@"index: %d", [self.allBars indexOfObject:self.tappedBar]);
-   NSUInteger index = [self.filteredBars indexOfObject:self.tappedBar];
+   NSUInteger index = [self.allBars indexOfObject:self.tappedBar];
    bool top = YES;
    bool bottom = YES;
    if (index > 0){
-      ActivityBar *act = [self.filteredBars objectAtIndex:index - 1];
+      ActivityBar *act = [self.allBars objectAtIndex:index - 1];
       top = !act.activity.activityJoined;
    }
    
-   if (index < [self.filteredBars count] - 1){
-      ActivityBar *act = [self.filteredBars objectAtIndex:index + 1];
+   if (index < [self.allBars count] - 1){
+      ActivityBar *act = [self.allBars objectAtIndex:index + 1];
       bottom = !act.activity.activityJoined;
    }
    
@@ -135,22 +135,22 @@
       ActivityBar *bar = [[ActivityBar alloc] initWithFrame: CGRectMake(0, ACTIVITY_BAR_HEIGHT * i, self.bounds.size.width, ACTIVITY_BAR_HEIGHT) withActivty: self.data[i]];
       bar.tag = i;
       bar.delegate = self;
-      //[self.scrollView addSubview:bar];
+      [self.scrollView addSubview:bar];
       [self.allBars addObject:bar];
    }
     NSLog(@"%@", self.allBars);
     //[self filterBy:self.currentFilterString];
-   //self.scrollView.contentSize = CGSizeMake(self.frame.size.width, [self.data count] * ACTIVITY_BAR_HEIGHT);
+    self.scrollView.contentSize = CGSizeMake(self.frame.size.width, [self.data count] * ACTIVITY_BAR_HEIGHT);
 }
 
 - (void)loadFilteredBars{
     for (UIView *view in [self.scrollView subviews]) {
         [view removeFromSuperview];
     }
-    for (ActivityBar *bar in self.filteredBars) {
+    for (ActivityBar *bar in self.allBars) {
         [self.scrollView addSubview:bar];
     }
-    self.scrollView.contentSize = CGSizeMake(self.frame.size.width, [self.filteredBars count] * ACTIVITY_BAR_HEIGHT);
+    self.scrollView.contentSize = CGSizeMake(self.frame.size.width, [self.allBars count] * ACTIVITY_BAR_HEIGHT);
 }
 
 - (void)initializeData{
@@ -163,7 +163,7 @@
    [self addSubview:top];
    
    self.allBars = [[NSMutableArray alloc] init];
-    self.filteredBars = [[NSMutableArray alloc] init];
+    //self.filteredBars = [[NSMutableArray alloc] init];
    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
    [self addSubview:self.scrollView];
 }
@@ -172,24 +172,24 @@
     Activity *newActivity = notification.object;
     [self.data addObject:newActivity];
     [self loadActivityBars];
-    [self filterBy:self.currentFilterString];
+    //[self filterBy:self.currentFilterString];
 }
 
 #pragma mark - Filter
 
 - (void)filterBy:(NSString *)filter{
-    self.currentFilterString = filter;
-    if ([filter isEqualToString:@""]) {
-        self.filteredBars = self.allBars;
-    } else{
-        [self.filteredBars removeAllObjects];
-        for (ActivityBar *bar in self.allBars) {
-            if ([bar.activity.category isEqualToString:filter]) {
-                [self.filteredBars addObject:bar];
-            }
-        }
-    }
-    [self loadFilteredBars];
+//    self.currentFilterString = filter;
+//    if ([filter isEqualToString:@""]) {
+//        self.filteredBars = self.allBars;
+//    } else{
+//        [self.filteredBars removeAllObjects];
+//        for (ActivityBar *bar in self.allBars) {
+//            if ([bar.activity.category isEqualToString:filter]) {
+//                [self.filteredBars addObject:bar];
+//            }
+//        }
+//    }
+//    [self loadFilteredBars];
 }
 
 @end
