@@ -103,6 +103,14 @@
              sub.layer.borderColor = [[UIColor grayColor] CGColor];
           }
        }
+       
+       CAGradientLayer *gradient = [CAGradientLayer layer];
+       gradient.frame = self.bounds;
+       UIColor *startColour = [UIColor colorWithHue:0.0f saturation:0.0f brightness:1.0f alpha:1.0];
+       UIColor *endColour = [UIColor colorWithHue:0 saturation:0 brightness:0.93 alpha:1.0];
+       gradient.colors = [NSArray arrayWithObjects:(id)[startColour CGColor], (id)[endColour CGColor], nil];
+       [self.layer insertSublayer:gradient atIndex:0];
+       
     }
     return self;
 }

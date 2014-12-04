@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UILabel *addressLabel;
 @property (nonatomic, strong) UIImageView *categoryImage;
 @property (nonatomic, strong) UIImageView *creatorImage;
+@property (nonatomic, strong) CAGradientLayer *gradient;
+
 @end
 
 @implementation RecentBar
@@ -45,15 +47,28 @@
       self.backgroundColor = [UIColor whiteColor];
       [self createLabels];
       [self createBorders];
+      
+      self.gradient = [CAGradientLayer layer];
+      [self updateGradient];
    }
    
    return self;
+}
+
+- (void)updateGradient{
+   self.gradient.frame = self.bounds;
+   UIColor *startColour = [UIColor colorWithHue:0.0f saturation:0.0f brightness:1.0f alpha:1.0];
+   UIColor *endColour = [UIColor colorWithHue:0 saturation:0 brightness:0.93 alpha:1.0];
+   self.gradient.colors = [NSArray arrayWithObjects:(id)[startColour CGColor], (id)[endColour CGColor], nil];
+   [self.layer insertSublayer:self.gradient atIndex:0];
 }
 
 /*
  * Contracts the expanded view into a smaller view
  */
 - (void)contractView{
+   [self updateGradient];
+
    [UIView animateWithDuration:0.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
       self.frame = self.originalFrame;
       self.bottomBorder.frame = CGRectMake(0, self.frame.size.height - BORDER_HEIGHT, self.frame.size.width, BORDER_HEIGHT);
@@ -75,7 +90,8 @@
    [UIView animateWithDuration:.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
       self.bottomBorder.center = CGPointMake(self.center.x, frame.size.height - 1);
       self.frame = frame;
-      
+      [self updateGradient];
+
       self.endTimeLabel.center = CGPointMake(self.endTimeLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT + self.endTimeLabel.frame.size.height/2);
       
       for (UIView *sub in self.subviews){
@@ -237,7 +253,7 @@
    [self addSubview:locationTitle];
    
 //   CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(-37.00, 100.00) radius:10 identifier:@"idd"];
-//   self.map = [[MKMapView alloc] initWithFrame:CGRectMake(INSET, locationTitle.frame.origin.y + locationTitle.frame.size.height, self.frame.size.width - 2*INSET, 80)];
+   self.map = [[MKMapView alloc] initWithFrame:CGRectMake(INSET, locationTitle.frame.origin.y + locationTitle.frame.size.height, self.frame.size.width - 2*INSET, 80)];
 //   self.map.rotateEnabled = YES;
 //   self.map.pitchEnabled = YES;
 //   self.map.showsUserLocation = YES;

@@ -63,6 +63,7 @@
    self.gradient.colors = [NSArray arrayWithObjects:(id)[startColour CGColor], (id)[endColour CGColor], nil];
    [self.layer insertSublayer:self.gradient atIndex:0];
 }
+
 /*
  * Contracts the expanded view into a smaller view
  */
@@ -114,9 +115,7 @@
    self.activity.activityJoined = YES;
    self.backgroundColor = JOINED_COLOR;
    [self.categoryImage setImage:[UIImage imageNamed:@"check"]];
-   
-   //self.layer.borderColor = [UIColor colorWithRed:37/255.0f green:217/255.0f blue:0/255.0f alpha:1.0f].CGColor;
-   //self.layer.borderWidth = 2.0f;
+  
    [self bringSubviewToFront:self.underline];
    [self.delegate joinedActivity];
 }
