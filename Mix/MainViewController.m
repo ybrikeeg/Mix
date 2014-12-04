@@ -29,6 +29,7 @@
 @property (nonatomic, strong) UIView *navBar;
 @property (nonatomic, strong) UIButton *buttonTopRight;
 @property (nonatomic, strong) UIView *activeView;
+@property (nonatomic, strong) UIButton *filterButton;
 
 @property (nonatomic, strong) UIButton *explore;
 @property (nonatomic, strong) UIButton *create;
@@ -72,12 +73,14 @@
    [self.view bringSubviewToFront:self.exploreView];
    self.activeView = self.exploreView;
    self.buttonTopRight.hidden = !self.exploreView.isDetailViewPresented;
-   self.buttonTopRight.titleLabel.text = @"Done";
+   self.buttonTopRight.titleLabel.text = @"Filter";
+   [self.buttonTopRight.titleLabel sizeToFit];
 }
 
 - (void)create:(UIButton *)sender
 {
    [self animateIndicator:sender];
+   self.filterButton.hidden = YES;
    [self.view bringSubviewToFront:self.createView];
    self.activeView = self.createView;
    self.buttonTopRight.hidden = YES;
@@ -87,9 +90,11 @@
 - (void)recent:(UIButton *)sender
 {
    [self animateIndicator:sender];
+   self.filterButton.hidden = YES;
    [self.view bringSubviewToFront:self.recentView];
    self.activeView = self.recentView;
    self.buttonTopRight.titleLabel.text = @"Done";
+   [self.buttonTopRight.titleLabel sizeToFit];
    self.buttonTopRight.hidden = !self.recentView.isDetailViewPresented;
    
 }
@@ -97,10 +102,12 @@
 - (void)message:(UIButton *)sender
 {
    [self animateIndicator:sender];
+   self.filterButton.hidden = YES;
    [self.view bringSubviewToFront:self.messageView];
    self.activeView = self.messageView;
    self.buttonTopRight.hidden = NO;
    self.buttonTopRight.titleLabel.text = @"Send";
+   [self.buttonTopRight.titleLabel sizeToFit];
 }
 
 - (void)done:(UIButton *)sender
@@ -114,6 +121,7 @@
    }
    
 }
+
 
 - (void)createTabBar
 {
@@ -138,8 +146,8 @@
    
    self.buttonTopRight = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.buttonTopRight addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
-   [self.buttonTopRight setTitle:@"Done" forState:UIControlStateNormal];
-   self.buttonTopRight.frame = CGRectMake(self.view.frame.size.width - 60, self.navBar.frame.size.height - 40   , 60, 40);
+   [self.buttonTopRight setTitle:@"Filter" forState:UIControlStateNormal];
+   self.buttonTopRight.frame = CGRectMake(self.view.frame.size.width - 60, self.navBar.frame.size.height - 40, 60, 40);
    [self.buttonTopRight.titleLabel setTextAlignment: NSTextAlignmentCenter];
    [self.buttonTopRight setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
    [self.navBar addSubview:self.buttonTopRight];
@@ -201,8 +209,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-   
-   
    [self.view addSubview:self.recentView];
    [self.view addSubview:self.messageView];
    [self.view addSubview:self.createView];
@@ -210,12 +216,10 @@
    self.exploreView.doneButton = self.buttonTopRight;
    self.exploreView.backgroundColor = [UIColor lightGrayColor];
    self.activeView = self.exploreView;
-   self.buttonTopRight.hidden = !self.exploreView.isDetailViewPresented;
 }
 
 - (void)didReceiveMemoryWarning {
    [super didReceiveMemoryWarning];
-    NSLog(@"fuck me");
    // Dispose of any resources that can be recreated.
 }
 

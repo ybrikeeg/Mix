@@ -32,7 +32,6 @@
       self.backgroundColor = [UIColor lightGrayColor];
       UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
       [self addGestureRecognizer:tap];
-      
    }
    return self;
 }
@@ -76,7 +75,6 @@
          }completion:^(BOOL finished){
             
          }];
-         
       }
    }
 }
