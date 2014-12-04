@@ -65,6 +65,8 @@
     act1.startTime = @"10a";
     act1.endTime = @"12p";
     act1.participants = @[[self.personLibrary objectAtIndex:0], [self.personLibrary objectAtIndex:1], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:3], [self.personLibrary objectAtIndex:4], [self.personLibrary objectAtIndex:5], [self.personLibrary objectAtIndex:6], [self.personLibrary objectAtIndex:7]];
+    act1.currentParticipants = 8;
+    act1.participantCapacity = 12;
     act1.address = @"Sandhill road";
     act1.distance = 1.3f;
     
@@ -79,6 +81,8 @@
     act2.startTime = @"2p";
     act2.endTime = @"3p";
     act2.participants = @[[self.personLibrary objectAtIndex:8], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:5]];
+    act2.currentParticipants = 3;
+    act2.participantCapacity = 4;
     act2.address = @"1345 Middlefield Ave";
     act2.distance = 5.8f;
     
@@ -93,6 +97,8 @@
     act3.startTime = @"8p";
     act3.endTime = @"11p";
     act3.participants = @[[self.personLibrary objectAtIndex:3], [self.personLibrary objectAtIndex:0], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:7], [self.personLibrary objectAtIndex:8]];
+    act3.currentParticipants = 5;
+    act3.participantCapacity = 8;
     act3.address = @"The park";
     act3.distance = 3.4f;
     
@@ -106,6 +112,8 @@
     act4.startTime = @"9p";
     act4.endTime = @"11p";
     act4.participants = @[[self.personLibrary objectAtIndex:1], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:6], [self.personLibrary objectAtIndex:7], [self.personLibrary objectAtIndex:3]];
+    act4.currentParticipants = 5;
+    act4.participantCapacity = 6;
     act4.address = @"Old Union";
     act4.distance = 2.1f;
     
@@ -119,6 +127,8 @@
     act5.startTime = @"8a";
     act5.endTime = @"9a";
     act5.participants = @[[self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:5], [self.personLibrary objectAtIndex:8]];
+    act5.currentParticipants = 3;
+    act5.participantCapacity = 4;
     act5.address = @"Toyon";
     act5.distance = 1.0f;
     
@@ -142,6 +152,8 @@
     act1.startTime = @"9a";
     act1.endTime = @"12p";
     act1.participants = @[[self.personLibrary objectAtIndex:4], [self.personLibrary objectAtIndex:3], [self.personLibrary objectAtIndex:6], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:1], [self.personLibrary objectAtIndex:0], [self.personLibrary objectAtIndex:7]];
+    act1.currentParticipants = 8;
+    act1.participantCapacity = 12;
     act1.address = @"Soccer Field";
     act1.distance = 1.5f;
     
@@ -156,6 +168,8 @@
     act2.startTime = @"4p";
     act2.endTime = @"5p";
     act2.participants = @[[self.personLibrary objectAtIndex:5], [self.personLibrary objectAtIndex:4], [self.personLibrary objectAtIndex:2]];
+    act2.currentParticipants = 3;
+    act2.participantCapacity = 5;
     act2.address = @"618 Escondido Rd.";
     act2.distance = 3.8f;
     
@@ -170,6 +184,8 @@
     act3.startTime = @"3p";
     act3.endTime = @"5p";
     act3.participants = @[[self.personLibrary objectAtIndex:8], [self.personLibrary objectAtIndex:9]];
+    act3.currentParticipants = 2;
+    act3.participantCapacity = 4;
     act3.address = @"Crothers";
     act3.distance = 3.8f;
     
@@ -183,6 +199,8 @@
     act4.startTime = @"8p";
     act4.endTime = @"11p";
     act4.participants = @[[self.personLibrary objectAtIndex:1], [self.personLibrary objectAtIndex:2], [self.personLibrary objectAtIndex:3]];
+    act4.currentParticipants = 3;
+    act4.participantCapacity = 6;
     act4.address = @"Old Union";
     act4.distance = 2.1f;
     
@@ -196,6 +214,8 @@
     act5.startTime = @"11a";
     act5.endTime = @"12p";
     act5.participants = @[[self.personLibrary objectAtIndex:7], [self.personLibrary objectAtIndex:9], [self.personLibrary objectAtIndex:4]];
+    act5.currentParticipants = 3;
+    act5.participantCapacity = 10;
     act5.address = @"Lake Lag";
     act5.distance = 4.4f;
     

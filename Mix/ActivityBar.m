@@ -20,6 +20,7 @@
 @property (nonatomic, strong) MKMapView *map;
 @property (nonatomic, strong) UILabel *addressLabel;
 @property (nonatomic, strong) UIButton *joinButton;
+@property (nonatomic, strong) UILabel *participantsTitle;
 
 @property (nonatomic, strong) UIImageView *categoryImage;
 @property (nonatomic, strong) UIImageView *creatorImage;
@@ -118,6 +119,7 @@
    
    if (self.activity.activityJoined){
        self.activity.currentParticipants += 1;
+       self.participantsTitle.text = [NSString stringWithFormat:@"Participants %d/%d", self.activity.currentParticipants, self.activity.participantCapacity];
       [self.categoryImage setImage:[UIImage imageNamed:@"check"]];
       [self.joinButton setTitle:@"Unjoin" forState:UIControlStateNormal];
       [self.joinButton setTitleColor:UNJOINED_COLOR forState:UIControlStateNormal];
@@ -126,6 +128,7 @@
       [self.delegate joinedActivity];
    }else{
        self.activity.currentParticipants -= 1;
+       self.participantsTitle.text = [NSString stringWithFormat:@"Participants %d/%d", self.activity.currentParticipants, self.activity.participantCapacity];
       [self.categoryImage setImage:[UIImage imageNamed:[self.activity.category.lowercaseString stringByReplacingOccurrencesOfString:@" " withString:@"_"]]];
       [self.joinButton setTitle:@"Join" forState:UIControlStateNormal];
       [self.joinButton setTitleColor:JOINED_COLOR forState:UIControlStateNormal];
@@ -221,14 +224,14 @@
    self.descriptionTextView.backgroundColor = [UIColor clearColor];
    [self addSubview:self.descriptionTextView];
    
-   UILabel *participantsTitle = [[UILabel alloc] initWithFrame:CGRectMake(INSET, self.descriptionTextView.frame.origin.y + self.descriptionTextView.frame.size.height, self.frame.size.width - 2*INSET, 80)];
-   participantsTitle.text = @"Participants";
-   participantsTitle.font = [UIFont fontWithName:FONT_NAME size:18.0f];
-   [participantsTitle sizeToFit];
-   participantsTitle.tag = MAKE_INVISIBLE_TAG;
-   [self addSubview:participantsTitle];
+   self.participantsTitle = [[UILabel alloc] initWithFrame:CGRectMake(INSET, self.descriptionTextView.frame.origin.y + self.descriptionTextView.frame.size.height, self.frame.size.width - 2*INSET, 80)];
+   self.participantsTitle.text = [NSString stringWithFormat:@"Participants %d/%d", self.activity.currentParticipants, self.activity.participantCapacity];
+   self.participantsTitle.font = [UIFont fontWithName:FONT_NAME size:18.0f];
+   [self.participantsTitle sizeToFit];
+   self.participantsTitle.tag = MAKE_INVISIBLE_TAG;
+   [self addSubview:self.participantsTitle];
    
-   self.profileScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(INSET, participantsTitle.frame.origin.y + participantsTitle.frame.size.height, self.frame.size.width - 2*INSET, 100)];
+   self.profileScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(INSET, self.participantsTitle.frame.origin.y + self.participantsTitle.frame.size.height, self.frame.size.width - 2*INSET, 100)];
    //self.profileScrollView.backgroundColor = [UIColor blueColor];
    self.profileScrollView.tag = MAKE_INVISIBLE_TAG;
    self.profileScrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
