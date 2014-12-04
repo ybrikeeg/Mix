@@ -69,6 +69,13 @@
 - (void)setFilter:(NSString *)filter{
    NSLog(@"Setting filter: %@", filter);
    self.filterView.hidden = YES;
+   
+   if ([filter isEqualToString:@"Remove"]){
+      [self.exploreView filterBy:@""];
+   }else{
+      [self.exploreView filterBy:filter];
+   }
+   
 }
 - (void)sports:(UIButton *)button{
    [self setFilter:button.titleLabel.text];
@@ -129,7 +136,7 @@
    
    self.fineArtsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.fineArtsButton addTarget:self action:@selector(fineArts:) forControlEvents:UIControlEventTouchUpInside];
-   [self.fineArtsButton setTitle:@"Recent" forState:UIControlStateNormal];
+   [self.fineArtsButton setTitle:@"Fine Arts" forState:UIControlStateNormal];
    self.fineArtsButton.frame = CGRectMake(self.filterView.frame.size.width/3, 0, self.filterView.frame.size.width/6, self.filterView.frame.size.height);
    [self.fineArtsButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];
    [self.filterView addSubview:self.fineArtsButton];
@@ -141,7 +148,7 @@
    
    self.educationButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.educationButton addTarget:self action:@selector(education:) forControlEvents:UIControlEventTouchUpInside];
-   [self.educationButton setTitle:@"Message" forState:UIControlStateNormal];
+   [self.educationButton setTitle:@"Education" forState:UIControlStateNormal];
    self.educationButton.frame = CGRectMake(self.filterView.frame.size.width/2 + 3, 0, self.filterView.frame.size.width/6, self.filterView.frame.size.height);
    self.socialButton.titleLabel.adjustsFontSizeToFitWidth = YES;
    [self.educationButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];
@@ -153,7 +160,7 @@
    
    self.socialButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.socialButton addTarget:self action:@selector(social:) forControlEvents:UIControlEventTouchUpInside];
-   [self.socialButton setTitle:@"Education" forState:UIControlStateNormal];
+   [self.socialButton setTitle:@"Social" forState:UIControlStateNormal];
    self.socialButton.titleLabel.adjustsFontSizeToFitWidth = YES;
    self.socialButton.frame = CGRectMake(2 * self.filterView.frame.size.width/3 + 3, 0, self.filterView.frame.size.width/6, self.filterView.frame.size.height);
    [self.socialButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];

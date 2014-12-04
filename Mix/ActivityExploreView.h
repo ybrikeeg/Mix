@@ -13,5 +13,6 @@
 @property (nonatomic) bool isDetailViewPresented;
 @property (nonatomic, strong) UIButton *doneButton;
 - (void)done:(UIButton*)button;
+- (void)filterBy:(NSString *)filter;
 
 @end
