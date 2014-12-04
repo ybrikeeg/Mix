@@ -37,7 +37,7 @@
 
 - (void)setIsDetailViewPresented:(bool)isDetailViewPresented
 {
-   self.doneButton.hidden = !isDetailViewPresented;
+   //self.doneButton.hidden = !isDetailViewPresented;
    _isDetailViewPresented = isDetailViewPresented;
 }
 /**
@@ -51,6 +51,8 @@
       BOOL pointInsideObject = [bar pointInside:pointInSubjectsView withEvent:nil];
       if(pointInsideObject){
          self.tappedBar = bar;
+         [self.doneButton setTitle:@"Done" forState:UIControlStateNormal];
+
          [UIView animateWithDuration:0.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
             
             CGPoint newCenter = [self convertPoint:self.center toView:self.scrollView];
@@ -102,7 +104,7 @@
 
 - (void)done:(UIButton *)button{
    self.isDetailViewPresented = NO;
-   
+   [self.doneButton setTitle:@"Filter" forState:UIControlStateNormal];
    [UIView animateWithDuration:0.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
       
       for (UIView *subs in self.scrollView.subviews){

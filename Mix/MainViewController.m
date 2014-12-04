@@ -46,14 +46,14 @@
    [super viewDidLoad];
    
    [self createTabBar];
-    self.recentView = [[RecentActivityView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
-    self.recentView.doneButton = self.buttonTopRight;
-    
-    self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
-    
-    self.createView = [[CreateView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
-    
-    self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
+   self.recentView = [[RecentActivityView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
+   self.recentView.doneButton = self.buttonTopRight;
+   
+   self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
+   
+   self.createView = [[CreateView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
+   
+   self.exploreView = [[ActivityExploreView alloc] initWithFrame:CGRectMake(0, self.tabView.frame.origin.y + self.tabView.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - self.tabView.frame.size.height - self.navBar.frame.size.height)];
 }
 
 - (void)animateIndicator:(UIButton *)sender
@@ -72,8 +72,12 @@
    [self animateIndicator:sender];
    [self.view bringSubviewToFront:self.exploreView];
    self.activeView = self.exploreView;
-   self.buttonTopRight.hidden = !self.exploreView.isDetailViewPresented;
-   self.buttonTopRight.titleLabel.text = @"Filter";
+   self.buttonTopRight.hidden = NO;
+   if (self.exploreView.isDetailViewPresented){
+      [self.buttonTopRight setTitle:@"Done" forState:UIControlStateNormal];
+   }else{
+      [self.buttonTopRight setTitle:@"Filter" forState:UIControlStateNormal];
+   }
    [self.buttonTopRight.titleLabel sizeToFit];
 }
 
@@ -93,7 +97,7 @@
    self.filterButton.hidden = YES;
    [self.view bringSubviewToFront:self.recentView];
    self.activeView = self.recentView;
-   self.buttonTopRight.titleLabel.text = @"Done";
+   [self.buttonTopRight setTitle:@"Done" forState:UIControlStateNormal];
    [self.buttonTopRight.titleLabel sizeToFit];
    self.buttonTopRight.hidden = !self.recentView.isDetailViewPresented;
    
@@ -106,7 +110,8 @@
    [self.view bringSubviewToFront:self.messageView];
    self.activeView = self.messageView;
    self.buttonTopRight.hidden = NO;
-   self.buttonTopRight.titleLabel.text = @"Send";
+   [self.buttonTopRight setTitle:@"Send" forState:UIControlStateNormal];
+   
    [self.buttonTopRight.titleLabel sizeToFit];
 }
 
@@ -119,13 +124,11 @@
    }else if (self.activeView == self.recentView){
       [self.recentView done:nil];
    }
-   
 }
 
 
 - (void)createTabBar
 {
-   
    self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.height + self.view.frame.size.width, 60)];
    self.navBar.backgroundColor = THEME_COLOR;
    [self.view addSubview:self.navBar];
@@ -197,7 +200,7 @@
    UIView *s3 = [[UIView alloc] initWithFrame:CGRectMake(self.recent.frame.origin.x +  self.recent.frame.size.width, 0, 1, self.explore.frame.size.height)];
    s3.backgroundColor = THEME_COLOR;
    [self.tabView addSubview:s3];
-
+   
    
    self.message = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    [self.message addTarget:self action:@selector(message:) forControlEvents:UIControlEventTouchUpInside];
