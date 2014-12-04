@@ -90,10 +90,12 @@
 }
 
 - (void)expandBarWithFrame:(CGRect)frame{
+   self.joinButton.frame = CGRectMake(INSET, frame.size.height - EDGE_INSET - 60, self.frame.size.width - 2*INSET, 60);
 
    [UIView animateWithDuration:.6f delay:0 usingSpringWithDamping:.5f initialSpringVelocity:0.0f options:0 animations:^{
       self.bottomBorder.center = CGPointMake(self.center.x, frame.size.height - 1);
       self.frame = frame;
+
       [self updateGradient];
 
       self.endTimeLabel.center = CGPointMake(self.endTimeLabel.center.x, self.underline.frame.origin.y/2 + BORDER_HEIGHT + self.endTimeLabel.frame.size.height/2);
@@ -275,23 +277,26 @@
    
    
    //causes crash
-   //   CLLocationCoordinate2D zoomLocation;
-   //   zoomLocation.latitude = 37.4300;
-   //   zoomLocation.longitude= -122.1700;
+//      CLLocationCoordinate2D zoomLocation;
+//      zoomLocation.latitude = 37.4300;
+//      zoomLocation.longitude= -122.1700;
    self.map = [[MKMapView alloc] initWithFrame:CGRectMake(INSET, locationTitle.frame.origin.y + locationTitle.frame.size.height, self.frame.size.width - 2*INSET, 80)];
-   //   self.map.rotateEnabled = YES;
-   //   self.map.pitchEnabled = YES;
-   //   self.map.showsUserLocation = YES;
-   //   self.map.userInteractionEnabled = YES;
-   //   self.map.tag = MAKE_INVISIBLE_TAG;
-   //   MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 1000, 1000);
-   //   [self.map setRegion:viewRegion animated:YES];
-   //
-   //   MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-   //   [annotation setCoordinate:zoomLocation];
-   //   [self.map addAnnotation:annotation];
-   //   [self.map  selectAnnotation:annotation animated:YES];
-   //   [self addSubview:self.map];
+   UIImageView *mapImage = [[UIImageView alloc] initWithFrame:CGRectMake(INSET, locationTitle.frame.origin.y + locationTitle.frame.size.height, self.frame.size.width - 2*INSET, 80)];
+   [mapImage setImage:[UIImage imageNamed:@"map"]];
+   [self addSubview:mapImage];
+//      self.map.rotateEnabled = YES;
+//      self.map.pitchEnabled = YES;
+//      self.map.showsUserLocation = YES;
+//      self.map.userInteractionEnabled = YES;
+//      self.map.tag = MAKE_INVISIBLE_TAG;
+//      MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 1000, 1000);
+//      [self.map setRegion:viewRegion animated:YES];
+//   
+//      MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+//      [annotation setCoordinate:zoomLocation];
+//      [self.map addAnnotation:annotation];
+//      [self.map  selectAnnotation:annotation animated:YES];
+//      [self addSubview:self.map];
    
    self.addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(INSET, self.map.frame.origin.y + self.map.frame.size.height, self.frame.size.width - 2*INSET, 40)];
    self.addressLabel.text = self.activity.address;
@@ -309,7 +314,7 @@
    [self.joinButton.layer setBorderColor:JOINED_COLOR.CGColor];
    
    self.joinButton.tag = MAKE_INVISIBLE_TAG;
-   self.joinButton.frame = CGRectMake(INSET, self.addressLabel.frame.origin.y + self.addressLabel.frame.size.height, self.frame.size.width - 2*INSET, 60);
+   NSInteger buttonHeight = 60;
    [self addSubview:self.joinButton];
    
    [self contractView];
