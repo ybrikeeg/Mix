@@ -150,6 +150,7 @@
     int index = 0;
     for (ActivityBar *bar in self.filteredBars) {
         bar.frame = CGRectMake(0, ACTIVITY_BAR_HEIGHT * index, self.bounds.size.width, ACTIVITY_BAR_HEIGHT);
+       bar.originalFrame = bar.frame;
         [self.scrollView addSubview:bar];
         index++;
     }
