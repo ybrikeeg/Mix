@@ -138,6 +138,8 @@
    [self.fineArtsButton addTarget:self action:@selector(fineArts:) forControlEvents:UIControlEventTouchUpInside];
    [self.fineArtsButton setTitle:@"Fine Arts" forState:UIControlStateNormal];
    self.fineArtsButton.frame = CGRectMake(self.filterView.frame.size.width/3, 0, self.filterView.frame.size.width/6, self.filterView.frame.size.height);
+   self.fineArtsButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+   [self.fineArtsButton.titleLabel sizeToFit];
    [self.fineArtsButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];
    [self.filterView addSubview:self.fineArtsButton];
    
@@ -150,7 +152,8 @@
    [self.educationButton addTarget:self action:@selector(education:) forControlEvents:UIControlEventTouchUpInside];
    [self.educationButton setTitle:@"Education" forState:UIControlStateNormal];
    self.educationButton.frame = CGRectMake(self.filterView.frame.size.width/2 + 3, 0, self.filterView.frame.size.width/6, self.filterView.frame.size.height);
-   self.socialButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+   self.educationButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+      [self.educationButton.titleLabel sizeToFit];
    [self.educationButton setTitleColor:THEME_COLOR forState:UIControlStateNormal];
    [self.filterView addSubview:self.educationButton];
    
