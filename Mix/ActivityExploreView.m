@@ -143,7 +143,7 @@
     self.scrollView.contentSize = CGSizeMake(self.frame.size.width, [self.data count] * ACTIVITY_BAR_HEIGHT);
 }
 
-- (void)loadFilteredBars{
+- (void)loadFilteredBars{  
     for (UIView *view in [self.scrollView subviews]) {
         [view removeFromSuperview];
     }

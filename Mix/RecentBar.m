@@ -255,6 +255,9 @@
    
 //   CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(-37.00, 100.00) radius:10 identifier:@"idd"];
    self.map = [[MKMapView alloc] initWithFrame:CGRectMake(INSET, locationTitle.frame.origin.y + locationTitle.frame.size.height, self.frame.size.width - 2*INSET, 80)];
+   UIImageView *mapImage = [[UIImageView alloc] initWithFrame:CGRectMake(INSET, locationTitle.frame.origin.y + locationTitle.frame.size.height, self.frame.size.width - 2*INSET, 80)];
+   [mapImage setImage:[UIImage imageNamed:@"map"]];
+   [self addSubview:mapImage];
 //   self.map.rotateEnabled = YES;
 //   self.map.pitchEnabled = YES;
 //   self.map.showsUserLocation = YES;
